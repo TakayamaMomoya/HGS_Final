@@ -345,6 +345,9 @@
     <ClCompile Include="code\resultSingleWin.cpp">
       <Filter>ソース ファイル\scene\game\gameresult</Filter>
     </ClCompile>
+    <ClCompile Include="code\character.cpp">
+      <Filter>ソース ファイル\character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\scene.h">
@@ -607,6 +610,9 @@
     </ClInclude>
     <ClInclude Include="code\resultSingleWin.h">
       <Filter>ソース ファイル\scene\game\gameresult</Filter>
+    </ClInclude>
+    <ClInclude Include="code\character.h">
+      <Filter>ソース ファイル\character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

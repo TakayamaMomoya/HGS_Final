@@ -10,7 +10,7 @@
 //*****************************************************
 // インクルード
 //*****************************************************
-#include "motion.h"
+#include "character.h"
 
 //*****************************************************
 // 前方宣言
@@ -21,7 +21,7 @@ class CShadow;
 //*****************************************************
 // クラスの定義
 //*****************************************************
-class CPlayer : public CMotion
+class CPlayer : public CCharacter
 {
 public:
 	// モーション列挙
@@ -69,8 +69,6 @@ public:
 	void VibJoypad(float fPow, int nFrame);		// ジョイパッドを振動させる
 
 	// 取得・設定
-	void SetMove(D3DXVECTOR3 move) { m_move = move; }				// 移動量
-	D3DXVECTOR3 GetMove(void) { return m_move; }
 	void EnableInput(bool bEnable) { m_bEnableInput = bEnable; }	// 入力可能フラグ
 	bool IsEnableInput(void) { return m_bEnableInput; }
 	void SetState(E_State state) { m_state = state; }				// 状態
@@ -79,7 +77,6 @@ public:
 	CInputManager *GetInpuManager(void) { return m_pInputMgr; }
 	void SetID(int nID) { m_nID = nID; }	// 番号
 	int GetID(void) { return m_nID; }
-	void SetShadowPos(D3DXVECTOR3 pos);
 
 	// 静的メンバ関数
 	static CPlayer* Create(void);										// 生成処理
@@ -102,8 +99,6 @@ private:
 	void MoveAnalog(void);		// アナログ移動
 	void InputMoveAnalog(void);	// アナログ移動入力
 	void Forward(void);			// 前進処理
-	void DecreaseMove(void);	// 移動量の減衰
-	void FactingRot(void);		// 向きの補正
 	
 	void Event(EVENT_INFO* pEventInfo) override;	// モーションイベント
 	void ManageMotion(void);						// モーションの管理
@@ -113,9 +108,7 @@ private:
 	// メンバ変数
 	int m_nID;					// 番号
 	bool m_bEnableInput;		// 入力可能フラグ
-	D3DXVECTOR3 m_move;			// 移動量
 	E_State m_state;			// プレイヤー状態
-	CShadow *m_pShadow;			// 影のポインタ
 	S_FragMotion m_fragMotion;	// モーションフラグ
 	CInputManager *m_pInputMgr;	// 入力マネージャー
 

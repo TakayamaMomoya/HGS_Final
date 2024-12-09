@@ -178,6 +178,7 @@
     <ClCompile Include="code\blurEvent.cpp" />
     <ClCompile Include="code\camera.cpp" />
     <ClCompile Include="code\cameraState.cpp" />
+    <ClCompile Include="code\character.cpp" />
     <ClCompile Include="code\collision.cpp" />
     <ClCompile Include="code\fade2D.cpp" />
     <ClCompile Include="code\fade3D.cpp" />
@@ -266,6 +267,7 @@
     <ClInclude Include="code\blurEvent.h" />
     <ClInclude Include="code\camera.h" />
     <ClInclude Include="code\cameraState.h" />
+    <ClInclude Include="code\character.h" />
     <ClInclude Include="code\collision.h" />
     <ClInclude Include="code\container.h" />
     <ClInclude Include="code\debug.h" />

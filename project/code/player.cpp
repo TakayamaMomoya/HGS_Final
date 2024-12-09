@@ -21,7 +21,6 @@
 #include "collision.h"
 #include "texture.h"
 #include "sound.h"
-#include "shadow.h"
 #include "MyEffekseer.h"
 #include "gameManager.h"
 
@@ -46,7 +45,7 @@ vector<CPlayer*> CPlayer::s_apPlayer;	// 格納用の配列
 //=====================================================
 // コンストラクタ
 //=====================================================
-CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0), m_pShadow(nullptr)
+CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -88,7 +87,7 @@ HRESULT CPlayer::Init(void)
 	Load((char*)&PATH_BODY[0]);
 
 	// 継承クラスの初期化
-	CMotion::Init();
+	CCharacter::Init();
 
 	InitPose(0);
 
@@ -98,9 +97,6 @@ HRESULT CPlayer::Init(void)
 	// 状態設定
 	m_state = STATE_NORMAL;
 
-	// 影の生成
-	m_pShadow = CShadow::Create();
-
 	return S_OK;
 }
 
@@ -109,8 +105,6 @@ HRESULT CPlayer::Init(void)
 //=====================================================
 void CPlayer::Uninit(void)
 {
-	Object::DeleteObject((CObject**)&m_pShadow);
-
 	for (auto itr = s_apPlayer.begin(); itr < s_apPlayer.end(); itr++)
 	{
 		//削除対象じゃない場合
@@ -124,7 +118,7 @@ void CPlayer::Uninit(void)
 	}
 
 	// 継承クラスの終了
-	CMotion::Uninit();
+	CCharacter::Uninit();
 }
 
 //=====================================================
@@ -138,12 +132,8 @@ void CPlayer::Update(void)
 	// モーションの管理
 	ManageMotion();
 
-	// 影の追従
-	if (m_pShadow != nullptr)
-		m_pShadow->SetPosition(GetPosition());
-
 	// モーション更新
-	CMotion::Update();
+	CCharacter::Update();
 
 #ifdef _DEBUG
 	Debug();
@@ -178,12 +168,6 @@ void CPlayer::InputMoveAnalog(void)
 {
 	// 前進処理
 	Forward();
-
-	// 向きの補正
-	FactingRot();
-
-	// 移動量の減衰
-	DecreaseMove();
 }
 
 //=====================================================
@@ -220,53 +204,9 @@ void CPlayer::Forward(void)
 
 	SetMove(move);
 
-	// 移動量の反映
-	Translate(move);
-}
-
-//=====================================================
-// 移動量減衰
-//=====================================================
-void CPlayer::DecreaseMove(void)
-{
-	D3DXVECTOR3 move = GetMove();
-
-	// 移動量の減衰
-	move.x *= RATE_DECREASE_MOVE;
-	move.z *= RATE_DECREASE_MOVE;
-
-	SetMove(move);
-}
-
-//=====================================================
-// 向きの補正
-//=====================================================
-void CPlayer::FactingRot(void)
-{
-	if (m_pInputMgr == nullptr)
-		return;
-
-	// 突っつきモーション中は行わない
-	int nMotion = GetMotion();
-	if (nMotion == MOTION_PECK || nMotion == MOTION_CANNOTPECK)
-		return;
-
-	// 目標方向の設定
-	CInputManager::S_Axis axis = m_pInputMgr->GetAxis();
-	D3DXVECTOR3 axisMove = axis.axisMove;
-
-	// 軸を正規化
-	float fLengthAxis = D3DXVec3Length(&axisMove);
-
-	if (fLengthAxis >= LINE_FACT_ROT)
-	{// 入力がしきい値を越えていたら補正
-		// 目標の向きに補正する
-		float fRotDest = atan2f(-axisMove.x, -axisMove.z);
-
-		D3DXVECTOR3 rot = GetRotation();
-		universal::FactingRot(&rot.y, fRotDest, FACT_ROTATION);
-		SetRotation(rot);
-	}
+	// 目標向きの設定
+	float fRotDest = atan2f(axisMove.x, axisMove.z) + D3DX_PI;
+	SetRotDest(fRotDest);
 }
 
 //=====================================================
@@ -330,7 +270,7 @@ void CPlayer::Debug(void)
 	CInputJoypad *pJoypad = CInputJoypad::GetInstance();
 	CInputManager *pInputMgr = CInputManager::GetInstance();
 
-	if (pDebugProc == nullptr || pInputKeyboard == nullptr || pJoypad == nullptr || pInputMgr == nullptr || m_pShadow == nullptr)
+	if (pDebugProc == nullptr || pInputKeyboard == nullptr || pJoypad == nullptr || pInputMgr == nullptr)
 		return;
 
 #if 1
@@ -348,16 +288,7 @@ void CPlayer::Debug(void)
 void CPlayer::Draw(void)
 {
 	// 継承クラスの描画
-	CMotion::Draw();
-}
-
-//=====================================================
-// 影の位置設定
-//=====================================================
-void CPlayer::SetShadowPos(D3DXVECTOR3 pos)
-{
-	if (m_pShadow != nullptr)
-		m_pShadow->SetJustPosition(pos);
+	CCharacter::Draw();
 }
 
 //=====================================================
