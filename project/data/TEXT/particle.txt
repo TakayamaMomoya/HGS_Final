@@ -1,0 +1,252 @@
+#====================================================================
+#
+# パーティクルスクリプトファイル[particle.txt]
+# Author：Momoya Takayama
+#
+#====================================================================
+SCRIPT
+
+PARTICLESET		#1 疾走のパーティクル
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+    LIFE_PARTICLE = 7
+    NUM_EFFECT = 3
+    LIFE_EFFECT = 9
+    RADIUS_EFFECT = 13.82
+    SPEED_EFFECT = 18.65
+    GRAVITY = -0.00
+    DECREASE = -0.13
+    RANGEROT = 2.71
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    MODE_RENDER = 1
+    COLOR = 0.86 0.86 0.86 1.00
+END_PARTICLESET
+
+PARTICLESET		#2 リザルトの煙
+	TEXTURE_PATH = data//TEXTURE//EFFECT//smoke.png
+    LIFE_PARTICLE = 7
+    NUM_EFFECT = 2
+    LIFE_EFFECT = 67
+    RADIUS_EFFECT = 23.13
+    SPEED_EFFECT = 2.82
+    GRAVITY = -0.00
+    DECREASE = -0.53
+    RANGEROT = 2.71
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    MODE_RENDER = 1
+    COLOR = 0.86 0.86 0.86 1.00
+END_PARTICLESET
+
+PARTICLESET		#3 氷破壊
+	TEXTURE_PATH = data//TEXTURE//EFFECT//ice001.png
+    LIFE_PARTICLE = 3
+    NUM_EFFECT = 4
+    LIFE_EFFECT = 40
+    RADIUS_EFFECT = 8.07
+    SPEED_EFFECT = 9.85
+    GRAVITY = 0.40
+    DECREASE = 0.16
+    RANGEROT = 9.99
+    IS_ADD = 0
+    IS_ROT = 0
+    IS_TURN = 0
+    COLOR = 0.50 0.82 1.34 1.00
+    MODE_RENDER = 1
+END_PARTICLESET
+
+PARTICLESET		#4 敵とぶつかったときのパーティクル(火花)
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+	LIFE_PARTICLE = 4
+    NUM_EFFECT = 4
+    LIFE_EFFECT = 20
+    RADIUS_EFFECT = 4.94
+    SPEED_EFFECT = 11.42
+    GRAVITY = 0.89
+    DECREASE = 0.25
+    RANGEROT = 2.44
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.00 0.70 0.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#5 硬い氷を叩いた時のパーティクル
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+ 	LIFE_PARTICLE = 2
+    NUM_EFFECT = 6
+    LIFE_EFFECT = 26
+    RADIUS_EFFECT = 6.39
+    SPEED_EFFECT = 9.23
+    GRAVITY = 0.42
+    DECREASE = 0.58
+    RANGEROT = 0.45
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 2.00 0.82 0.01 1.00
+END_PARTICLESET
+
+PARTICLESET		#6 修復中の氷のエフェクト
+	TEXTURE_PATH = data//TEXTURE//EFFECT//smoke.png
+	LIFE_PARTICLE = 30
+    NUM_EFFECT = 2
+    LIFE_EFFECT = 35
+    RADIUS_EFFECT = 110.00
+    SPEED_EFFECT = 7.00
+    GRAVITY = -0.00
+    DECREASE = -0.50
+    RANGEROT = 1.05
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.00 1.00 1.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#7 水しぶき
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+ 	LIFE_PARTICLE = 7
+    NUM_EFFECT = 17
+    LIFE_EFFECT = 13
+    RADIUS_EFFECT = 5.56
+    SPEED_EFFECT = 9.34
+    GRAVITY = 0.65
+    DECREASE = -0.47
+    RANGEROT = 2.33
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 0.00 0.54 1.69 1.00
+END_PARTICLESET
+
+PARTICLESET		#8 氷が沈むときの泡
+	TEXTURE_PATH = data//TEXTURE//EFFECT//bubble.png
+ 	LIFE_PARTICLE = 10
+    NUM_EFFECT = 10
+    LIFE_EFFECT = 30
+    RADIUS_EFFECT = 40.0
+    SPEED_EFFECT = 5.1
+    GRAVITY = 0.00
+    DECREASE = -0.01
+    RANGEROT = 0.94
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.01 1.01 1.01 1.00
+END_PARTICLESET
+
+PARTICLESET		#9 マップに入ったときのエフェクト
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+  	LIFE_PARTICLE = 10
+    NUM_EFFECT = 5
+    LIFE_EFFECT = 28
+    RADIUS_EFFECT = 0.55
+    SPEED_EFFECT = 0.91
+    GRAVITY = 0.02
+    DECREASE = -0.14
+    RANGEROT = 1.63
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.01 1.00 0.60 1.00
+END_PARTICLESET
+
+PARTICLESET		#10 ダメージ受けた時(★エフェクト)
+	TEXTURE_PATH = data//TEXTURE//EFFECT//star.png
+	LIFE_PARTICLE = 2
+    NUM_EFFECT = 1
+    LIFE_EFFECT = 30
+    RADIUS_EFFECT = 25.15
+    SPEED_EFFECT = 11.16
+    GRAVITY = 0.71
+    DECREASE = -0.00
+    RANGEROT = 1.50
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.00 1.01 0.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#11 氷がくっついた時のかけら
+	TEXTURE_PATH = data//TEXTURE//EFFECT//ice001.png
+    LIFE_PARTICLE = 1
+    NUM_EFFECT = 2
+    LIFE_EFFECT = 40
+    RADIUS_EFFECT = 10.00
+    SPEED_EFFECT = 6.00
+    GRAVITY = 0.66
+    DECREASE = -0.40
+    RANGEROT = 3.11
+    IS_ADD = 0
+    IS_ROT = 0
+    IS_TURN = 0
+    COLOR = 1.00 1.00 1.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#12 雪が吹雪いた時のエフェクト
+	TEXTURE_PATH = data//TEXTURE//EFFECT//effect000.png
+    LIFE_PARTICLE = 1
+    NUM_EFFECT = 25
+    LIFE_EFFECT = 73
+    RADIUS_EFFECT = 6.01
+    SPEED_EFFECT = 9.89
+    GRAVITY = 0.16
+    DECREASE = -0.30
+    RANGEROT = 0.41
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 1.00 1.00 1.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#13 ステージセレクトの雪の軌道
+	TEXTURE_PATH = data//TEXTURE//EFFECT//Snow.png
+    LIFE_PARTICLE = 1
+    NUM_EFFECT = 4
+    LIFE_EFFECT = 30
+    RADIUS_EFFECT = 23.01
+    SPEED_EFFECT = 11.01
+    GRAVITY = 0.31
+    DECREASE = 0.30
+    RANGEROT = 0.57
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 0.90 1.00 1.00 1.00
+END_PARTICLESET
+
+PARTICLESET		#14 敵が氷に着地するときのパーティクル
+	TEXTURE_PATH = data//TEXTURE//EFFECT//ice001.png
+    LIFE_PARTICLE = 3
+    NUM_EFFECT = 14
+    LIFE_EFFECT = 40
+    RADIUS_EFFECT = 15.24
+    SPEED_EFFECT = 14.19
+    GRAVITY = 0.35
+    DECREASE = 0.57
+    RANGEROT = 2.31
+    IS_ADD = 1
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 0.00 0.50 0.78 1.00
+END_PARTICLESET
+
+PARTICLESET		#15 マルチモードでプレイヤーが飛び出たときの飛沫
+	TEXTURE_PATH = data//TEXTURE//EFFECT//ice001.png
+    LIFE_PARTICLE = 3
+    NUM_EFFECT = 10
+    LIFE_EFFECT = 60
+    RADIUS_EFFECT = 25.00
+    SPEED_EFFECT = 8.51
+    GRAVITY = 0.30
+    DECREASE = -0.00
+    RANGEROT = 1.58
+    IS_ADD = 0
+    IS_ROT = 1
+    IS_TURN = 0
+    COLOR = 0.81 0.80 1.01 1.00
+END_PARTICLESET
+
+END_SCRIPT
