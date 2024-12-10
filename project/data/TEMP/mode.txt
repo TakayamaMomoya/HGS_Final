@@ -1,2 +1,0 @@
-MODE = 1
-PLAYER = 1

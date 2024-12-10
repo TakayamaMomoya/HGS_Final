@@ -58,14 +58,14 @@ private:
 	void SetMtxBillboard(void);
 
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファへのポインタ
-	D3DXVECTOR3 m_posOld;	// 前回の位置
-	D3DXCOLOR m_col;	// 色
-	float m_width;	// 幅
-	float m_heigth;	// 高さ
-	float m_fFactSB;	// ストレッチビルボードのときの見やすさの補正
-	int m_nIdxTexture;	// テクスチャの番号
-	int m_nNumVtx;	// 頂点数
-	MODE m_mode;	// モード
+	D3DXVECTOR3 m_posOld;				// 前回の位置
+	D3DXCOLOR m_col;					// 色
+	float m_width;						// 幅
+	float m_heigth;						// 高さ
+	float m_fFactSB;					// ストレッチビルボードのときの見やすさの補正
+	int m_nIdxTexture;					// テクスチャの番号
+	int m_nNumVtx;						// 頂点数
+	MODE m_mode;						// モード
 };
 
 #endif
