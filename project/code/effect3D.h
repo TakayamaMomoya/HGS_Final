@@ -36,7 +36,7 @@ private:
 	int m_nLife;	// 寿命
 	float m_fDecreaseRadius;	// 半径減少量
 	float m_fDecreaseAlpha;	// α値減少量
-	D3DXVECTOR3 m_move;
+	D3DXVECTOR3 m_move;		// 移動量
 	D3DXVECTOR3 m_relPos;	// 相対位置
 	D3DXVECTOR3 *m_pPosOwner;	// 持ち主のポインタ
 	bool m_bAdd;	// 加算処理

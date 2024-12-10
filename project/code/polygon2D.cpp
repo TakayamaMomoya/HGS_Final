@@ -20,7 +20,6 @@ CPolygon2D::CPolygon2D(int nPriority) : CObject2D(nPriority)
 {
 	// 変数のクリア
 	m_pVtxBuff = nullptr;
-	m_move = { 0,0,0 };
 	m_heigth = 0;
 	m_width = 0;
 	m_col = { 1.0f,1.0f,1.0f,1.0f };
@@ -273,6 +272,8 @@ void CPolygon2D::SetSize(float width, float height)
 {
 	m_width = width;
 	m_heigth = height;
+
+	SetVtx();
 }
 
 //=====================================================
@@ -281,6 +282,8 @@ void CPolygon2D::SetSize(float width, float height)
 void CPolygon2D::SetWidth(float width)
 {
 	m_width = width;
+
+	SetVtx();
 }
 
 //=====================================================
@@ -289,6 +292,8 @@ void CPolygon2D::SetWidth(float width)
 void CPolygon2D::SetHeight(float height)
 {
 	m_heigth = height;
+
+	SetVtx();
 }
 
 //=====================================================
@@ -355,32 +360,6 @@ void CPolygon2D::SetAnim(int nAnim,int nNumAnim,int nNumV)
 		// 頂点バッファのアンロック
 		m_pVtxBuff->Unlock();
 	}
-}
-
-//=====================================================
-// 移動量設定処理
-//=====================================================
-void CPolygon2D::SetMove(D3DXVECTOR3 move)
-{
-	m_move = move;
-}
-
-//=====================================================
-// 移動量加算処理
-//=====================================================
-void CPolygon2D::AddMove(D3DXVECTOR3 move)
-{
-	m_move += move;
-}
-
-//=====================================================
-// 移動量減衰処理
-//=====================================================
-void CPolygon2D::DicMove(float fDicrease)
-{
-	m_move.x *= fDicrease;
-	m_move.y *= fDicrease;
-	m_move.z *= fDicrease;
 }
 
 //=====================================================

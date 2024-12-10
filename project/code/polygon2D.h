@@ -25,9 +25,7 @@ public:
 	HRESULT Init(void);	// 初期化処理
 	void Uninit(void);	// 終了処理
 	void Update(void);	// 更新処理
-	void Draw(void);	// 描画処理
-	void AddMove(D3DXVECTOR3 move);	// 移動量加算処理
-	void DicMove(float fDicrease);	// 移動量減衰処理
+	void Draw(void);	// 描画処理x
 
 	// 変数取得・設定関数
 	virtual void SetSize(float width, float height);	// サイズ
@@ -39,9 +37,6 @@ public:
 	void SetAnim(int nAnim, int nNumAnim, int nNumV);	// アニメーション
 	void SetTex(D3DXVECTOR2 texLeftUp, D3DXVECTOR2 texRightDown);	// テクスチャ座標
 	LPDIRECT3DVERTEXBUFFER9 GetVtxBuff(void) { return m_pVtxBuff; }	// 頂点バッファ
-	void SetMove(D3DXVECTOR3 move);	// 移動量設定処理
-	D3DXVECTOR3 GetPositionOld(void) { return m_posOld; }	// 前回の位置
-	D3DXVECTOR3 GetMove(void) { return m_move; }	// 移動量取得処理
 	D3DXCOLOR GetCol(void) { return m_col; }	// 色
 	float GetAlpha(void) { return m_col.a; }	// 透明度
 	void SetCol(D3DXCOLOR col);
@@ -57,8 +52,6 @@ public:
 private:
 	// メンバ変数
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// 頂点バッファ
-	D3DXVECTOR3 m_posOld;	// 前回の位置
-	D3DXVECTOR3 m_move;	// 移動量
 	D3DXCOLOR m_col;	// 色
 	float m_width;	// 幅
 	float m_heigth;	// 高さ

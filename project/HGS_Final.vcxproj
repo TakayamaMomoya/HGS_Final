@@ -190,7 +190,6 @@
     <ClCompile Include="code\resultSingleLose.cpp" />
     <ClCompile Include="code\resultSingleWin.cpp" />
     <ClCompile Include="code\shadow.cpp" />
-    <ClCompile Include="code\playerTutorial.cpp" />
     <ClCompile Include="code\debris.cpp" />
     <ClCompile Include="code\debrisspawner.cpp" />
     <ClCompile Include="code\debugproc.cpp" />
@@ -281,7 +280,6 @@
     <ClInclude Include="code\resultSingleLose.h" />
     <ClInclude Include="code\resultSingleWin.h" />
     <ClInclude Include="code\shadow.h" />
-    <ClInclude Include="code\playerTutorial.h" />
     <ClInclude Include="code\debris.h" />
     <ClInclude Include="code\debrisSpawner.h" />
     <ClInclude Include="code\debugproc.h" />

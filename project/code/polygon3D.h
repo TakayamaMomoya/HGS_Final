@@ -42,7 +42,7 @@ public:
 	int GetIdxTexture(void) { return m_nIdxTexture; }
 	D3DXCOLOR GetColor(void) { return m_col; }
 	void SetColor(D3DXCOLOR col);
-	void SetAlpha(float fValue) { m_col.a = fValue; }
+	void SetAlpha(float fValue) { m_col.a = fValue; SetColor(m_col); }
 	void SetTex(D3DXVECTOR2 rd, D3DXVECTOR2 lu);
 	void SetFactSB(float fFact) { m_fFactSB = fFact; }
 	void SetVtx(void);

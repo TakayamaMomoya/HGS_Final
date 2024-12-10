@@ -28,9 +28,14 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	// •Ï”æ“¾Eİ’èŠÖ”
+	void SetMove(D3DXVECTOR3 move) { m_move = move; }	// ˆÚ“®—Ê
+	D3DXVECTOR3 GetMove(void) { return m_move; }
+
 private:
-	int m_nLife;	// õ–½
+	int m_nLife;		// õ–½
 	float m_fDecrease;	// Œ¸­—Ê
+	D3DXVECTOR3 m_move;	// ˆÚ“®—Ê
 };
 
 #endif

@@ -300,9 +300,6 @@
     <ClCompile Include="code\shadow.cpp">
       <Filter>ソース ファイル\mesh</Filter>
     </ClCompile>
-    <ClCompile Include="code\playerTutorial.cpp">
-      <Filter>ソース ファイル\scene\tutorial</Filter>
-    </ClCompile>
     <ClCompile Include="code\gauge.cpp">
       <Filter>ソース ファイル\UI\gauge</Filter>
     </ClCompile>
@@ -565,9 +562,6 @@
     </ClInclude>
     <ClInclude Include="code\shadow.h">
       <Filter>ソース ファイル\mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="code\playerTutorial.h">
-      <Filter>ソース ファイル\scene\tutorial</Filter>
     </ClInclude>
     <ClInclude Include="code\gauge.h">
       <Filter>ソース ファイル\UI\gauge</Filter>
