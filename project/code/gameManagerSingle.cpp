@@ -63,9 +63,6 @@ HRESULT CGameManagerSingle::Init(void)
 	// 家の生成
 	CHouse::SetHouseRandom();
 	
-	// プレゼント生成
-	CPresent::Create();
-
 	// 基底クラスの初期化
 	CGameManager::Init();
 
