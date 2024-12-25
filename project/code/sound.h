@@ -23,6 +23,8 @@ public:
 		LABEL_BGM_RESULT,				// リザルトBGM
 		LABEL_BGM_OPTION,				// オプションBGM
 
+		LABEL_BGM_FEVER,				// フィーバーBGM
+
 		LABEL_SE_COUNTDOWN,				// カウントダウン
 		LABEL_SE_COUNTSTART,			// 開始時スタート
 		LABEL_SE_PENGUIN_JUMP,			// ペンギンジャンプ
@@ -41,6 +43,8 @@ public:
 		LABEL_SE_POLARBEAR_VOICE,		// シロクマ鳴き声
 		LABEL_SE_POLARBEAR_ASSALT,		// シロクマ突撃
 		LABEL_SE_ALBATROSS,				// アホウドリ鳴き声
+
+		LABEL_SE_PICKUP,				// プレゼント取得
 
 		LABEL_SE_PAUSE_MENU,			// ポーズ
 		LABEL_SE_PAUSE_ARROW,			// 移動
@@ -103,11 +107,13 @@ private:
 	// サウンドの情報
 	SOUNDINFO m_aSoundInfo[LABEL_MAX] =
 	{
-		{ "data/SOUND/BGM/BGM_Title.wav",-1 },			// タイトル画面BGM
+		{ "data/SOUND/BGM/BGM_Title01.wav",-1 },		// タイトル画面BGM
 		{ "data/SOUND/BGM/BGM_Result.wav",-1 },			// チュートリアル画面BGM（未）
-		{ "data/SOUND/BGM/BGM_Game00.wav",-1 },			// ゲーム画面BGM
-		{ "data/SOUND/BGM/BGM_Result.wav",-1 },			// リザルト画面BGM
+		{ "data/SOUND/BGM/BGM_Title01.wav",-1 },			// ゲーム画面BGM
+		{ "data/SOUND/BGM/BGM_Result01.wav",-1 },		// リザルト画面BGM
 		{ "data/SOUND/BGM/BGM_Option.wav",-1 },			// オプション画面BGM
+
+		{ "data/SOUND/BGM/BGM_Game06.wav",-1 },			// フィーバーBGM
 
 		{ "data/SOUND/SE/SE_Count.wav",0 },				// カウントダウン
 		{ "data/SOUND/SE/SE_Start.wav",0 },				// 開始時スタート
@@ -128,15 +134,17 @@ private:
 		{ "data/SOUND/SE/SE_Polarbear_Assault.wav",0 },	// シロクマ突撃
 		{ "data/SOUND/SE/SE_Albatross.wav",0 },			// アホウドリ鳴き声
 
+		{ "data/SOUND/SE/SE_Pickup00.wav",0 },			// プレゼント取得
+
 		{ "data/SOUND/SE/pause.wav",0 },				// ポーズ
-		{ "data/SOUND/SE/SE_ENTER00.wav",0 },			// 選択
-		{ "data/SOUND/SE/SE_Enter01.wav",0 },			// 決定
-		{ "data/SOUND/SE/SE_Enter02.wav",0 },			// 決定
+		{ "data/SOUND/SE/SE_Enter03.wav",0 },			// 選択
+		{ "data/SOUND/SE/SE_Enter03.wav",0 },			// 決定
+		{ "data/SOUND/SE/SE_Enter03.wav",0 },			// 決定
 
 		{ "data/SOUND/SE/SE_GameStart.wav",0 },			// ゲームスタート
 
 		{ "data/SOUND/SE/SE_Fade.wav",0 },				// タイトルフェード音
-		{ "data/SOUND/SE/SE_StageEntry.wav",-1 },				// タイトルフェード音
+		{ "data/SOUND/SE/SE_StageEntry.wav",-1 },		// タイトルフェード音
 	};
 
 	static CSound *m_pSound;	// 自身のポインタ

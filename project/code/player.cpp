@@ -420,6 +420,15 @@ void CPlayer::SwapPresent()
 		m_pGauge->SetParam(0.0f);
 	}
 
+	// サウンドインスタンスの取得
+	CSound* pSound = CSound::GetInstance();
+
+	if (pSound != nullptr)
+	{
+		// BGMの再生
+		pSound->Play(pSound->LABEL_SE_PICKUP);
+	}
+
 	// 自身の所持しているプレゼントを上書きする
 	m_pPresent = pTemp;
 }
