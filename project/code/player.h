@@ -121,7 +121,6 @@ private:
 	CInputManager *m_pInputMgr;	// 入力マネージャー
 	CUI* m_pInteract;			// インタラクトUI
 	CPresent* m_pPresent;		// プレゼントのポインタ
-	CHouse* m_pNearHouse;		// 一番近い家のポインタ
 
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列

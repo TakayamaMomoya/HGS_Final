@@ -300,6 +300,13 @@ void CPlayer::Trade()
 	// インタラクト表示が存在していない場合関数を抜ける
 	if (m_pInteract == nullptr) { return; }
 
+	// 入力情報の取得
+	CInputKeyboard* pInputKeyboard = CInputKeyboard::GetInstance();
+	CInputJoypad* pJoypad = CInputJoypad::GetInstance();
+
+	// ボタン入力がない場合関数を抜ける
+	if (!pInputKeyboard->GetTrigger(DIK_SPACE), !pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0)){ return; }
+
 	// TODO : 建物にプレゼントを渡す
 	// TODO : 建物からプレゼントを受け取る
 }
