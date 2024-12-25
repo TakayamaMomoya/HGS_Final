@@ -53,6 +53,7 @@ private:
 	void UpdateCamera(void);
 	void MotionSet(void);
 	void PursueCamera(void);
+	void EndCamera(void);
 	void InitCharacter(void);
 
 	// Ã“Iƒƒ“ƒo•Ï”

@@ -61,10 +61,10 @@ HRESULT CGameManagerSingle::Init(void)
 	CGameManager::Init();
 
 	// ƒXƒRƒA‚Ì¶¬
-	CGame *pGame = CGame::GetInstance();
+	//CGame *pGame = CGame::GetInstance();
 
-	if (pGame != nullptr)
-		pGame->CreateScore();
+	//if (pGame != nullptr)
+	//	pGame->CreateScore();
 
 	return S_OK;
 }
