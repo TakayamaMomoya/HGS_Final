@@ -33,7 +33,8 @@
 //*****************************************************
 namespace
 {
-const std::string PATH_BODY = "data\\MOTION\\motionPenguin.txt";	// ボディのパス
+const std::string PATH_BODY = "data\\MOTION\\motionTonakai.txt";	// ボディのパス
+const float MODEL_SCALE = 10.0f; // 拡大率
 
 const float RATE_DECREASE_MOVE = 0.5f;	// 移動減衰の割合
 const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
@@ -45,6 +46,9 @@ const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
 const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
 
 const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // プレゼントのオフセット
+
+const int POWERUP_NUM = 5; // 加速に必要な連続正解数
+const float POWER_RATE = 1.5f; // 加速倍率
 }
 
 //*****************************************************
@@ -58,7 +62,8 @@ vector<CPlayer*> CPlayer::s_apPlayer;	// 格納用の配列
 CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0),
 m_pInteract(nullptr),
 m_pPresent(nullptr),
-m_pNearHouse(nullptr)
+m_pNearHouse(nullptr),
+m_nAnswerCount(0)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -101,6 +106,9 @@ HRESULT CPlayer::Init(void)
 
 	// 継承クラスの初期化
 	CCharacter::Init();
+
+	// 大きくする
+	SetScale(MODEL_SCALE);
 
 	InitPose(0);
 
@@ -242,6 +250,11 @@ void CPlayer::Forward(void)
 		fSpeed = SPEED_MOVE;
 	}
 
+	if (m_nAnswerCount >= POWERUP_NUM)
+	{
+		fSpeed *= POWER_RATE;
+	}
+
 	// 移動速度の設定
 	D3DXVECTOR3 move = GetMove();
 
@@ -312,6 +325,7 @@ void CPlayer::Interact()
 void CPlayer::SwapPresent()
 {
 	CDebugProc::GetInstance()->Print("所持プレゼント : %d\n", m_pPresent);
+	CDebugProc::GetInstance()->Print("連続正解カウンター : %d\n", m_nAnswerCount);
 
 	// インタラクト表示が存在していない場合関数を抜ける
 	if (m_pInteract == nullptr) { return; }
@@ -328,6 +342,17 @@ void CPlayer::SwapPresent()
 
 	// 最も近い建物にプレゼントを与える
 	m_pNearHouse->SetPresent(m_pPresent);
+
+	// 正解のプレゼントだった場合カウンターを加算する
+	if (m_pNearHouse->GetLabelWant() == m_pPresent->GetLabel())
+	{
+		++m_nAnswerCount;
+	}
+	else
+	{
+		// 間違えていた場合カウンターを初期化
+		m_nAnswerCount = 0;
+	}
 
 	// 自身の所持しているプレゼントを上書きする
 	m_pPresent = pTemp;

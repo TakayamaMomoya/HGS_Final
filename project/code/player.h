@@ -123,6 +123,8 @@ private:
 	CPresent* m_pPresent;		// プレゼントのポインタ
 	CHouse* m_pNearHouse;			// 近い建物のポインタ
 
+	unsigned int m_nAnswerCount; // 連続正解カウンター
+
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列
 };
