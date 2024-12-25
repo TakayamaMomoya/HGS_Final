@@ -32,6 +32,8 @@ public:
 	void Update(void);
 	void Draw(void);
 	bool CheckCover(D3DXVECTOR3 pos);	// 被りチェック
+	CPresent* GetPresent(void) { return m_pPresent; }	// プレゼント
+	void SetPresent(CPresent* pPresent) { m_pPresent = pPresent; }
 
 	// 静的メンバ関数
 	static void SetHouseRandom(void);			// ランダムに家を配置する処理
