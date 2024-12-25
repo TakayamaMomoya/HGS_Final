@@ -8,10 +8,22 @@
 # パラメーター
 #====================================================================
 SET
-	PATH_MODEL = data\\MODEL\\Penguin\\01_Head.x
+	PATH_MODEL = data\\MODEL\\goods\\3ds.x
 END_SET
 SET
-	PATH_MODEL = data\\MODEL\\Penguin\\00_Body.x
+	PATH_MODEL = data\\MODEL\\goods\\icecream.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\plane00.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\ps5.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\sakai.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\tamagon.x
 END_SET
 
 END_SCRIPT
