@@ -11,19 +11,36 @@ SET
 	PATH_MODEL = data\\MODEL\\goods\\3ds.x
 END_SET
 SET
+	PATH_MODEL = data\\MODEL\\goods\\goku.x
+	SCALE = 3.0
+END_SET
+SET
 	PATH_MODEL = data\\MODEL\\goods\\icecream.x
+	SCALE = 5.0
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\MangaMeat.x
+	SCALE = 4.0
 END_SET
 SET
 	PATH_MODEL = data\\MODEL\\goods\\plane00.x
+	SCALE = 0.8
 END_SET
 SET
 	PATH_MODEL = data\\MODEL\\goods\\ps5.x
 END_SET
 SET
 	PATH_MODEL = data\\MODEL\\goods\\sakai.x
+	SCALE = 7.0
 END_SET
 SET
 	PATH_MODEL = data\\MODEL\\goods\\tamagon.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\tank00.x
+END_SET
+SET
+	PATH_MODEL = data\\MODEL\\goods\\ufo.x
 END_SET
 
 END_SCRIPT
