@@ -18,6 +18,7 @@
 #include "cameraState.h"
 #include "house.h"
 #include "present.h"
+#include "meshfield.h"
 
 //*****************************************************
 // ’è”’è‹`

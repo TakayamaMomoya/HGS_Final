@@ -29,14 +29,12 @@ public:
 	enum TYPE
 	{// 種類
 		TYPE_NONE = 0,		// なんもない
-		TYPE_PECKWAVE,		// つっつき波紋
-		TYPE_RIPPLESTRINGS,	// さざ波
-		TYPE_RIPPLE,		// 波紋
-		TYPE_BEARSTEP,		// シロクマの歩き煙
-		TYPE_BLIZZARD,		// 吹雪
-		TYPE_ICEBREAK,		// 氷が壊れるとき
-		TYPE_JUMP,			// ジャンプ
-		TYPE_DROP,			// 水しぶき
+		TYPE_RIGHT,			// 正解
+		TYPE_POWER_UP,		// 連続正解
+		TYPE_POWER_DOWN,	// 不正解
+		TYPE_FOOT,			// 土煙
+		TYPE_SPEED,			// 二足歩行
+		TYPE_PRESENT,		// 開封
 		TYPE_MAX
 	};
 

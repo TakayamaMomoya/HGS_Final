@@ -48,6 +48,8 @@ public:
 	static CListManager<CHouse>* GetList(void); // リスト取得
 	static void SetResultLabel(void);			// リザルトのラベル設定
 	static vector<CPresent::E_Label> GetLabelResult(void) { return s_aLabelResult; }
+	static void LimitPos(D3DXVECTOR3 &rPos);
+	static void PosRate(D3DXVECTOR3 pos,float* pRateX, float* pRateZ);
 
 private:
 	// 静的メンバ変数
