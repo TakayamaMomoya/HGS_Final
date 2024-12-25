@@ -26,7 +26,7 @@
 
 #include "house.h"
 #include "UI.h"
-#include "texture.h"
+#include "present.h"
 
 //*****************************************************
 // 定数定義
@@ -54,7 +54,9 @@ vector<CPlayer*> CPlayer::s_apPlayer;	// 格納用の配列
 // コンストラクタ
 //=====================================================
 CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0),
-m_pInteract(nullptr)
+m_pInteract(nullptr),
+m_pPresent(nullptr),
+m_pNearHouse(nullptr)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -274,6 +276,10 @@ void CPlayer::Interact()
 			// TODO : テクスチャ変更する
 			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\tutorial_piston.png"));
 		}
+
+		// 近かった建物を記録する
+		m_pNearHouse = house;
+
 		return;
 	}
 
@@ -284,6 +290,18 @@ void CPlayer::Interact()
 		delete m_pInteract;
 		m_pInteract = nullptr;
 	}
+}
+
+//==========================================
+//  プレゼントを交換する処理
+//==========================================
+void CPlayer::Trade()
+{
+	// インタラクト表示が存在していない場合関数を抜ける
+	if (m_pInteract == nullptr) { return; }
+
+	// TODO : 建物にプレゼントを渡す
+	// TODO : 建物からプレゼントを受け取る
 }
 
 //=====================================================
