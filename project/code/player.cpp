@@ -60,7 +60,7 @@ const D3DXVECTOR3 GAUGE_POS = { 0.8f, 0.93f, 0.0f };	// ゲージの位置
 const D3DXVECTOR2 GAUGE_SIZE = { 0.2f, 0.07f };		// ゲージのサイズ
 const float RADIUS_COLLISION = 200.0f;					// 判定の半径
 
-const float SAB_TIME = 1.0f; // ゲージが減少するまでの時間
+const float SAB_TIME = 5.0f; // ゲージが減少するまでの時間
 
 }
 
@@ -208,8 +208,6 @@ void CPlayer::Update(void)
 
 	// ゲージの操作
 	ControlGauge();
-
-	CDebugProc::GetInstance()->Print("\n\n\n\n\n\n\nゲージの数字 : %f\n\n\n\n\n\n", m_pGauge->GetParam());
 
 	// プレゼントを入れ替える処理
 	SwapPresent();

@@ -365,8 +365,14 @@ void CResult::MotionSet(void)
 			(*m_CharacterIt)->pPresent->SetMotion(1);
 
 			//=====================================================
-			// プレゼントを手の先に付ける (6で右手 10で左手)
+			// プレゼントを生成
 			//=====================================================
+			 vector<CPresent::S_InfoPresent*> aInfo = CPresent::GetInfoPresent();
+
+			 CPresent::S_InfoPresent* pInfo = universal::RandomFromVector(aInfo);
+			 (*m_CharacterIt)->pModel = CObjectX::Create();
+			 int nIdxModel = CModel::Load(&pInfo->pathModel[0]);
+			 (*m_CharacterIt)->pModel->BindModel(nIdxModel);
 
 			// プレゼント箱からエフェクトを生成
 			MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_PRESENT, (*m_CharacterIt)->pPresent->GetPosition());
@@ -379,6 +385,16 @@ void CResult::MotionSet(void)
 	// モーション確認
 	for (const auto& it : m_CharacterList)
 	{
+		//=====================================================
+		// プレゼントを手の先に付ける (6で右手 10で左手)
+		//=====================================================
+		D3DXMATRIX mtxHand = it->pCharacter->GetParts(6)->pParts->GetMatrix();
+
+		if (it->pModel != nullptr)
+		{
+			it->pModel->SetPosition(D3DXVECTOR3(mtxHand._41, mtxHand._42, mtxHand._43));
+		}
+
 		if (it->pCharacter->IsFinish())
 		{
 			if (it->pCharacter == m_LastInfo.pCharacter)

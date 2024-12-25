@@ -37,9 +37,10 @@ private:
 	{
 		CMotion* pCharacter;
 		CPresent* pPresent;
+		CObjectX* pModel;
 
 		// コンストラクタ
-		SCharaInfo() : pCharacter(nullptr), pPresent(nullptr) {}
+		SCharaInfo() : pCharacter(nullptr), pPresent(nullptr), pModel(nullptr){}
 	};
 
 	enum E_State
