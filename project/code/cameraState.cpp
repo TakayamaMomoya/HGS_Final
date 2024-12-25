@@ -44,6 +44,9 @@ const D3DXVECTOR3 POSV_DEFAULT_SELECTMODE = { 0.0f,200.0f,-2000.0f };	// ƒ‚[ƒhƒ
 const D3DXVECTOR3 POSR_DEFAULT_RESULTMULTI = { 800.0f,50.0f,-400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒg’Ž‹“_ˆÊ’u
 const D3DXVECTOR3 POSV_DEFAULT_RESULTMULTI = { 800.0f,400.0f,-2400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒgŽ‹“_ˆÊ’u
 
+const D3DXVECTOR3 POSR_DEFAULT_RESULT = { 800.0f,50.0f,-400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒg’Ž‹“_ˆÊ’u
+const D3DXVECTOR3 POSV_DEFAULT_RESULT = { 800.0f,400.0f,-2400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒgŽ‹“_ˆÊ’u
+
 const D3DXVECTOR3 POSV_DISTANCE = { 0.0f, 1500.0f, -1500.0f }; // ƒJƒƒ‰‚Ì‹——£
 
 namespace resultSingle
@@ -370,4 +373,34 @@ void CCameraStateSelectMode::Init(CCamera* pCamera)
 void CCameraStateSelectMode::Update(CCamera* pCamera)
 {
 
+}
+
+//**************************************************************************
+// ƒŠƒUƒ‹ƒg
+//**************************************************************************
+//=====================================================
+// ‰Šú‰»
+//=====================================================
+void CCameraStateResult::Init(CCamera* pCamera)
+{
+	if (pCamera == nullptr)
+		return;
+
+	CCamera::Camera* pInfoCamera = pCamera->GetCamera();
+
+	// ƒJƒƒ‰Ž‹“_A’Ž‹“_ˆÊ’u‰Šú‰»
+	pInfoCamera->posR = POSR_DEFAULT_SELECTMODE;
+	pInfoCamera->posV = POSV_DEFAULT_SELECTMODE;
+}
+
+//=====================================================
+// XV
+//=====================================================
+void CCameraStateResult::Update(CCamera* pCamera)
+{
+	if (pCamera == nullptr)
+		return;
+
+	//pCamera->SetPosR();
+	pCamera->SetPosV();
 }
