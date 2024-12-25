@@ -158,6 +158,9 @@ void CPlayer::Update(void)
 		m_pInteract->SetPosition(posScreen);
 	}
 
+	// プレゼントを入れ替える処理
+	SwapPresent();
+
 	// 入力処理
 	Input();
 
@@ -295,7 +298,7 @@ void CPlayer::Interact()
 //==========================================
 //  プレゼントを交換する処理
 //==========================================
-void CPlayer::Trade()
+void CPlayer::SwapPresent()
 {
 	// インタラクト表示が存在していない場合関数を抜ける
 	if (m_pInteract == nullptr) { return; }
@@ -305,10 +308,16 @@ void CPlayer::Trade()
 	CInputJoypad* pJoypad = CInputJoypad::GetInstance();
 
 	// ボタン入力がない場合関数を抜ける
-	if (!pInputKeyboard->GetTrigger(DIK_SPACE), !pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0)){ return; }
+	if (!pInputKeyboard->GetTrigger(DIK_SPACE) && !pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0)){ return; }
 
-	// TODO : 建物にプレゼントを渡す
-	// TODO : 建物からプレゼントを受け取る
+	// 最も近い建物のプレゼントを受け取る
+	CPresent* pTemp = m_pNearHouse->GetPresent();
+
+	// 最も近い建物にプレゼントを与える
+	m_pNearHouse->SetPresent(m_pPresent);
+
+	// 自身の所持しているプレゼントを上書きする
+	m_pPresent = pTemp;
 }
 
 //=====================================================

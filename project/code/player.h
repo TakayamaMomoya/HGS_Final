@@ -106,7 +106,7 @@ private:
 
 	void Interact(); // インタラクト表示
 
-	void Trade(); // プレゼントを交換する処理
+	void SwapPresent(); // プレゼントを交換する処理
 	
 	void Event(EVENT_INFO* pEventInfo) override;	// モーションイベント
 	void ManageMotion(void);						// モーションの管理
@@ -121,6 +121,7 @@ private:
 	CInputManager *m_pInputMgr;	// 入力マネージャー
 	CUI* m_pInteract;			// インタラクトUI
 	CPresent* m_pPresent;		// プレゼントのポインタ
+	CHouse* m_pNearHouse;			// 近い建物のポインタ
 
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列
