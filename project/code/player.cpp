@@ -54,11 +54,11 @@ const float POWER_RATE = 2.0f; // 加速倍率
 
 const float POWER_GAUGE = 5.0f;							// 連続正解ゲージの最大値
 const float POWER_ADD = 1.0f;		// １正解で加算されるゲージの量
-const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f };	// ゲージの位置
-const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f };		// ゲージのサイズ
+const D3DXVECTOR3 GAUGE_POS = { 0.8f, 0.93f, 0.0f };	// ゲージの位置
+const D3DXVECTOR2 GAUGE_SIZE = { 0.2f, 0.07f };		// ゲージのサイズ
 const float RADIUS_COLLISION = 200.0f;					// 判定の半径
 
-const float SAB_TIME = 20.0f; // ゲージが減少するまでの時間
+const float SAB_TIME = 10.0f; // ゲージが減少するまでの時間
 
 }
 
