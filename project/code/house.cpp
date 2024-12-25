@@ -363,10 +363,19 @@ void CHouse::SetResultLabel(void)
 //==========================================
 void CHouse::LimitPos(D3DXVECTOR3 &rPos)
 {
-	float width = set::NUM_GRID * set::DIST_HOUSE * 0.5f;
-	float height = set::NUM_GRID * set::DIST_HOUSE * 0.5f;
+	float width = set::NUM_GRID * set::DIST_HOUSE * 0.5f + set::DIST_HOUSE;
+	float height = set::NUM_GRID * set::DIST_HOUSE * 0.5f + set::DIST_HOUSE;
 
 	universal::LimitPosInSq(width, height, &rPos);
+}
+
+//==========================================
+// à íuÇÃäÑçáÇï‘Ç∑
+//==========================================
+void CHouse::PosRate(D3DXVECTOR3 pos, float* pRateX, float* pRateZ)
+{
+	*pRateX = pos.x / (set::NUM_GRID * set::DIST_HOUSE + set::DIST_HOUSE * 3.3f);
+	*pRateZ = pos.z / (set::NUM_GRID * set::DIST_HOUSE + set::DIST_HOUSE * 2);
 }
 
 namespace house

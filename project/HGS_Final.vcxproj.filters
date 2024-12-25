@@ -97,6 +97,9 @@
     <Filter Include="ソース ファイル\UI\navigation">
       <UniqueIdentifier>{f925cd43-afe8-4b6a-9a74-ca18656ca170}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI\minimap">
+      <UniqueIdentifier>{1ac06369-dec1-4986-897c-0a78354fa0e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\scene.cpp">
@@ -365,6 +368,9 @@
     </ClCompile>
     <ClCompile Include="code\navigation.cpp">
       <Filter>ソース ファイル\UI\navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="code\minimap.cpp">
+      <Filter>ソース ファイル\UI\minimap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -643,6 +649,9 @@
     </ClInclude>
     <ClInclude Include="code\navigation.h">
       <Filter>ソース ファイル\UI\navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="code\minimap.h">
+      <Filter>ソース ファイル\UI\minimap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
