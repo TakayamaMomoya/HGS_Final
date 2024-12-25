@@ -22,6 +22,11 @@ namespace model
 const string PATH_DEFAULT = "data\\MODEL\\block\\Drift_ice.x";	// デフォルトモデルのパス
 }
 
+//==========================================
+//  静的メンバ変数宣言
+//==========================================
+CListManager<CHouse>* CHouse::m_pList = nullptr; // オブジェクトリスト
+
 //=====================================================
 // コンストラクタ
 //=====================================================
@@ -65,6 +70,16 @@ HRESULT CHouse::Init(void)
 	int nIdx = CModel::Load(&model::PATH_DEFAULT[0]);
 	BindModel(nIdx);
 
+	// リストマネージャーの生成
+	if (m_pList == nullptr)
+	{
+		m_pList = CListManager<CHouse>::Create();
+		if (m_pList == nullptr) { assert(false); return E_FAIL; }
+	}
+
+	// リストに自身のオブジェクトを追加・イテレーターを取得
+	m_iterator = m_pList->AddList(this);
+
 	return S_OK;
 }
 
@@ -73,6 +88,16 @@ HRESULT CHouse::Init(void)
 //=====================================================
 void CHouse::Uninit(void)
 {
+	// リストから自身のオブジェクトを削除
+	m_pList->DelList(m_iterator);
+
+	if (m_pList->GetNumAll() == 0)
+	{ // オブジェクトが一つもない場合
+
+		// リストマネージャーの破棄
+		m_pList->Release(m_pList);
+	}
+
 	// 継承クラスの終了
 	CObjectX::Uninit();
 }

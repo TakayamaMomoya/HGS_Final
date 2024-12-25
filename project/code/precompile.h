@@ -38,6 +38,8 @@
 #include <EffekseerRendererDX9.h>
 #include <Effekseer.Modules.h>
 
+#include "listManager.h"
+
 //========================================
 // UsingéŒ¾
 //========================================
