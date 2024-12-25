@@ -27,6 +27,7 @@
 #include "inputManager.h"
 #include "debrisSpawner.h"
 #include "cameraState.h"
+#include "present.h"
 #include "MyEffekseer.h"
 
 //*****************************************************
@@ -101,6 +102,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 
 	// エフェクシアの生成
 	CMyEffekseer::Create();
+
+	// プレゼント情報読込
+	CPresent::Load();
 
 	return S_OK;
 }
@@ -189,6 +193,10 @@ void CManager::Uninit(void)
 
 	// モデル破棄
 	CModel::Unload();
+
+	// プレゼント情報破棄
+	CPresent::Unload();
+
 }
 
 //=====================================================

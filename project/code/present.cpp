@@ -50,10 +50,16 @@ void CPresent::Load(void)
 //=====================================================
 void CPresent::Unload(void)
 {
-	//for ()
+	for (int i = 0; i <= (int)s_aInfoPresnt.size(); i++)
 	{
-
+		if (s_aInfoPresnt[i] != nullptr)
+		{
+			delete s_aInfoPresnt[i];
+			s_aInfoPresnt[i] = nullptr;
+		}
 	}
+
+	s_aInfoPresnt.clear();
 }
 
 //=====================================================
