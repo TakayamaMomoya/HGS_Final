@@ -112,7 +112,7 @@ private:
 	{
 		{ "data/SOUND/BGM/BGM_Title01.wav",-1 },		// タイトル画面BGM
 		{ "data/SOUND/BGM/BGM_Result.wav",-1 },			// チュートリアル画面BGM（未）
-		{ "data/SOUND/BGM/BGM_Title01.wav",-1 },			// ゲーム画面BGM
+		{ "data/SOUND/BGM/BGM_Game05.wav",-1 },		// ゲーム画面BGM
 		{ "data/SOUND/BGM/BGM_Result01.wav",-1 },		// リザルト画面BGM
 		{ "data/SOUND/BGM/BGM_Option.wav",-1 },			// オプション画面BGM
 
