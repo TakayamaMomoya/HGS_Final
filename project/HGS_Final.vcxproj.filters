@@ -91,6 +91,9 @@
     <Filter Include="ソース ファイル\scene\ranking">
       <UniqueIdentifier>{ee060a5a-642c-4ceb-842c-1868a1013121}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\scene\result">
+      <UniqueIdentifier>{f7de0b37-1eb8-4111-a419-78d76650aaef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\scene.cpp">
@@ -353,6 +356,9 @@
     </ClCompile>
     <ClCompile Include="code\listManager.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\scene\result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -625,6 +631,9 @@
     </ClInclude>
     <ClInclude Include="code\listManager.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ソース ファイル\scene\result</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
