@@ -506,6 +506,16 @@ void CPlayer::ManageMotion(void)
 void CPlayer::Event(EVENT_INFO* pEventInfo)
 {
 	int nMotion = GetMotion();
+
+	if (nMotion == MOTION::MOTION_WALKFOURLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+	}
+
+	if (nMotion == MOTION::MOTION_WALKTWOLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+	}
 }
 
 //=====================================================
