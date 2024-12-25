@@ -427,6 +427,15 @@ void CPlayer::SwapPresent()
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
 	}
 
+	// サウンドインスタンスの取得
+	CSound* pSound = CSound::GetInstance();
+
+	if (pSound != nullptr)
+	{
+		// BGMの再生
+		pSound->Play(pSound->LABEL_SE_PICKUP);
+	}
+
 	// 自身の所持しているプレゼントを上書きする
 	m_pPresent = pTemp;
 }
