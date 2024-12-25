@@ -30,9 +30,9 @@ const string PATH_DEFAULT = "data\\MODEL\\object\\Snowdome.x";	// デフォルトモデ
 namespace set
 {
 const int NUM_SET = 16;				// 設置数
-const float DIST_HOUSE = 1000.0f;	// 家同士の距離
-const float RANGE_SET = 5000.0f;	// 配置範囲
-const int NUM_GRID = 20;			// グリッドの数
+const float DIST_HOUSE = 3000.0f;	// 家同士の距離
+const int NUM_GRID = 7;			// グリッドの数
+const float RANGE_SET = DIST_HOUSE * NUM_GRID;	// 配置範囲
 const D3DXVECTOR3 OFFSET_PRESENT = { 0.0f,0.0f,-800.0f };	// プレゼントのオフセット
 }
 
@@ -43,7 +43,7 @@ namespace UI
 {
 const float WIDTH = 0.05f;							// 幅
 const float HEIGHT = 0.08f;							// 高さ
-const D3DXVECTOR3 OFFSET = { 0.0f,-0.2f,0.0f };		// オフセット
+const D3DXVECTOR3 OFFSET = { 0.1f,-0.2f,0.0f };		// オフセット
 const string PATH[CPresent::E_Label::LABEL_MAX] =	// テクスチャパス
 {
 	"data\\TEXTURE\\UI\\boxb.png",
@@ -94,8 +94,8 @@ void CHouse::SetHouseRandom(void)
 		while (!bResult)
 		{
 			// 配置位置の設定
-			pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET;
-			pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET;
+			pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET * 0.5f;
+			pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET * 0.5f;
 
 			// 配置が被ってるかのチェック
 			bResult = !pHouse->CheckCover(pos);
