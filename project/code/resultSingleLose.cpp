@@ -54,8 +54,6 @@ const float DIFF_HEIGHT = HEIGHT_DEST - HEIGHT_INIT;	// 高さの差分
 CResultSingleLose::FuncUpdateState CResultSingleLose::s_aFuncUpdateState[] =	// 状態更新関数
 {
 	nullptr,								// 何もしない更新
-	&CResultSingleLose::UpdateApperMenu,	// メニュ出現状態更新
-	&CResultSingleLose::UpdateSelect,		// 選択状態更新
 	nullptr,								// 終了状態の更新
 };
 
@@ -148,9 +146,6 @@ void CResultSingleLose::Update(void)
 
 	// 親クラスの更新
 	CResultSingle::Update();
-
-	if (GetState() == CResultSingle::E_State::STATE_ENDAPPERCAPTION && m_state == E_State::STATE_NONE)
-		m_state = E_State::STATE_APPER_MENU;	// フェードが終了したら演出始まる
 }
 
 //=====================================================
@@ -180,11 +175,6 @@ void CResultSingleLose::UpdateApperMenu(void)
 		m_apMenu[i]->SetAlpha(fRate);
 	}
 
-	if (m_fTimer > menu::TIME_APPER)
-	{// 一定時間経過で次の状態に移る
-		m_state = E_State::STATE_SELECT;
-		m_fTimer = 0.0f;
-	}
 }
 
 //=====================================================

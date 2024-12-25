@@ -175,5 +175,5 @@ void CGameManagerSingle::EndGame(void)
 	CFade *pFade = CFade::GetInstance();
 
 	if (pFade != nullptr)
-		pFade->SetFade(CScene::MODE_TITLE);
+		pFade->SetFade(CScene::MODE_RESULT);
 }

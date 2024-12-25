@@ -29,6 +29,8 @@
 #include "UI.h"
 #include "present.h"
 #include "gauge.h"
+#include "blur.h"
+#include "blurEvent.h"
 
 //*****************************************************
 // 定数定義
@@ -403,6 +405,8 @@ void CPlayer::SwapPresent()
 	// ボタン入力がない場合関数を抜ける
 	if (!pInputKeyboard->GetTrigger(DIK_SPACE) && !pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0)){ return; }
 
+	Sound::Play(CSound::LABEL::LABEL_SE_PICKUP);
+
 	// 最も近い建物のプレゼントを受け取る
 	CPresent* pTemp = m_pNearHouse->GetPresent();
 
@@ -412,11 +416,22 @@ void CPlayer::SwapPresent()
 	// 正解のプレゼントだった場合カウンターを加算する
 	if (m_pNearHouse->GetLabelWant() == m_pPresent->GetLabel())
 	{
+		float fOld = m_pGauge->GetParam();
+
 		m_fSabTime = 0.0f;
 		++m_nAnswerCount;
 		m_pGauge->AddParam(POWER_ADD);
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_RIGHT, m_pNearHouse->GetPosition());
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_UP, GetPosition());
+
+		if (m_pGauge->GetParam() >= POWER_GAUGE && fOld < POWER_GAUGE)
+		{
+			CSound::GetInstance()->Stop();
+
+			Sound::Play(CSound::LABEL::LABEL_BGM_FEVER);
+
+			CBlurEvent::Create(0.7f, 0.7f, 10.0f);
+		}
 	}
 	else
 	{
@@ -425,6 +440,10 @@ void CPlayer::SwapPresent()
 		m_nAnswerCount = 0;
 		m_pGauge->SetParam(0.0f);
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
+
+		CSound::GetInstance()->Stop();
+
+		Sound::Play(CSound::LABEL::LABEL_BGM_GAME01);
 	}
 
 	// サウンドインスタンスの取得
@@ -506,6 +525,18 @@ void CPlayer::ManageMotion(void)
 void CPlayer::Event(EVENT_INFO* pEventInfo)
 {
 	int nMotion = GetMotion();
+
+	if (nMotion == MOTION::MOTION_WALKFOURLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition(),D3DXVECTOR3(0.0f,0.0f,0.0f), D3DXVECTOR3(200.0f, 200.0f, 200.0f));
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
+	}
+
+	if (nMotion == MOTION::MOTION_WALKTWOLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
+	}
 }
 
 //=====================================================

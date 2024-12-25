@@ -32,8 +32,8 @@ const float RADIUS_COLLISION = 400.0f;							// 判定の半径
 //-------------------------
 namespace set
 {
-const int NUM_SET = 16;				// 設置数
-const float DIST_HOUSE = 3000.0f;	// 家同士の距離
+const int NUM_SET = 40;				// 設置数
+const float DIST_HOUSE = 2300.0f;	// 家同士の距離
 const int NUM_GRID = 7;			// グリッドの数
 const float RANGE_SET = DIST_HOUSE * NUM_GRID;	// 配置範囲
 const D3DXVECTOR3 OFFSET_PRESENT = { 0.0f,0.0f,-800.0f };	// プレゼントのオフセット

@@ -196,6 +196,8 @@ HRESULT CRenderer::Init(HWND hWnd, BOOL bWindow)
 	m_fogInfo.fStart = FOG_START;
 	m_fogInfo.fEnd = FOG_END;
 
+	CBlur::Create();
+
 #ifdef _DEBUG
 	m_bDispimGui = false;
 #else

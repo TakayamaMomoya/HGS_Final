@@ -9,6 +9,7 @@
 // インクルード
 //*****************************************************
 #include "present.h"
+#include "model.h"
 
 //*****************************************************
 // 定数定義
@@ -118,6 +119,7 @@ void CPresent::LoadInfo(std::ifstream& file, string str, S_InfoPresent *pInfo)
 		if (key == "PATH_MODEL")
 		{// モデルのパス
 			iss >> str >> pInfo->pathThumnail;
+			CModel::Load(&pInfo->pathThumnail[0]);
 		}
 	}
 }
