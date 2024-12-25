@@ -95,7 +95,7 @@ template <typename T>	// ランダムな要素の取得
 inline T RandomFromVector(std::vector<T> vec)
 {
 	// サイズからランダムで指定
-	int nRand = universal::RandRange((int)vec.size() - 1, 0);
+	int nRand = universal::RandRange((int)vec.size(), 0);
 
 	T data = vec[nRand];
 

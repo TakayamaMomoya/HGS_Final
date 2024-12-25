@@ -328,15 +328,15 @@ CObjectX *CObjectX::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nPriority)
 //=====================================================
 void CObjectX::SetRadius(void)
 {
-	//計算用変数
-	int nNumVtx;			//頂点数
-	DWORD dwSizeFVF;		//頂点フォーマットのサイズ
-	BYTE *pVtxBuff;			//頂点バッファへのポインタ
+	// 計算用変数
+	int nNumVtx;			// 頂点数
+	DWORD dwSizeFVF;		// 頂点フォーマットのサイズ
+	BYTE *pVtxBuff;			// 頂点バッファへのポインタ
 	float fLength = 0.0f;
 	D3DXVECTOR3 vtxMin = { 0.0f,0.0f,0.0f };
 	D3DXVECTOR3 vtxMax = { 0.0f,0.0f,0.0f };
 
-	//頂点数の取得
+	// 頂点数の取得
 	nNumVtx = m_pModel->pMesh->GetNumVertices();
 
 	//フォーマットサイズ入手

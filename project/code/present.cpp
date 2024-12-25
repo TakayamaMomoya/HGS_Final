@@ -118,8 +118,8 @@ void CPresent::LoadInfo(std::ifstream& file, string str, S_InfoPresent *pInfo)
 
 		if (key == "PATH_MODEL")
 		{// ƒ‚ƒfƒ‹‚ÌƒpƒX
-			iss >> str >> pInfo->pathThumnail;
-			CModel::Load(&pInfo->pathThumnail[0]);
+			iss >> str >> pInfo->pathModel;
+			CModel::Load(&pInfo->pathModel[0]);
 		}
 	}
 }
