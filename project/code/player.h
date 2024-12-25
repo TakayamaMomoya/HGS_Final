@@ -85,6 +85,7 @@ public:
 	static int GetNumPlayer(void) { return (int)s_apPlayer.size(); }	// プレイヤー数の取得
 
 private:
+
 	// 構造体定義
 	struct S_FragMotion
 	{// モーションフラグの構造体
@@ -99,6 +100,8 @@ private:
 	void MoveAnalog(void);		// アナログ移動
 	void InputMoveAnalog(void);	// アナログ移動入力
 	void Forward(void);			// 前進処理
+
+	void Interact(); // インタラクト表示-
 	
 	void Event(EVENT_INFO* pEventInfo) override;	// モーションイベント
 	void ManageMotion(void);						// モーションの管理

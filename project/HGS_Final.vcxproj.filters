@@ -345,6 +345,12 @@
     <ClCompile Include="code\character.cpp">
       <Filter>ソース ファイル\character</Filter>
     </ClCompile>
+    <ClCompile Include="code\house.cpp">
+      <Filter>ソース ファイル\gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="code\present.cpp">
+      <Filter>ソース ファイル\gameobject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\scene.h">
@@ -607,6 +613,12 @@
     </ClInclude>
     <ClInclude Include="code\character.h">
       <Filter>ソース ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="code\house.h">
+      <Filter>ソース ファイル\gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="code\present.h">
+      <Filter>ソース ファイル\gameobject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

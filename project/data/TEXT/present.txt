@@ -1,0 +1,20 @@
+#====================================================================
+#
+# プレゼント情報[present.txt]
+# Author：Momoya Takayama
+#
+#====================================================================
+#====================================================================
+# パラメーター
+#====================================================================
+SET
+	PATH_THUMNAIL = data\\TEXTURE\\UI\\1st.png
+	PATH_MODEL = data\\MODEL\\Penguin\\01_Head.x
+END_SET
+
+SET
+	PATH_THUMNAIL = data\\TEXTURE\\UI\\1st.png
+	PATH_MODEL = data\\MODEL\\Penguin\\00_Body.x
+END_SET
+
+END_SCRIPT

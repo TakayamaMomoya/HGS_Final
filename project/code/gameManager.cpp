@@ -61,7 +61,7 @@ HRESULT CGameManager::Init(void)
 	// UIマネージャーの追加
 	CUIManager::Create();
 
-#if 1
+#if 0
 	//ゲームスタート告知UI
 	CUIready::Create();
 #endif
