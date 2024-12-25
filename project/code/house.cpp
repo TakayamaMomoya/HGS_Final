@@ -13,6 +13,7 @@
 #include "UI.h"
 #include "texture.h"
 #include "collision.h"
+#include "manager.h"
 
 //*****************************************************
 // 定数定義
@@ -53,6 +54,7 @@ const string PATH[CPresent::E_Label::LABEL_MAX] =	// テクスチャパス
 	"data\\TEXTURE\\UI\\boxp.png",
 	"data\\TEXTURE\\UI\\boxy.png",
 };
+const float TIME_FADE = 1.0f;	// フェードにかかる時間
 }
 
 //==========================================
@@ -65,7 +67,7 @@ vector<CPresent::E_Label> CHouse::s_aLabelResult;	// リザルトラベルのベクター
 // コンストラクタ
 //=====================================================
 CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr),
-m_bClear(false)
+m_bClear(false), m_fTimerFade(0.0f)
 {
 
 }
@@ -287,6 +289,18 @@ void CHouse::Update(void)
 		{
 			m_bClear = true;
 		}
+	}
+	else
+	{
+		m_fTimerFade += CManager::GetDeltaTime();
+		universal::LimitValuefloat(&m_fTimerFade, UI::TIME_FADE, 0.0f);
+
+		// タイマーのイージング
+		float fTime = m_fTimerFade / UI::TIME_FADE;
+		float fRate = easing::EaseOutExpo(fTime);
+
+		// 色の設定
+		m_pUI->SetAlpha(1.0f - fRate);
 	}
 }
 
