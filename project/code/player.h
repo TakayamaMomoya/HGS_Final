@@ -20,6 +20,7 @@ class CShadow;
 class CUI;
 class CPresent;
 class CHouse;
+class CGauge;
 
 //*****************************************************
 // クラスの定義
@@ -124,6 +125,7 @@ private:
 	CHouse* m_pNearHouse;			// 近い建物のポインタ
 
 	unsigned int m_nAnswerCount; // 連続正解カウンター
+	CGauge* m_pGauge; // 連続正解ゲージ
 
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列

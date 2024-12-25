@@ -27,6 +27,7 @@
 #include "house.h"
 #include "UI.h"
 #include "present.h"
+#include "gauge.h"
 
 //*****************************************************
 // ’è”’è‹`
@@ -48,7 +49,12 @@ const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // ƒCƒ“ƒ^ƒ‰ƒNƒgUI‚ÌƒIƒtƒZƒ
 const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // ƒvƒŒƒ[ƒ“ƒg‚ÌƒIƒtƒZƒbƒg
 
 const int POWERUP_NUM = 5; // ‰Á‘¬‚É•K—v‚È˜A‘±³‰ð”
-const float POWER_RATE = 1.5f; // ‰Á‘¬”{—¦
+const float POWER_RATE = 3.0f; // ‰Á‘¬”{—¦
+
+const float POWER_GAUGE = 5.0f; // ˜A‘±³‰ðƒQ[ƒW‚ÌÅ‘å’l
+const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // ‚P³‰ð‚Å‰ÁŽZ‚³‚ê‚éƒQ[ƒW‚Ì—Ê
+const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f }; // ƒQ[ƒW‚ÌƒTƒCƒY
+
 }
 
 //*****************************************************
@@ -63,7 +69,8 @@ CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_
 m_pInteract(nullptr),
 m_pPresent(nullptr),
 m_pNearHouse(nullptr),
-m_nAnswerCount(0)
+m_nAnswerCount(0),
+m_pGauge(nullptr)
 {
 	// ƒfƒtƒHƒ‹ƒg‚Í“ü‚Á‚½‡‚Ì”Ô†
 	m_nID = (int)s_apPlayer.size();
@@ -109,6 +116,9 @@ HRESULT CPlayer::Init(void)
 
 	// ‘å‚«‚­‚·‚é
 	SetScale(MODEL_SCALE);
+
+	// ƒQ[ƒW‚ð¶¬
+	m_pGauge = CGauge::Create(POWER_GAUGE, GAUGE_SIZE);
 
 	InitPose(0);
 
@@ -347,11 +357,13 @@ void CPlayer::SwapPresent()
 	if (m_pNearHouse->GetLabelWant() == m_pPresent->GetLabel())
 	{
 		++m_nAnswerCount;
+		m_pGauge->AddParam(POWER_ADD);
 	}
 	else
 	{
 		// ŠÔˆá‚¦‚Ä‚¢‚½ê‡ƒJƒEƒ“ƒ^[‚ð‰Šú‰»
 		m_nAnswerCount = 0;
+		m_pGauge->SetParam(0.0f);
 	}
 
 	// Ž©g‚ÌŠŽ‚µ‚Ä‚¢‚éƒvƒŒƒ[ƒ“ƒg‚ðã‘‚«‚·‚é

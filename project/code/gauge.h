@@ -37,11 +37,15 @@ public:
 	void SetParam(float fParam) { m_fParam = fParam; }	// パラメーター
 	float GetParam(void) { return m_fParam; }
 	void SetPosition(D3DXVECTOR3 pos) override;	// 位置
-	CUI *GetGauge(void) { return m_aPolygon[E_Polygon::POLYGON_GAUGE]; }	// ゲージポリゴン
-	void SetGauge(CUI *pUI) { m_aPolygon[E_Polygon::POLYGON_GAUGE] = pUI; }
+
+	CUI* GetGauge(void) { return m_aPolygon[E_Polygon::POLYGON_GAUGE]; }	// ゲージポリゴン
+	void SetGauge(CUI* pUI) { m_aPolygon[E_Polygon::POLYGON_GAUGE] = pUI; }
+
+	D3DXVECTOR2 GetGaugeSize(void) { return m_sizeGauge; }	// ゲージサイズ
+	void SetGaugeSize(const float fWidth, const float fHeight) { m_sizeGauge.x = fWidth; m_sizeGauge.y = fHeight; }
 
 	// 静的メンバ関数
-	static CGauge *Create(float fParamMax);	// 生成処理
+	static CGauge *Create(float fParamMax, const D3DXVECTOR2& size);	// 生成処理
 
 private:
 	// 列挙型定義
