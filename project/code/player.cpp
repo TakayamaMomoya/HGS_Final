@@ -148,9 +148,6 @@ HRESULT CPlayer::Init(void)
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
 
-	// ミニマップの生成
-	CMinimap::Create();
-
 	return S_OK;
 }
 
@@ -450,6 +447,8 @@ void CPlayer::SwapPresent()
 
 		CSound::GetInstance()->Stop();
 
+		Sound::Play(CSound::LABEL::LABEL_SE_FALSE);
+
 		Sound::Play(CSound::LABEL::LABEL_BGM_GAME01);
 	}
 
@@ -459,7 +458,7 @@ void CPlayer::SwapPresent()
 	if (pSound != nullptr)
 	{
 		// BGMの再生
-		pSound->Play(pSound->LABEL_SE_PICKUP);
+		//pSound->Play(pSound->LABEL_SE_PICKUP);
 	}
 
 	// 自身の所持しているプレゼントを上書きする
