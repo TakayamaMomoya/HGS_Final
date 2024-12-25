@@ -49,6 +49,7 @@ HRESULT CCharacter::Init(void)
 
 	// 影の生成
 	m_pShadow = CShadow::Create();
+	m_pShadow->SetSize(200.0f, 200.0f);
 
 	// パラメーターのデフォルト設定
 	m_fDecMove = init::DEC_MOVE;

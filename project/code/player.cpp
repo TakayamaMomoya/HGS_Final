@@ -148,8 +148,6 @@ HRESULT CPlayer::Init(void)
 	// ミニマップの生成
 	CMinimap::Create();
 
-	EnableShadow(true);
-
 	return S_OK;
 }
 
@@ -429,6 +427,15 @@ void CPlayer::SwapPresent()
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
 	}
 
+	// サウンドインスタンスの取得
+	CSound* pSound = CSound::GetInstance();
+
+	if (pSound != nullptr)
+	{
+		// BGMの再生
+		pSound->Play(pSound->LABEL_SE_PICKUP);
+	}
+
 	// 自身の所持しているプレゼントを上書きする
 	m_pPresent = pTemp;
 }
@@ -499,6 +506,18 @@ void CPlayer::ManageMotion(void)
 void CPlayer::Event(EVENT_INFO* pEventInfo)
 {
 	int nMotion = GetMotion();
+
+	if (nMotion == MOTION::MOTION_WALKFOURLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
+	}
+
+	if (nMotion == MOTION::MOTION_WALKTWOLEG)
+	{
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
+	}
 }
 
 //=====================================================

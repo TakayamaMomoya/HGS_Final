@@ -28,6 +28,7 @@
 #include "meshcylinder.h"
 #include "polygon3D.h"
 #include "MyEffekseer.h"
+#include "meshfield.h"
 
 //*****************************************************
 // 定数定義
@@ -80,6 +81,10 @@ HRESULT CScene::Init(void)
 
 	// スカイボックスの生成
 	CSkybox::Create();
+
+	// メッシュフィールド
+	CMeshField* pMeshField = CMeshField::Create();
+	pMeshField->Reset();
 
 	return S_OK;
 }
