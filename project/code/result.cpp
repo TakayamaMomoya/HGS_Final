@@ -54,12 +54,13 @@ namespace
 	const float CHARA_Z = (-100.0f);
 	char* CHARA_PATH = "data\\TEXT\\motion_kidsboy.txt";
 	const std::string FILE_PATH = "data\\FILE\\ranking.bin";
-	const float CNT = 0.3f;
+	const float CNT = 0.325f;
 	const int MAX_WIDTH_NUM = 10;
 	const float ADD_Z = 500.0f;
 	const D3DXVECTOR3 END_CAMERAROT = D3DXVECTOR3(D3DX_PI * 0.25f, 0.0f, 0.0f);
 	const float END_CAMERADIS = 2000.0f;
 	const float END_CAMERAINER = 0.02f;
+	const float AUTO_FADE_TIMER = 7.0f;
 }
 
 namespace
@@ -182,6 +183,7 @@ CResult::CResult() : m_fTimer(0.0f), m_pCaption(nullptr)
 	m_camerastart = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	m_pMyScore = nullptr;
 	m_pRank = nullptr;
+	m_fFadeTimer = 0.0f;
 
 	for (int i = 0; i < Result_Rank::NUM; i++)
 	{
@@ -206,6 +208,19 @@ HRESULT CResult::Init(void)
 
 	// リストを取得するよ
 	m_ClearList = CHouse::GetLabelResult();
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
 
 	// プレゼントを並べる
 	InitCharacter();
@@ -278,6 +293,7 @@ void CResult::Uninit(void)
 
 	m_CharacterList.clear();
 	m_aRankScore.clear();
+	m_ClearList.clear();
 
 	// オブジェクト全棄
 	CObject::ReleaseAll();
@@ -737,14 +753,15 @@ void CResult::Input(void)
 	if (pInputMgr == nullptr)
 		return;
 
-	if (!pInputMgr->GetTrigger(CInputManager::E_Button::BUTTON_ENTER)) { return; }
-
 	if (m_state == E_State::STATE_NONE)
 	{
+		if (!pInputMgr->GetTrigger(CInputManager::E_Button::BUTTON_ENTER)) { return; }
 		m_state = E_State::STATE_FADE;
 	}
 	else if (m_state == E_State::STATE_ENDAPPERCAPTION)
 	{
+		m_fFadeTimer += CManager::GetDeltaTime();
+		if (!pInputMgr->GetTrigger(CInputManager::E_Button::BUTTON_ENTER) && m_fFadeTimer <= AUTO_FADE_TIMER) { return; }
 		m_state = E_State::STATE_END;
 		CFade::GetInstance()->SetFade(CScene::MODE::MODE_TITLE);
 	}
