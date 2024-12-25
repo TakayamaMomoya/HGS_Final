@@ -148,6 +148,8 @@ HRESULT CPlayer::Init(void)
 	// ナビゲーション生成
 	CNavigation::Create();
 
+	EnableShadow(true);
+
 	return S_OK;
 }
 
@@ -241,6 +243,9 @@ void CPlayer::Update(void)
 
 		pos.y = posInit.y;
 
+		// 位置制限
+		CHouse::LimitPos(pos);
+
 		// キャラの位置反映
 		SetPosition(pos);
 	}
@@ -303,25 +308,29 @@ void CPlayer::Forward(void)
 	if (LINE_FACT_ROT < fLengthAxis)
 	{// 移動軸操作がしきい値を越えていたら移動
 		fSpeed = SPEED_MOVE;
+
+		// 移動速度の設定
+		D3DXVECTOR3 move = GetMove();
+
+		// 向いている方向にベクトルを伸ばす
+		vecMove -= {sinf(rot.y) * fSpeed, 0.0f, cosf(rot.y) * fSpeed};
+		move += vecMove;
+
+		SetMove(move);
+
+		// 目標向きの設定
+		float fRotDest = atan2f(axisMove.x, axisMove.z) + D3DX_PI;
+		SetRotDest(fRotDest);
+
+		m_fragMotion.bWalk = true;
 	}
+	else
+		m_fragMotion.bWalk = false;
 
 	if (m_pGauge->GetParam() >= POWER_GAUGE)
 	{
 		fSpeed *= POWER_RATE;
 	}
-
-	// 移動速度の設定
-	D3DXVECTOR3 move = GetMove();
-
-	// 向いている方向にベクトルを伸ばす
-	vecMove -= {sinf(rot.y) * fSpeed, 0.0f, cosf(rot.y) * fSpeed};
-	move += vecMove;
-
-	SetMove(move);
-
-	// 目標向きの設定
-	float fRotDest = atan2f(axisMove.x, axisMove.z) + D3DX_PI;
-	SetRotDest(fRotDest);
 }
 
 //==========================================
@@ -465,8 +474,16 @@ void CPlayer::ManageMotion(void)
 	
 	if (m_fragMotion.bWalk)
 	{// 歩きモーションフラグ有効
-		if (nMotion != MOTION::MOTION_WALK)
-			SetMotion(MOTION::MOTION_WALK);
+		if (m_pGauge->GetParam() >= POWER_GAUGE)
+		{
+			if (nMotion != MOTION::MOTION_WALKTWOLEG)
+				SetMotion(MOTION::MOTION_WALKTWOLEG);
+		}
+		else
+		{
+			if (nMotion != MOTION::MOTION_WALKFOURLEG)
+				SetMotion(MOTION::MOTION_WALKFOURLEG);
+		}
 	}
 	else
 	{// 何もフラグが立っていない状態

@@ -67,6 +67,8 @@ public:
 	void SetPosV(void);
 	void SetPosR(D3DXVECTOR3& posR) { m_camera.posR = posR; }
 	void SetPosR(void);
+	void SetRot(D3DXVECTOR3& rot) { m_camera.rot = rot; }
+	D3DXVECTOR3& GetRot() { return m_camera.rot; }
 	float GetRoll(void) { return m_camera.fRoll; }
 	void SetRoll(float fRoll) { m_camera.fRoll = fRoll; }
 	D3DXVECTOR3 GetPosAbove(void) { return m_posAbove; }
