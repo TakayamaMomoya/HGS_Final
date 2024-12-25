@@ -48,7 +48,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	E_Label GetLabel(void) { return m_label; }	// ƒ‰ƒxƒ‹
-
+	
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static void Load(void);																	// “Ç
 	static void CPresent::LoadInfo(std::ifstream& file, string str, S_InfoPresent *pInfo);
