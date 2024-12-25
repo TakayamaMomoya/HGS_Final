@@ -80,6 +80,7 @@ public:
 	E_State GetState(void) { return m_state; }
 	void BindInputMgr(CInputManager *pInputMgr) { m_pInputMgr = pInputMgr; }	// 入力マネージャー
 	CInputManager *GetInpuManager(void) { return m_pInputMgr; }
+	CPresent* GetPresent(void) { return m_pPresent; }	// プレゼント
 	void SetID(int nID) { m_nID = nID; }	// 番号
 	int GetID(void) { return m_nID; }
 
@@ -90,7 +91,6 @@ public:
 	static int GetNumPlayer(void) { return (int)s_apPlayer.size(); }	// プレイヤー数の取得
 
 private:
-
 	// 構造体定義
 	struct S_FragMotion
 	{// モーションフラグの構造体
@@ -125,7 +125,7 @@ private:
 	CPresent* m_pPresent;		// プレゼントのポインタ
 	CHouse* m_pNearHouse;			// 近い建物のポインタ
 	CCollisionSphere *m_pCollision;	// 当たり判定
-
+	
 	unsigned int m_nAnswerCount; // 連続正解カウンター
 	CGauge* m_pGauge; // 連続正解ゲージ
 	float m_fSabTime; // ゲージが減少するまでの時間

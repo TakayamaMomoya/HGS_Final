@@ -23,6 +23,7 @@
 #include "sound.h"
 #include "MyEffekseer.h"
 #include "gameManager.h"
+#include "navigation.h"
 
 #include "house.h"
 #include "UI.h"
@@ -141,6 +142,9 @@ HRESULT CPlayer::Init(void)
 	{
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
+
+	// ナビゲーション生成
+	CNavigation::Create();
 
 	return S_OK;
 }
