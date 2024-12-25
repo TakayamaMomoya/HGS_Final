@@ -194,7 +194,14 @@ void CGauge::SetPosition(D3DXVECTOR3 pos)
 //=====================================================
 void CGauge::AddParam(float fValue)
 {
+	// パラメータを加算
 	m_fParam += fValue;
+
+	// 0を下回る場合
+	m_fParam = m_fParam <= 0.0f ? 0.0f : m_fParam;
+
+	// 最大値を上回る場合
+	m_fParam = m_fParam >= m_fParamMax ? m_fParamMax : m_fParam;
 
 	// ゲージが動くように設定
 	if (m_aPolygon[E_Polygon::POLYGON_GAUGE] == nullptr)
