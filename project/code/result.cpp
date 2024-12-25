@@ -104,11 +104,11 @@ namespace
 		const D3DXVECTOR3 DEST_POS = D3DXVECTOR3(0.25f, 0.35f, 0.0f);				// 目標位置
 		const D3DXVECTOR3 INIT_POS = DEST_POS + D3DXVECTOR3(0.0f, 0.2f, 0.0f);	// 初期位置
 		const D3DXVECTOR3 DIFF_POS = DEST_POS - INIT_POS;						// 差分位置
-		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.075f, 0.3f, 0.0f);				// 目標位置
+		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.09f, 0.3f, 0.0f);				// 目標位置
 		const float WIDTH = 0.2f;	// 幅
 		const float HEIGHT = 0.125f;	// 高さ
-		const float SCORE_WIDTH = 0.035f;	// 幅
-		const float SCORE_HEIGHT = 0.075f;	// 高さ
+		const float SCORE_WIDTH = 0.05f;	// 幅
+		const float SCORE_HEIGHT = 0.09f;	// 高さ
 	}
 
 	namespace Rank
@@ -135,14 +135,14 @@ namespace
 		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.05f, 0.3f, 0.0f);			// 目標位置
 		const D3DXVECTOR3 RANK_UI_POS = D3DXVECTOR3(-0.12f, 0.15f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_UI_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
-		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.06f, 0.15f, 0.0f);		// 目標位置
+		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_SCORE_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);	// 目標位置
 		const float WIDTH = 0.2f;				// 幅
 		const float HEIGHT = 0.125f;			// 高さ
-		const float SCORE_UI_WIDTH = 0.1f;		// 幅
-		const float SCORE_UI_HEIGHT = 0.075f;	// 高さ
-		const float SCORE_WIDTH = 0.025f;		// 幅
-		const float SCORE_HEIGHT = 0.04f;		// 高さ
+		const float SCORE_UI_WIDTH = 0.075f;		// 幅
+		const float SCORE_UI_HEIGHT = 0.05f;	// 高さ
+		const float SCORE_WIDTH = 0.03f;		// 幅
+		const float SCORE_HEIGHT = 0.06f;		// 高さ
 	}
 }
 
@@ -710,6 +710,11 @@ void CResult::Input(void)
 	if (m_state == E_State::STATE_NONE)
 	{
 		m_state = E_State::STATE_FADE;
+	}
+	else if (m_state == E_State::STATE_ENDAPPERCAPTION)
+	{
+		m_state = E_State::STATE_END;
+		CFade::GetInstance()->SetFade(CScene::MODE::MODE_TITLE);
 	}
 }
 
