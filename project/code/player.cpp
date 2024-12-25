@@ -25,6 +25,8 @@
 #include "gameManager.h"
 
 #include "house.h"
+#include "UI.h"
+#include "texture.h"
 
 //*****************************************************
 // 定数定義
@@ -38,8 +40,10 @@ const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
 const float FACT_ROTATION = 0.1f;		// 回転係数
 const float SPEED_MOVE = 5.0f;			// 移動速度
 
-const float INTERACT_LENGTH = 100.0f; // インタラクト表示が出る範囲
-} 
+const float INTERACT_LENGTH = 300.0f; // インタラクト表示が出る範囲
+const D3DXVECTOR3 UI_SIZE = { 0.05f, 0.05f, 0.0f }; // インタラクトUIのサイズ
+const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
+}
 
 //*****************************************************
 // 静的メンバ変数宣言
@@ -49,7 +53,8 @@ vector<CPlayer*> CPlayer::s_apPlayer;	// 格納用の配列
 //=====================================================
 // コンストラクタ
 //=====================================================
-CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0)
+CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0),
+m_pInteract(nullptr)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -121,6 +126,14 @@ void CPlayer::Uninit(void)
 		break;
 	}
 
+	// UIを削除する
+	if (m_pInteract != nullptr)
+	{
+		m_pInteract->Uninit();
+		delete m_pInteract;
+		m_pInteract = nullptr;
+	}
+
 	// 継承クラスの終了
 	CCharacter::Uninit();
 }
@@ -130,6 +143,19 @@ void CPlayer::Uninit(void)
 //=====================================================
 void CPlayer::Update(void)
 {
+	// インタラクト表示処理
+	Interact();
+
+	// UIを移動する
+	if (m_pInteract != nullptr)
+	{
+		D3DXVECTOR3 posScreen = { 0.0f, 0.0f, 0.0f };
+		D3DXVECTOR3 pos = GetPosition() + UI_OFFSET;
+		universal::IsInScreen(pos, &posScreen);
+		universal::ConvertScreenRate(posScreen);
+		m_pInteract->SetPosition(posScreen);
+	}
+
 	// 入力処理
 	Input();
 
@@ -232,11 +258,31 @@ void CPlayer::Interact()
 		D3DXVECTOR3 posHouse = house->GetPosition();
 
 		// 一定距離内に建物が存在しない場合次に進む
-		if (!universal::DistCmp(pos, posHouse, INTERACT_LENGTH, nullptr))continue;
+		if (!universal::DistCmp(pos, posHouse, INTERACT_LENGTH, nullptr)) continue;
 
 		// 一定距離内に建物が存在したらポリゴンを表示する
-		// TODO : ポリゴン出す
+		if (m_pInteract == nullptr)
+		{
+			m_pInteract = CUI::Create();
+			m_pInteract->Init();
+			m_pInteract->SetSize(UI_SIZE.x, UI_SIZE.y);
+			D3DXVECTOR3 posScreen = { 0.0f, 0.0f, 0.0f };
+			D3DXVECTOR3 pos = GetPosition() + UI_OFFSET;
+			universal::IsInScreen(pos, &posScreen);
+			universal::ConvertScreenRate(posScreen);
+			m_pInteract->SetPosition(posScreen);
+			// TODO : テクスチャ変更する
+			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\tutorial_piston.png"));
+		}
 		return;
+	}
+
+	// 建物を最後までチェックしても存在していない場合ポリゴンを削除する
+	if (m_pInteract != nullptr)
+	{
+		m_pInteract->Uninit();
+		delete m_pInteract;
+		m_pInteract = nullptr;
 	}
 }
 

@@ -166,6 +166,7 @@ void CUI::SetPosition(D3DXVECTOR3 pos)
 	pos.y *= SCREEN_HEIGHT;
 
 	CGameObject::SetPosition(pos);
+	SetVtx();
 }
 
 //=====================================================

@@ -1,0 +1,117 @@
+#====================================================================
+#
+# モーションスクリプトファイル[motion.txt]
+# Author：Momoya Takayama
+#
+#====================================================================
+SCRIPT
+
+#====================================================================
+# モデル数
+#====================================================================
+NUM_MODEL = 11
+
+#====================================================================
+# モデルファイル名
+#====================================================================
+MODEL_FILENAME = data/MODEL/Player/00_body.x
+MODEL_FILENAME = data/MODEL/Player/02_neck.x
+MODEL_FILENAME = data/MODEL/Player/01_head.x
+
+MODEL_FILENAME = data/MODEL/Player/03_legUP.x
+MODEL_FILENAME = data/MODEL/Player/04_legDW.x
+
+MODEL_FILENAME = data/MODEL/Player/03_legUP.x
+MODEL_FILENAME = data/MODEL/Player/04_legDW.x
+
+MODEL_FILENAME = data/MODEL/Player/03_legUP.x
+MODEL_FILENAME = data/MODEL/Player/04_legDW.x
+
+MODEL_FILENAME = data/MODEL/Player/03_legUP.x
+MODEL_FILENAME = data/MODEL/Player/04_legDW.x
+
+#====================================================================
+# キャラクター情報
+#====================================================================
+CHARACTERSET
+    NUM_PARTS = 11
+
+    PARTSSET
+        INDEX = 0
+        PARENT = -1
+        POS = 0.0 19.5 0.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 1
+        PARENT = 0
+        POS = 0.0 0.6 -11.5
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 2
+        PARENT = 1
+        POS = 0.0 15.8 -1.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    
+    
+    PARTSSET
+        INDEX = 3
+        PARENT = 0
+        POS = 3.3 -5.7 -8.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 4
+        PARENT = 3
+        POS = 0.0 -6.5 0.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    
+    PARTSSET
+        INDEX = 5
+        PARENT = 0
+        POS = -3.3 -5.7 -8.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 6
+        PARENT = 5
+        POS = 0.0 -6.5 0.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    
+     PARTSSET
+        INDEX = 7
+        PARENT = 0
+        POS = -3.3 -5.7 8.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 8
+        PARENT = 7
+        POS = 0.0 -6.5 0.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    
+     PARTSSET
+        INDEX = 9
+        PARENT = 0
+        POS = 3.3 -5.7 8.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    PARTSSET
+        INDEX = 10
+        PARENT = 9
+        POS = 0.0 -6.5 0.0
+        ROT = 0.0 0.0 0.0
+    END_PARTSSET
+    
+END_CHARACTERSET
+
+#====================================================================
+# モーション情報
+#====================================================================
+
+END_SCRIPT

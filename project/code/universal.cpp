@@ -1010,7 +1010,7 @@ bool IsInScreen(const D3DXVECTOR3 pos, D3DXVECTOR3 *pPos)
 	D3DXMatrixIdentity(&mtx);
 
 	D3DXVECTOR3 screenPosition;
-	D3DXVec3Project(&screenPosition, &pos, &viewport, &m_projectionMatrix, &viewMatrix, D3DXMatrixIdentity(&mtx));
+	D3DXVec3Project(&screenPosition, &pos, &viewport, &m_projectionMatrix, &viewMatrix, &mtx);
 
 	if (pPos != nullptr)
 	{
