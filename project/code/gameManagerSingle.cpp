@@ -51,12 +51,6 @@ HRESULT CGameManagerSingle::Init(void)
 		m_pPlayer->BindInputMgr(pInpuMgr);
 	}
 
-	// スコアの生成
-	CGame *pGame = CGame::GetInstance();
-
-	if (pGame != nullptr)
-		pGame->CreateScore();
-
 	// カメラのステイト設定
 	Camera::ChangeState(new CFollowPlayer);
 
@@ -65,6 +59,12 @@ HRESULT CGameManagerSingle::Init(void)
 	
 	// 基底クラスの初期化
 	CGameManager::Init();
+
+	// スコアの生成
+	CGame *pGame = CGame::GetInstance();
+
+	if (pGame != nullptr)
+		pGame->CreateScore();
 
 	return S_OK;
 }
