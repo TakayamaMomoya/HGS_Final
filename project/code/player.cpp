@@ -432,6 +432,7 @@ void CPlayer::SwapPresent()
 			CSound::GetInstance()->Stop();
 
 			Sound::Play(CSound::LABEL::LABEL_BGM_FEVER);
+			Sound::Play(CSound::LABEL::LABEL_SE_FEVER);
 
 			CBlurEvent::Create(0.7f, 0.7f, 10.0f);
 		}

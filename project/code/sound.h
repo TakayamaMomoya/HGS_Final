@@ -47,7 +47,7 @@ public:
 		LABEL_SE_PICKUP,				// プレゼント取得
 		LABEL_SE_WALK,					// 歩く音
 		LABEL_SE_SUCCESS,				// 成功
-		LABEL_SE_FIVER,					// フィーバー
+		LABEL_SE_FEVER,					// フィーバー
 
 		LABEL_SE_PAUSE_MENU,			// ポーズ
 		LABEL_SE_PAUSE_ARROW,			// 移動
