@@ -24,6 +24,8 @@
 #include "MyEffekseer.h"
 #include "gameManager.h"
 
+#include "house.h"
+
 //*****************************************************
 // 定数定義
 //*****************************************************
@@ -35,7 +37,9 @@ const float RATE_DECREASE_MOVE = 0.5f;	// 移動減衰の割合
 const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
 const float FACT_ROTATION = 0.1f;		// 回転係数
 const float SPEED_MOVE = 5.0f;			// 移動速度
-}
+
+const float INTERACT_LENGTH = 100.0f; // インタラクト表示が出る範囲
+} 
 
 //*****************************************************
 // 静的メンバ変数宣言
@@ -207,6 +211,33 @@ void CPlayer::Forward(void)
 	// 目標向きの設定
 	float fRotDest = atan2f(axisMove.x, axisMove.z) + D3DX_PI;
 	SetRotDest(fRotDest);
+}
+
+//==========================================
+//  インタラクト表示
+//==========================================
+void CPlayer::Interact()
+{
+	// 建物の情報を取得する
+	if (CHouse::GetList() == nullptr) { return; }
+	std::list<CHouse*> list = CHouse::GetList()->GetList();    // リストを取得
+
+	// 自身の座標を取得する
+	D3DXVECTOR3 pos = GetPosition();
+
+	// プレイヤーリストの中身を確認する
+	for (CHouse* house : list)
+	{
+		// 建物の座標を取得する
+		D3DXVECTOR3 posHouse = house->GetPosition();
+
+		// 一定距離内に建物が存在しない場合次に進む
+		if (!universal::DistCmp(pos, posHouse, INTERACT_LENGTH, nullptr))continue;
+
+		// 一定距離内に建物が存在したらポリゴンを表示する
+		// TODO : ポリゴン出す
+		return;
+	}
 }
 
 //=====================================================

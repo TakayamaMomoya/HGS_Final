@@ -41,6 +41,7 @@ public:
 
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static void Load(void);			// “Ç
+	static void CPresent::LoadInfo(std::ifstream& file, string str, S_InfoPresent *pInfo);
 	static void Unload(void);		// ”jŠü
 	static CPresent *Create(void);	// ¶¬ˆ—
 
