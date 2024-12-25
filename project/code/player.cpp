@@ -73,8 +73,7 @@ m_pPresent(nullptr),
 m_pNearHouse(nullptr),
 m_nAnswerCount(0),
 m_pGauge(nullptr),
-m_pCollision(nullptr)
-m_pGauge(nullptr),
+m_pCollision(nullptr),
 m_fSabTime(0.0f)
 {
 	// デフォルトは入った順の番号
