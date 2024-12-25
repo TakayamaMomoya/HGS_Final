@@ -11,6 +11,7 @@
 // インクルード
 //*****************************************************
 #include "objectX.h"
+#include "present.h"
 
 //*****************************************************
 // 前方宣言
@@ -30,7 +31,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	bool CheckCover(D3DXVECTOR3 pos);				// 被りチェック
+	bool CheckCover(D3DXVECTOR3 pos);	// 被りチェック
 
 	// 静的メンバ関数
 	static void SetHouseRandom(void);			// ランダムに家を配置する処理
@@ -38,13 +39,12 @@ public:
 	static CListManager<CHouse>* GetList(void); // リスト取得
 
 private:
-
 	// 静的メンバ変数
-	static CListManager<CHouse>* m_pList; // オブジェクトリスト
+	static CListManager<CHouse>* m_pList;		// オブジェクトリスト
 
 	// メンバ変数
 	CListManager<CHouse>::AIterator m_iterator; // イテレーター
-
+	CPresent* m_pPresent;						// プレゼント
 };
 
 #endif

@@ -16,6 +16,13 @@
 namespace
 {
 const string PATH_INFO = "data\\TEXT\\present.txt";	// プレゼント情報のパス
+const string PATH_LABEL[CPresent::E_Label::LABEL_MAX] =	// ラベルのモデルパス
+{
+	"data\\TEXT\\box\\motion_box_b.txt",
+	"data\\TEXT\\box\\motion_box_g.txt",
+	"data\\TEXT\\box\\motion_box_p.txt",
+	"data\\TEXT\\box\\motion_box_y.txt",
+};
 }
 
 //*****************************************************
@@ -26,7 +33,7 @@ vector<CPresent::S_InfoPresent*> CPresent::s_aInfoPresnt;	// プレゼント情報
 //=====================================================
 // コンストラクタ
 //=====================================================
-CPresent::CPresent(int nPriority) : CObject(nPriority)
+CPresent::CPresent(int nPriority) : CMotion(nPriority)
 {
 
 }
@@ -136,14 +143,17 @@ void CPresent::Unload(void)
 //=====================================================
 // 生成処理
 //=====================================================
-CPresent* CPresent::Create(void)
+CPresent* CPresent::Create(E_Label label)
 {
 	CPresent *pPresent = nullptr;
 
 	pPresent = new CPresent;
 
 	if (pPresent != nullptr)
+	{
+		pPresent->m_label = label;
 		pPresent->Init();
+	}
 
 	return pPresent;
 }
@@ -153,6 +163,13 @@ CPresent* CPresent::Create(void)
 //=====================================================
 HRESULT CPresent::Init(void)
 {
+	// 読込
+	CMotion::Load((char*)&PATH_LABEL[m_label][0]);
+
+	CMotion::Init();
+
+	InitPose(0);
+
 	return S_OK;
 }
 
@@ -161,6 +178,8 @@ HRESULT CPresent::Init(void)
 //=====================================================
 void CPresent::Uninit(void)
 {
+	CMotion::Uninit();
+
 	// 自身の解放
 	Release();
 }
@@ -170,7 +189,7 @@ void CPresent::Uninit(void)
 //=====================================================
 void CPresent::Update(void)
 {
-
+	CMotion::Update();
 }
 
 //=====================================================
@@ -178,5 +197,5 @@ void CPresent::Update(void)
 //=====================================================
 void CPresent::Draw(void)
 {
-
+	CMotion::Draw();
 }
