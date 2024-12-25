@@ -40,7 +40,7 @@ const D3DXCOLOR INIT_COL = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);	// 初期の色
 const float DEST_ALPHA = 0.5f;	// 目標色
 const float DIFF_ALPHA = DEST_ALPHA - INIT_COL.a;			// 差分アルファ値
 const D3DXVECTOR3 POS = D3DXVECTOR3(0.5f, 0.5f, 0.0f);	// 位置
-const float TIME_FADE = 2.0f;	// フェードにかかる時間
+const float TIME_FADE = 0.9f;	// フェードにかかる時間
 }
 
 namespace caption
@@ -51,7 +51,7 @@ const char* PATH[CResultSingle::RESULT_MAX] =
 	"data\\TEXTURE\\UI\\gameover.png",		// 死亡
 	"data\\TEXTURE\\UI\\timeover.png",		// タイムオーバー
 };
-const float	MOVE_TIME = 1.5f;											// 移動時間
+const float	MOVE_TIME = 0.6f;											// 移動時間
 const D3DXCOLOR DEST_COL = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);			// 目標色
 const D3DXCOLOR INIT_COL = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);			// 初期色
 const D3DXCOLOR DIFF_COL = DEST_COL - INIT_COL;							// 差分色
@@ -267,6 +267,7 @@ void CResultSingle::UpdateApperCaption(void)
 	{// 一定時間経過で次の状態に移る
 		m_state = E_State::STATE_ENDAPPERCAPTION;
 		m_fTimer = 0.0f;
+		CGame::SetState(CGame::E_State::STATE_END);
 	}
 }
 

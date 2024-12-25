@@ -26,8 +26,6 @@ public:
 	enum E_State
 	{
 		STATE_NONE = 0,			// 何もしてない状態
-		STATE_APPER_MENU,		// メニュー選択状態
-		STATE_SELECT,			// 選択状態
 		STATE_END,				// 終了状態
 		STATE_MAX
 	};
