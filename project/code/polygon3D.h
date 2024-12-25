@@ -57,7 +57,7 @@ private:
 	void SetMtx(void);
 	void SetMtxBillboard(void);
 
-	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファへのポインタ
+	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// 頂点バッファへのポインタ
 	D3DXVECTOR3 m_posOld;				// 前回の位置
 	D3DXCOLOR m_col;					// 色
 	float m_width;						// 幅

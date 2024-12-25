@@ -44,6 +44,8 @@ const D3DXVECTOR3 POSV_DEFAULT_SELECTMODE = { 0.0f,200.0f,-2000.0f };	// ƒ‚[ƒhƒ
 const D3DXVECTOR3 POSR_DEFAULT_RESULTMULTI = { 800.0f,50.0f,-400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒg’Ž‹“_ˆÊ’u
 const D3DXVECTOR3 POSV_DEFAULT_RESULTMULTI = { 800.0f,400.0f,-2400.0f };	// ƒ}ƒ‹ƒ`ƒ‚[ƒh‚ÌƒŠƒUƒ‹ƒg’†‚ÌƒfƒtƒHƒ‹ƒgŽ‹“_ˆÊ’u
 
+const D3DXVECTOR3 POSV_DISTANCE = { 0.0f, 1500.0f, -1500.0f }; // ƒJƒƒ‰‚Ì‹——£
+
 namespace resultSingle
 {
 const D3DXVECTOR3 POS_OFFSET = { 0.0f,100.0f,-500.0f };	// –Ú•W’n“_‚ÌƒIƒtƒZƒbƒg
@@ -78,8 +80,17 @@ void CFollowPlayer::Update(CCamera *pCamera)
 
 	CCamera::Camera *pInfoCamera = pCamera->GetCamera();
 
-	pInfoCamera->posR = POSR_GAME;
-	pInfoCamera->posV = POSV_GAME;
+	// ƒvƒŒƒCƒ„[‚ÌŽæ“¾
+	CPlayer* player = CPlayer::GetInstance().front();
+
+	// ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ðŽæ“¾
+	float rot = player->GetRotation().y;
+
+	// ’Ž‹“_‚ðƒvƒŒƒCƒ„[À•W‚ÉÝ’è
+	pInfoCamera->posR = player->GetPosition();
+
+	// ’Ž‹“_‚©‚çˆê’è‹——£‚ÉŽ‹“_‚ðÝ’è
+	pInfoCamera->posV = pInfoCamera->posR + POSV_DISTANCE;
 }
 
 //***********************************************************************************

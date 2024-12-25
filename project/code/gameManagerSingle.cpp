@@ -16,6 +16,7 @@
 #include "fade.h"
 #include "camera.h"
 #include "cameraState.h"
+#include "house.h"
 
 //*****************************************************
 // 定数定義
@@ -57,6 +58,9 @@ HRESULT CGameManagerSingle::Init(void)
 
 	// カメラのステイト設定
 	Camera::ChangeState(new CFollowPlayer);
+
+	// 家の生成
+	CHouse::Create();
 
 	// 基底クラスの初期化
 	CGameManager::Init();
