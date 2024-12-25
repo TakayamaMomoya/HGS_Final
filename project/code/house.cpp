@@ -28,9 +28,9 @@ const string PATH_DEFAULT = "data\\MODEL\\object\\Snowdome.x";	// デフォルトモデ
 namespace set
 {
 const int NUM_SET = 15;									// 設置数
-const float DIST_HOUSE = 300.0f;						// 家同士の距離
+const float DIST_HOUSE = 1000.0f;						// 家同士の距離
 const float RANGE_SET = 5000.0f;						// 配置範囲
-const int NUM_GRID = (int)RANGE_SET / (int)DIST_HOUSE;	// グリッドの数
+const int NUM_GRID = 20;	// グリッドの数
 }
 
 //==========================================
@@ -73,11 +73,11 @@ void CHouse::SetHouseRandom(void)
 		while (!bResult)
 		{
 			// 配置位置の設定
-			pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
-			pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
+			pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET;
+			pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE - set::RANGE_SET;
 
 			// 配置が被ってるかのチェック
-			bResult = CheckCover(pos);
+			bResult = !pHouse->CheckCover(pos);
 		}
 
 		pHouse->SetPosition(pos);
@@ -89,7 +89,20 @@ void CHouse::SetHouseRandom(void)
 //=====================================================
 bool CHouse::CheckCover(D3DXVECTOR3 pos)
 {
-	
+	std::list<CHouse*> list = CHouse::GetList()->GetList(); 
+
+	for (CHouse* house : list)
+	{
+		if (house == this)
+			continue;
+
+		D3DXVECTOR3 posHouse = house->GetPosition();
+
+		if (!universal::DistCmp(pos, posHouse, 1.0f, nullptr))
+			continue;
+
+		return true;
+	}
 
 	return false;
 }
