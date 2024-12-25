@@ -4,7 +4,7 @@ Format Text Ver 1.0
 Scene {
 	pos -94.3448 -633.4584 9830.4014
 	lookat 0.0000 0.0000 0.0000
-	head 7.9484
+	head 6.2784
 	pich 0.2892
 	bank 0.0000
 	ortho 0
@@ -153,7 +153,7 @@ Object "obj14" {
 }
 Object "obj15" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -179,7 +179,7 @@ Object "obj15" {
 }
 Object "obj16" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -205,7 +205,7 @@ Object "obj16" {
 }
 Object "obj17" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -245,7 +245,7 @@ Object "obj17" {
 }
 Object "obj18" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -285,7 +285,7 @@ Object "obj18" {
 }
 Object "obj19" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -345,7 +345,7 @@ Object "obj19" {
 }
 Object "obj20" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -587,7 +587,7 @@ Object "obj24" {
 }
 Object "obj23" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
@@ -679,7 +679,7 @@ Object "obj23" {
 }
 Object "obj25" {
 	visible 15
-	locking 1
+	locking 0
 	shading 1
 	facet 59.5
 	color 0.898 0.498 0.698
