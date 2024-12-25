@@ -28,6 +28,9 @@ public:
 		string pathThumnail;	// サムネイル
 		string pathModel;		// モデル
 		int nID;				// ID
+		float fScale;			// スケール
+
+		S_InfoPresent::S_InfoPresent() : fScale(1.0f) {};
 	};
 	// 列挙型定義
 	enum E_Label

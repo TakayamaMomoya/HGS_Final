@@ -116,6 +116,11 @@ void CPresent::LoadInfo(std::ifstream& file, string str, S_InfoPresent *pInfo)
 			iss >> str >> pInfo->pathThumnail;
 		}
 
+		if (key == "SCALE")
+		{// サムネイルのパス
+			iss >> str >> pInfo->fScale;
+		}
+
 		if (key == "PATH_MODEL")
 		{// モデルのパス
 			iss >> str >> pInfo->pathModel;
