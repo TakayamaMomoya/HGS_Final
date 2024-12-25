@@ -34,6 +34,7 @@
 #include "player.h"
 #include "score.h"
 #include "fishshadow.h"
+#include "house.h"
 
 //*****************************************************
 // 定数定義
@@ -99,6 +100,8 @@ HRESULT CGame::Init(void)
 void CGame::Uninit(void)
 {
 	m_pGameManager = nullptr;
+
+	CHouse::SetResultLabel();
 
 	// オブジェクト全棄
 	CObject::ReleaseAll();
