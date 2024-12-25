@@ -30,6 +30,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	bool CheckCover(D3DXVECTOR3 pos);				// 被りチェック
 
 	// 静的メンバ関数
 	static void SetHouseRandom(void);			// ランダムに家を配置する処理
