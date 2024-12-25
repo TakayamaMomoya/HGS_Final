@@ -84,6 +84,11 @@ private:
 	void UpdateApperCaption(void);	// キャプション出現状態の更新
 	void Input(void);
 
+	// 外部ファイル
+	void Save(void);
+	void Load(void);
+	void Sort(void);
+
 	// 状態更新の関数ポインタ型エイリアス定義
 	typedef void (CResult::* FuncUpdateState)(void);
 
