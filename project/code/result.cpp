@@ -49,9 +49,12 @@ namespace
 	const float ADD_X = 200.0f;
 	const float CHARA_Z = (-100.0f);
 	char* CHARA_PATH = "data\\TEXT\\motion_kidsboy.txt";
-	const float CNT = 0.35f;
+	const float CNT = 0.3f;
 	const int MAX_WIDTH_NUM = 10;
 	const float ADD_Z = 500.0f;
+	const D3DXVECTOR3 END_CAMERAROT = D3DXVECTOR3(D3DX_PI * 0.25f, 0.0f, 0.0f);
+	const float END_CAMERADIS = 2000.0f;
+	const float END_CAMERAINER = 0.02f;
 }
 
 //*****************************************************
@@ -85,6 +88,76 @@ HRESULT CResult::Init(void)
 
 	// ƒŠƒXƒg‚ðŽæ“¾‚·‚é‚æ
 	//m_ClearList = CHouse::GetLabelResult();
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
+	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
 	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
 	m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
 	m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
@@ -252,7 +325,7 @@ void CResult::MotionSet(void)
 //=====================================================
 void CResult::PursueCamera(void)
 {
-	if (m_bEnd) { return; }
+	if (m_bEnd) { EndCamera(); return; }
 
 	CCamera* pCamera = CManager::GetCamera();
 
@@ -337,4 +410,17 @@ void CResult::InitCharacter(void)
 	m_LastInfo.pCharacter->SetRotation(D3DXVECTOR3(0.0f, D3DX_PI, 0.0f));
 	m_LastInfo.pCharacter->SetScale(1.1f);
 	m_CharacterList.push_back(&m_LastInfo);
+}
+
+void CResult::EndCamera(void)
+{
+	CCamera* pCamera = CManager::GetCamera();
+
+	if (pCamera == nullptr) { return; }
+
+	float dis = pCamera->GetDist() + ((END_CAMERADIS - pCamera->GetDist()) * END_CAMERAINER);
+	pCamera->SetDist(dis);
+
+	D3DXVECTOR3 rot = pCamera->GetRot() + ((END_CAMERAROT - pCamera->GetRot()) * END_CAMERAINER);
+	pCamera->SetRot(rot);
 }
