@@ -33,7 +33,8 @@
 //*****************************************************
 namespace
 {
-const std::string PATH_BODY = "data\\MOTION\\motionPenguin.txt";	// ボディのパス
+const std::string PATH_BODY = "data\\MOTION\\motionTonakai.txt";	// ボディのパス
+const float MODEL_SCALE = 10.0f; // 拡大率
 
 const float RATE_DECREASE_MOVE = 0.5f;	// 移動減衰の割合
 const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
@@ -105,6 +106,9 @@ HRESULT CPlayer::Init(void)
 
 	// 継承クラスの初期化
 	CCharacter::Init();
+
+	// 大きくする
+	SetScale(MODEL_SCALE);
 
 	InitPose(0);
 
