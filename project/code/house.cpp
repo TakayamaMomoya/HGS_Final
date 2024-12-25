@@ -46,17 +46,18 @@ const float HEIGHT = 0.08f;							// 高さ
 const D3DXVECTOR3 OFFSET = { 0.0f,-0.2f,0.0f };		// オフセット
 const string PATH[CPresent::E_Label::LABEL_MAX] =	// テクスチャパス
 {
-	"data\\TEXTURE\\UI\\1st.png",
-	"data\\TEXTURE\\UI\\2nd.png",
-	"data\\TEXTURE\\UI\\3rd.png",
-	"data\\TEXTURE\\UI\\4th.png",
+	"data\\TEXTURE\\UI\\boxb.png",
+	"data\\TEXTURE\\UI\\boxg.png",
+	"data\\TEXTURE\\UI\\boxp.png",
+	"data\\TEXTURE\\UI\\boxy.png",
 };
 }
 
 //==========================================
 // 静的メンバ変数宣言
 //==========================================
-CListManager<CHouse>* CHouse::m_pList = nullptr; // オブジェクトリスト
+CListManager<CHouse>* CHouse::m_pList = nullptr;	// オブジェクトリスト
+vector<CPresent::E_Label> CHouse::s_aLabelResult;	// リザルトラベルのベクター
 
 //=====================================================
 // コンストラクタ
@@ -290,17 +291,40 @@ CListManager<CHouse>* CHouse::GetList(void)
 	return m_pList;
 }
 
+//==========================================
+// リザルトのラベル設定
+//==========================================
+void CHouse::SetResultLabel(void)
+{
+	s_aLabelResult.clear();
+
+	// 建物の情報を取得する
+	if (CHouse::GetList() == nullptr) { return; }
+	std::list<CHouse*> list = CHouse::GetList()->GetList();    // リストを取得
+
+	for (CHouse* house : list)
+	{
+		if (house->GetPresent()->GetLabel() == house->GetLabelWant())
+		{
+			s_aLabelResult.push_back(house->GetLabelWant());
+		}
+	}
+}
+
 namespace house
 {
 void GetTwoLabel(CPresent::E_Label &labelFirst, CPresent::E_Label &labelSecond)
 {
 	// 最初のラベルの決定
-	labelFirst = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX - 1, 0);
+	labelFirst = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX, 0);
 
 	// 次のラベルの決定
-	while (labelFirst != labelSecond)
+	while (true)
 	{
-		labelSecond = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX - 1, 0);
+		labelSecond = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX, 0);
+
+		if (labelFirst != labelSecond)
+			break;
 	}
 }
 }
