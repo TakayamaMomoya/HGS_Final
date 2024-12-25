@@ -510,11 +510,13 @@ void CPlayer::Event(EVENT_INFO* pEventInfo)
 	if (nMotion == MOTION::MOTION_WALKFOURLEG)
 	{
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
 	}
 
 	if (nMotion == MOTION::MOTION_WALKTWOLEG)
 	{
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
 	}
 }
 
