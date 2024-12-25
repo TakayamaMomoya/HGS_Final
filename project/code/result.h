@@ -109,6 +109,7 @@ private:
 	int m_nKeyOld;			// 最後のキャラの前回のキー
 	D3DXVECTOR3 m_camerastart;	// カメラの開始地点
 	float m_fTimer;	// タイマー
+	float m_fFadeTimer;
 	E_State m_state;		// 状態
 
 	// UI用変数
