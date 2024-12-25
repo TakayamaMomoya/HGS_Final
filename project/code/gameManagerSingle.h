@@ -33,6 +33,9 @@ public:
 	void Draw(void) override;
 	void EndGame(void) override;	// ゲームの終了
 
+	//プレイヤーの取得
+	CPlayer* GetPlayer() { return m_pPlayer; }
+
 private:
 	// メンバ関数
 	void UpdateStart(void) override;	// 開始状態の更新
