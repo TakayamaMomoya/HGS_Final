@@ -60,7 +60,8 @@ HRESULT CGameManagerSingle::Init(void)
 	Camera::ChangeState(new CFollowPlayer);
 
 	// ‰Æ‚Ì¶¬
-	CHouse::Create();
+	CHouse::SetHouseRandom();
+	CObjectX::Create();
 
 	// Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
 	CGameManager::Init();
