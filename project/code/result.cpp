@@ -89,14 +89,14 @@ namespace
 		const D3DXVECTOR3 INIT_POS = DEST_POS + D3DXVECTOR3(0.0f, 0.2f, 0.0f);	// 初期位置
 		const D3DXVECTOR3 DIFF_POS = DEST_POS - INIT_POS;						// 差分位置
 		const float WIDTH = 0.27f;	// 幅
-		const float HEIGHT = 0.14f;	// 高さ
+		const float HEIGHT = 0.11f;	// 高さ
 	}
 
 	namespace MyResult
 	{
 		const char* PATH =
 		{																		// パス
-			"data\\TEXTURE\\UI\\stage_clear.png",	// 今回のスコア
+			"data\\TEXTURE\\UI\\result_my.png",	// 今回のスコア
 		};
 		const float	MOVE_TIME = 1.5f;											// 移動時間
 		const D3DXCOLOR DEST_COL = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);			// 目標色
@@ -107,7 +107,7 @@ namespace
 		const D3DXVECTOR3 DIFF_POS = DEST_POS - INIT_POS;						// 差分位置
 		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.09f, 0.3f, 0.0f);				// 目標位置
 		const float WIDTH = 0.2f;	// 幅
-		const float HEIGHT = 0.125f;	// 高さ
+		const float HEIGHT = 0.1f;	// 高さ
 		const float SCORE_WIDTH = 0.05f;	// 幅
 		const float SCORE_HEIGHT = 0.09f;	// 高さ
 	}
@@ -116,7 +116,7 @@ namespace
 	{
 		const char* PATH =
 		{																		// パス
-			"data\\TEXTURE\\UI\\stage_clear.png",	// 今回のスコア
+			"data\\TEXTURE\\UI\\result_rank.png",	// 今回のスコア
 		};
 
 		const char* SCORE_UIPATH[Result_Rank::NUM] =
@@ -134,12 +134,12 @@ namespace
 		const D3DXVECTOR3 INIT_POS = DEST_POS + D3DXVECTOR3(0.0f, 0.2f, 0.0f);	// 初期位置
 		const D3DXVECTOR3 DIFF_POS = DEST_POS - INIT_POS;						// 差分位置
 		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.05f, 0.3f, 0.0f);			// 目標位置
-		const D3DXVECTOR3 RANK_UI_POS = D3DXVECTOR3(-0.12f, 0.15f, 0.0f);		// 目標位置
+		const D3DXVECTOR3 RANK_UI_POS = D3DXVECTOR3(-0.12f, 0.2f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_UI_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
-		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
+		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.0f, 0.2f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_SCORE_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);	// 目標位置
 		const float WIDTH = 0.2f;				// 幅
-		const float HEIGHT = 0.125f;			// 高さ
+		const float HEIGHT = 0.1f;			// 高さ
 		const float SCORE_UI_WIDTH = 0.075f;		// 幅
 		const float SCORE_UI_HEIGHT = 0.05f;	// 高さ
 		const float SCORE_WIDTH = 0.03f;		// 幅

@@ -45,7 +45,9 @@ public:
 		LABEL_SE_ALBATROSS,				// アホウドリ鳴き声
 
 		LABEL_SE_PICKUP,				// プレゼント取得
-		LABEL_SE_WALK,
+		LABEL_SE_WALK,					// 歩く音
+		LABEL_SE_SUCCESS,				// 成功
+		LABEL_SE_FIVER,					// フィーバー
 
 		LABEL_SE_PAUSE_MENU,			// ポーズ
 		LABEL_SE_PAUSE_ARROW,			// 移動
@@ -135,8 +137,10 @@ private:
 		{ "data/SOUND/SE/SE_Polarbear_Assault.wav",0 },	// シロクマ突撃
 		{ "data/SOUND/SE/SE_Albatross.wav",0 },			// アホウドリ鳴き声
 
-		{ "data/SOUND/SE/SE_Pickup00.wav",0 },			// プレゼント取得
+		{ "data/SOUND/SE/SE_Pickup01.wav",0 },			// プレゼント取得
 		{ "data/SOUND/SE/SE_Walking.wav",0 },			// 歩く音
+		{ "data/SOUND/SE/SE_Success00.wav",0 },			// 成功
+		{ "data/SOUND/SE/SE_Fiver.wav",0 },				// フィーバー
 
 		{ "data/SOUND/SE/pause.wav",0 },				// ポーズ
 		{ "data/SOUND/SE/SE_Enter03.wav",0 },			// 選択
