@@ -12,6 +12,7 @@
 #include "model.h"
 #include "UI.h"
 #include "texture.h"
+#include "collision.h"
 
 //*****************************************************
 // 定数定義
@@ -22,6 +23,7 @@
 namespace model
 {
 const string PATH_DEFAULT = "data\\MODEL\\object\\Snowdome.x";	// デフォルトモデルのパス
+const float RADIUS_COLLISION = 400.0f;							// 判定の半径
 }
 
 //-------------------------
@@ -62,7 +64,7 @@ vector<CPresent::E_Label> CHouse::s_aLabelResult;	// リザルトラベルのベクター
 //=====================================================
 // コンストラクタ
 //=====================================================
-CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr)
+CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr), m_pCollision(nullptr)
 {
 
 }
@@ -210,6 +212,14 @@ HRESULT CHouse::Init(void)
 		m_pUI->SetSize(UI::WIDTH, UI::HEIGHT);
 	}
 
+	// 判定の生成
+	m_pCollision = CCollisionSphere::Create(CCollision::TAG_BLOCK, CCollision::TYPE::TYPE_SPHERE, this);
+
+	if (m_pCollision != nullptr)
+	{
+		m_pCollision->SetRadius(model::RADIUS_COLLISION);
+	}
+
 	return S_OK;
 }
 
@@ -226,6 +236,12 @@ void CHouse::Uninit(void)
 
 		// リストマネージャーの破棄
 		m_pList->Release(m_pList);
+	}
+
+	if (m_pCollision != nullptr)
+	{
+		m_pCollision->Uninit();
+		m_pCollision = nullptr;
 	}
 
 	// 継承クラスの終了
@@ -257,6 +273,10 @@ void CHouse::Update(void)
 		int nIdxTexture = Texture::GetIdx(&UI::PATH[m_labelWant][0]);
 		m_pUI->SetIdxTexture(nIdxTexture);
 	}
+
+	// 判定の追従
+	if (m_pCollision != nullptr)
+		m_pCollision->SetPosition(GetPosition());
 }
 
 //=====================================================

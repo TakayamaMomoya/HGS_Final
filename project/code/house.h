@@ -17,6 +17,7 @@
 // 前方宣言
 //*****************************************************
 class CUI;
+class CCollisionSphere;
 
 //*****************************************************
 // クラスの定義
@@ -56,6 +57,7 @@ private:
 	CPresent* m_pPresent;						// プレゼント
 	CPresent::E_Label m_labelWant;				// 欲しているラベル
 	CUI* m_pUI;									// 欲しているラベルの画像
+	CCollisionSphere *m_pCollision;				// 当たり判定
 };
 
 namespace house
