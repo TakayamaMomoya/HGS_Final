@@ -416,6 +416,8 @@ void CPlayer::SwapPresent()
 		m_fSabTime = 0.0f;
 		++m_nAnswerCount;
 		m_pGauge->AddParam(POWER_ADD);
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_RIGHT, m_pNearHouse->GetPosition());
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_UP, GetPosition());
 	}
 	else
 	{
@@ -423,6 +425,7 @@ void CPlayer::SwapPresent()
 		m_fSabTime = 0.0f;
 		m_nAnswerCount = 0;
 		m_pGauge->SetParam(0.0f);
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
 	}
 
 	// ©g‚ÌŠ‚µ‚Ä‚¢‚éƒvƒŒƒ[ƒ“ƒg‚ğã‘‚«‚·‚é
