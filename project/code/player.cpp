@@ -40,21 +40,22 @@ const float MODEL_SCALE = 10.0f; // 拡大率
 const float RATE_DECREASE_MOVE = 0.5f;	// 移動減衰の割合
 const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
 const float FACT_ROTATION = 0.1f;		// 回転係数
-const float SPEED_MOVE = 5.0f;			// 移動速度
+const float SPEED_MOVE = 20.0f;			// 移動速度
 
-const float INTERACT_LENGTH = 500.0f; // インタラクト表示が出る範囲
+const float INTERACT_LENGTH = 1000.0f; // インタラクト表示が出る範囲
 const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
 const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
 
 const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // プレゼントのオフセット
 
 const int POWERUP_NUM = 5; // 加速に必要な連続正解数
-const float POWER_RATE = 3.0f; // 加速倍率
+const float POWER_RATE = 2.0f; // 加速倍率
 
 const float POWER_GAUGE = 5.0f; // 連続正解ゲージの最大値
 const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // １正解で加算されるゲージの量
 const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f }; // ゲージの位置
 const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f }; // ゲージのサイズ
+const float RADIUS_COLLISION = 200.0f;							// 判定の半径
 
 }
 
@@ -71,7 +72,9 @@ m_pInteract(nullptr),
 m_pPresent(nullptr),
 m_pNearHouse(nullptr),
 m_nAnswerCount(0),
-m_pGauge(nullptr)
+m_pGauge(nullptr),
+m_pCollision(nullptr),
+m_fSabTime(0.0f)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -122,8 +125,6 @@ HRESULT CPlayer::Init(void)
 	m_pGauge = CGauge::Create(POWER_GAUGE, GAUGE_SIZE);
 	m_pGauge->SetPosition(GAUGE_POS);
 
-	InitPose(0);
-
 	// プレゼントを生成
 	m_pPresent = CPresent::Create();
 
@@ -132,6 +133,14 @@ HRESULT CPlayer::Init(void)
 
 	// 状態設定
 	m_state = STATE_NORMAL;
+
+	// 判定の生成
+	m_pCollision = CCollisionSphere::Create(CCollision::TAG_PLAYER, CCollision::TYPE::TYPE_SPHERE, this);
+
+	if (m_pCollision != nullptr)
+	{
+		m_pCollision->SetRadius(RADIUS_COLLISION);
+	}
 
 	return S_OK;
 }
@@ -159,6 +168,12 @@ void CPlayer::Uninit(void)
 		m_pInteract->Uninit();
 		delete m_pInteract;
 		m_pInteract = nullptr;
+	}
+
+	if (m_pCollision != nullptr)
+	{
+		m_pCollision->Uninit();
+		m_pCollision = nullptr;
 	}
 
 	// 継承クラスの終了
@@ -201,6 +216,23 @@ void CPlayer::Update(void)
 
 	// モーション更新
 	CCharacter::Update();
+
+	// 判定の追従
+	if (m_pCollision != nullptr)
+	{// 球の判定の追従
+		D3DXVECTOR3 pos = GetPosition();
+		D3DXVECTOR3 posInit = pos;
+
+		m_pCollision->SetPosition(pos);
+
+		// ブロック判定
+		m_pCollision->PushCollision(&pos, CCollision::TAG::TAG_BLOCK);
+
+		pos.y = posInit.y;
+
+		// キャラの位置反映
+		SetPosition(pos);
+	}
 
 #ifdef _DEBUG
 	Debug();
@@ -296,6 +328,9 @@ void CPlayer::Interact()
 	// プレイヤーリストの中身を確認する
 	for (CHouse* house : list)
 	{
+		// クリアフラグがたっていた場合次に進む
+		if(house->IsClear()) continue;
+
 		// 建物の座標を取得する
 		D3DXVECTOR3 posHouse = house->GetPosition();
 

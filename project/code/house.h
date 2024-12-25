@@ -17,6 +17,7 @@
 // 前方宣言
 //*****************************************************
 class CUI;
+class CCollisionSphere;
 
 //*****************************************************
 // クラスの定義
@@ -38,6 +39,8 @@ public:
 	CPresent::E_Label GetLabelWant(void) { return m_labelWant; }	// 欲しているラベル
 	void SetLabelWant(CPresent::E_Label label) { m_labelWant = label; }
 
+	bool IsClear() { return m_bClear; }	// クリアフラグ
+
 	// 静的メンバ関数
 	static void SetHouseRandom(void);			// ランダムに家を配置する処理
 	static void BindPresent(void);				// プレゼントの割り振り
@@ -56,6 +59,9 @@ private:
 	CPresent* m_pPresent;						// プレゼント
 	CPresent::E_Label m_labelWant;				// 欲しているラベル
 	CUI* m_pUI;									// 欲しているラベルの画像
+	CCollisionSphere *m_pCollision;				// 当たり判定
+	bool m_bClear;								// プレゼントの一致フラグ
+	float m_fTimerFade;							// フェードタイマー
 };
 
 namespace house
