@@ -170,3 +170,11 @@ void CHouse::Draw(void)
 	// 継承クラスの描画
 	CObjectX::Draw();
 }
+
+//==========================================
+//  リストの取得
+//==========================================
+CListManager<CHouse>* CHouse::GetList(void)
+{
+	return m_pList;
+}
