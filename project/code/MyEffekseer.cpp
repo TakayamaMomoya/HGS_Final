@@ -26,14 +26,12 @@
 const char* CMyEffekseer::m_apEfkName[CMyEffekseer::TYPE_MAX] =		// エフェクトのパス
 {
 	"",												// なんもない
-	"data\\EFFEKSEER\\Effect\\peckWave.efkefc",		// つっつきの波紋
-	"data\\EFFEKSEER\\Effect\\splashwater.efkefc",	// さざ波
-	"data\\EFFEKSEER\\Effect\\ripplesring.efkefc",	// 波紋
-	"data\\EFFEKSEER\\Effect\\bearstep.efkefc",		// シロクマの足煙
-	"data\\EFFEKSEER\\Effect\\blizzard.efkefc",		// 吹雪
-	"data\\EFFEKSEER\\Effect\\icebreak.efkefc",		// 氷の破壊
-	"data\\EFFEKSEER\\Effect\\jump.efkefc",			// ジャンプ
-	"data\\EFFEKSEER\\Effect\\drop.efkefc",			// 水しぶき
+	"data\\EFFEKSEER\\Effect\\right.efkefc",		// 正解
+	"data\\EFFEKSEER\\Effect\\up.efkefc",	// 連続正解
+	"data\\EFFEKSEER\\Effect\\down.efkefc",	// 不正解
+	"data\\EFFEKSEER\\Effect\\foot.efkefc",	// 土煙
+	"data\\EFFEKSEER\\Effect\\speed.efkefc",	// 二足歩行
+	"data\\EFFEKSEER\\Effect\\present.efkefc",	// 開封
 };
 CMyEffekseer *CMyEffekseer::s_pMyEffekseer = nullptr;	// 自身のポインタ
 

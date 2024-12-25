@@ -193,6 +193,8 @@ HRESULT CHouse::Init(void)
 	// 継承クラスの初期化
 	CObjectX::Init();
 
+	EnableShadow(true);
+
 	// モデル読込
 	int nIdx = CModel::Load(&model::PATH_DEFAULT[0]);
 	BindModel(nIdx);
@@ -354,6 +356,26 @@ void CHouse::SetResultLabel(void)
 			s_aLabelResult.push_back(house->GetLabelWant());
 		}
 	}
+}
+
+//==========================================
+// 位置の制限
+//==========================================
+void CHouse::LimitPos(D3DXVECTOR3 &rPos)
+{
+	float width = set::NUM_GRID * set::DIST_HOUSE * 0.5f + set::DIST_HOUSE;
+	float height = set::NUM_GRID * set::DIST_HOUSE * 0.5f + set::DIST_HOUSE;
+
+	universal::LimitPosInSq(width, height, &rPos);
+}
+
+//==========================================
+// 位置の割合を返す
+//==========================================
+void CHouse::PosRate(D3DXVECTOR3 pos, float* pRateX, float* pRateZ)
+{
+	*pRateX = pos.x / (set::NUM_GRID * set::DIST_HOUSE + set::DIST_HOUSE * 3.3f);
+	*pRateZ = pos.z / (set::NUM_GRID * set::DIST_HOUSE + set::DIST_HOUSE * 2);
 }
 
 namespace house

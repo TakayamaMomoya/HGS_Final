@@ -23,7 +23,7 @@
 #include "sound.h"
 #include "MyEffekseer.h"
 #include "gameManager.h"
-#include "navigation.h"
+#include "minimap.h"
 
 #include "house.h"
 #include "UI.h"
@@ -145,8 +145,10 @@ HRESULT CPlayer::Init(void)
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
 
-	// ナビゲーション生成
-	CNavigation::Create();
+	// ミニマップの生成
+	CMinimap::Create();
+
+	EnableShadow(true);
 
 	return S_OK;
 }
@@ -241,6 +243,9 @@ void CPlayer::Update(void)
 
 		pos.y = posInit.y;
 
+		// 位置制限
+		CHouse::LimitPos(pos);
+
 		// キャラの位置反映
 		SetPosition(pos);
 	}
@@ -325,6 +330,7 @@ void CPlayer::Forward(void)
 	if (m_pGauge->GetParam() >= POWER_GAUGE)
 	{
 		fSpeed *= POWER_RATE;
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_SPEED, GetPosition());
 	}
 }
 
@@ -411,6 +417,8 @@ void CPlayer::SwapPresent()
 		m_fSabTime = 0.0f;
 		++m_nAnswerCount;
 		m_pGauge->AddParam(POWER_ADD);
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_RIGHT, m_pNearHouse->GetPosition());
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_UP, GetPosition());
 	}
 	else
 	{
@@ -418,6 +426,7 @@ void CPlayer::SwapPresent()
 		m_fSabTime = 0.0f;
 		m_nAnswerCount = 0;
 		m_pGauge->SetParam(0.0f);
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
 	}
 
 	// サウンドインスタンスの取得
