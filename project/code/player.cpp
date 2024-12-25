@@ -148,6 +148,8 @@ HRESULT CPlayer::Init(void)
 	// ナビゲーション生成
 	CNavigation::Create();
 
+	EnableShadow(true);
+
 	return S_OK;
 }
 
@@ -240,6 +242,9 @@ void CPlayer::Update(void)
 		m_pCollision->PushCollision(&pos, CCollision::TAG::TAG_BLOCK);
 
 		pos.y = posInit.y;
+
+		// 位置制限
+		CHouse::LimitPos(pos);
 
 		// キャラの位置反映
 		SetPosition(pos);
