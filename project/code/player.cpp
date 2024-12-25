@@ -427,6 +427,8 @@ void CPlayer::SwapPresent()
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_RIGHT, m_pNearHouse->GetPosition());
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_UP, GetPosition());
 
+		Sound::Play(CSound::LABEL::LABEL_SE_SUCCESS);
+
 		if (m_pGauge->GetParam() >= POWER_GAUGE && fOld < POWER_GAUGE)
 		{
 			CSound::GetInstance()->Stop();
