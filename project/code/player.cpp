@@ -40,8 +40,8 @@ const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
 const float FACT_ROTATION = 0.1f;		// 回転係数
 const float SPEED_MOVE = 5.0f;			// 移動速度
 
-const float INTERACT_LENGTH = 300.0f; // インタラクト表示が出る範囲
-const D3DXVECTOR3 UI_SIZE = { 0.05f, 0.05f, 0.0f }; // インタラクトUIのサイズ
+const float INTERACT_LENGTH = 500.0f; // インタラクト表示が出る範囲
+const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
 const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
 }
 
@@ -277,7 +277,7 @@ void CPlayer::Interact()
 			universal::ConvertScreenRate(posScreen);
 			m_pInteract->SetPosition(posScreen);
 			// TODO : テクスチャ変更する
-			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\tutorial_piston.png"));
+			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\swap.png"));
 		}
 
 		// 近かった建物を記録する
