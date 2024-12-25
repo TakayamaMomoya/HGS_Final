@@ -4,16 +4,23 @@ Format Text Ver 1.0
 Scene {
 	pos -8.7404 -99.7429 1500.0000
 	lookat 0.0000 0.0000 0.0000
-	head -0.4636
-	pich 0.2536
+	head -0.6336
+	pich 0.0136
+	bank 0.0000
 	ortho 0
 	zoom2 5.0000
 	amb 0.250 0.250 0.250
+	dirlights 1 {
+		light {
+			dir 0.408 0.408 0.816
+			color 1.000 1.000 1.000
+		}
+	}
 }
 Material 3 {
 	"mat1" col(1.000 0.937 0.937 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
 	"mat2" col(1.000 1.000 1.000 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00)
-	"mat3" col(1.000 1.000 1.000 1.000) dif(0.800) amb(0.600) emi(0.000) spc(0.000) power(5.00) tex("C:\Users\student\Desktop\HGS_Final\project\data\TEXTURE\sakai.png")
+	"mat3" col(1.000 1.000 1.000 1.000) dif(0.800) amb(0.600) emi(0.630) spc(0.000) power(5.00) tex("C:\Users\student\Desktop\HGS_Final\project\data\TEXTURE\sakai.png")
 }
 Object "obj1" {
 	visible 15

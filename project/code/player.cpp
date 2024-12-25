@@ -79,7 +79,8 @@ m_pNearHouse(nullptr),
 m_nAnswerCount(0),
 m_pGauge(nullptr),
 m_pCollision(nullptr),
-m_fSabTime(0.0f)
+m_fSabTime(0.0f),
+m_bDash(false)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -310,7 +311,7 @@ void CPlayer::Forward(void)
 	{// 移動軸操作がしきい値を越えていたら移動
 		fSpeed = SPEED_MOVE;
 
-		if (m_pGauge->GetParam() >= POWER_GAUGE)
+		if (m_bDash)
 		{
 			fSpeed *= POWER_RATE;
 			MyEffekseer::CreateEffect(CMyEffekseer::TYPE_SPEED, GetPosition());
@@ -427,8 +428,9 @@ void CPlayer::SwapPresent()
 
 		Sound::Play(CSound::LABEL::LABEL_SE_SUCCESS);
 
-		if (m_pGauge->GetParam() >= POWER_GAUGE && fOld < POWER_GAUGE)
+		if (m_pGauge->GetParam() >= POWER_GAUGE && fOld < POWER_GAUGE && !m_bDash)
 		{
+			m_bDash = true;
 			CSound::GetInstance()->Stop();
 
 			Sound::Play(CSound::LABEL::LABEL_BGM_FEVER);
@@ -444,6 +446,7 @@ void CPlayer::SwapPresent()
 		m_nAnswerCount = 0;
 		m_pGauge->SetParam(0.0f);
 		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_POWER_DOWN, GetPosition());
+		m_bDash = false;
 
 		CSound::GetInstance()->Stop();
 
@@ -468,17 +471,20 @@ void CPlayer::SwapPresent()
 //==========================================
 void CPlayer::ControlGauge()
 {
-	// ゲージが最大の場合関数を抜ける
-	if (m_pGauge->GetParam() >= POWER_GAUGE) { return; }
-
 	// ゲージ減少時間を加算する
 	m_fSabTime += CManager::GetDeltaTime();
 
 	// 一定時間経過していない場合関数を抜ける
-	if (m_fSabTime < SAB_TIME) { return; }
+	if (m_fSabTime > SAB_TIME || m_bDash)
+	{
+		// ゲージを減らす
+		m_pGauge->AddParam(-0.002f);
+	}
 
-	// ゲージを減らす
-	m_pGauge->AddParam(-0.002f);
+	if (m_pGauge->GetParam() <= 0.0f)
+	{
+		m_bDash = false;
+	}
 }
 
 //=====================================================
@@ -505,7 +511,7 @@ void CPlayer::ManageMotion(void)
 	
 	if (m_fragMotion.bWalk)
 	{// 歩きモーションフラグ有効
-		if (m_pGauge->GetParam() >= POWER_GAUGE)
+		if (m_bDash)
 		{
 			if (nMotion != MOTION::MOTION_WALKTWOLEG)
 				SetMotion(MOTION::MOTION_WALKTWOLEG);

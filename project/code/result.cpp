@@ -369,6 +369,8 @@ void CResult::MotionSet(void)
 			//=====================================================
 			 vector<CPresent::S_InfoPresent*> aInfo = CPresent::GetInfoPresent();
 
+			 Sound::Play(CSound::LABEL::LABEL_SE_SUCCESS);
+
 			 CPresent::S_InfoPresent* pInfo = universal::RandomFromVector(aInfo);
 			 (*m_CharacterIt)->pModel = CObjectX::Create();
 			 int nIdxModel = CModel::Load(&pInfo->pathModel[0]);
