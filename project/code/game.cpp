@@ -40,7 +40,7 @@
 //*****************************************************
 namespace
 {
-const int TRANS_TIME = 100;	// 終了までの余韻のフレーム数
+const int TRANS_TIME = 60;	// 終了までの余韻のフレーム数
 const int SPEED_TIME = 60;	// タイマーが減っていく速度
 const char* PATH_GAME_ROAD = "data\\MAP\\road00.bin";	// ゲームメッシュロードのパス
 const char* PATH_SAMPLE_ICESTAGE = "data\\TEXT\\ice_stage_00.txt";	// サンプルの初期配置
