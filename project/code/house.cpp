@@ -31,6 +31,7 @@ const int NUM_SET = 16;				// 設置数
 const float DIST_HOUSE = 1000.0f;	// 家同士の距離
 const float RANGE_SET = 5000.0f;	// 配置範囲
 const int NUM_GRID = 20;			// グリッドの数
+const D3DXVECTOR3 OFFSET_PRESENT = { 0.0f,0.0f,-800.0f };	// プレゼントのオフセット
 }
 
 //==========================================
@@ -81,6 +82,41 @@ void CHouse::SetHouseRandom(void)
 		}
 
 		pHouse->SetPosition(pos);
+	}
+
+	// プレゼントの割り振り
+	BindPresent();
+}
+
+//=====================================================
+// プレゼントの割り振り
+//=====================================================
+void CHouse::BindPresent(void)
+{
+	if (CHouse::GetList()->GetNumAll() % 2 != 0)
+		assert(false);	// 偶数個じゃないときのアサート
+
+	// ベクターに変換
+	std::list<CHouse*> list = CHouse::GetList()->GetList();
+	std::vector<CHouse*> vector;
+
+	for (CHouse* house : list)
+	{
+		vector.push_back(house);
+	}
+
+	// 二つずつ割り振る
+	for (int i = 0; i < (int)vector.size(); i += 2)
+	{
+		// 二種類、別々のラベルを用意する
+		CPresent::E_Label labelFirst;
+		CPresent::E_Label labelSecond;
+
+		house::GetTwoLabel(labelFirst, labelSecond);
+
+		// 割り振る
+		vector[i]->SetPresent(CPresent::Create(labelFirst));
+		vector[i + 1]->SetPresent(CPresent::Create(labelSecond));
 	}
 }
 
@@ -184,10 +220,40 @@ void CHouse::Draw(void)
 	CObjectX::Draw();
 }
 
+//=====================================================
+// プレゼント設定
+//=====================================================
+void CHouse::SetPresent(CPresent* pPresent)
+{ 
+	m_pPresent = pPresent;
+
+	if (m_pPresent != nullptr)
+	{
+		D3DXVECTOR3 pos = GetPosition() + set::OFFSET_PRESENT;
+
+		m_pPresent->SetPosition(pos);
+	}
+}
+
 //==========================================
 //  リストの取得
 //==========================================
 CListManager<CHouse>* CHouse::GetList(void)
 {
 	return m_pList;
+}
+
+namespace house
+{
+void GetTwoLabel(CPresent::E_Label &labelFirst, CPresent::E_Label &labelSecond)
+{
+	// 最初のラベルの決定
+	labelFirst = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX - 1, 0);
+
+	// 次のラベルの決定
+	while (labelFirst != labelSecond)
+	{
+		labelSecond = (CPresent::E_Label)universal::RandRange(CPresent::E_Label::LABEL_MAX - 1, 0);
+	}
+}
 }
