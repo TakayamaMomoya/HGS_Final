@@ -36,6 +36,8 @@
 #include "house.h"
 #include "number.h"
 #include "UI.h"
+#include "MyEffekseer.h"
+#include "objectX.h"
 
 //*****************************************************
 // 定数定義
@@ -358,8 +360,17 @@ void CResult::MotionSet(void)
 		// キャラクター次あるよ
 		if (m_CharacterIt != m_CharacterList.end())
 		{
+			// モーションを設定
 			(*m_CharacterIt)->pCharacter->SetMotion(1);
 			(*m_CharacterIt)->pPresent->SetMotion(1);
+
+			//=====================================================
+			// プレゼントを手の先に付ける (6で右手 10で左手)
+			//=====================================================
+
+			// プレゼント箱からエフェクトを生成
+			MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_PRESENT, (*m_CharacterIt)->pPresent->GetPosition());
+
 			m_camerastart = (*m_CharacterIt)->pCharacter->GetPosition();
 			m_CharacterIt++;
 		}
