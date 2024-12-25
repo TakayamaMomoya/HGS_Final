@@ -61,6 +61,7 @@ private:
 	CUI* m_pUI;									// 欲しているラベルの画像
 	CCollisionSphere *m_pCollision;				// 当たり判定
 	bool m_bClear;								// プレゼントの一致フラグ
+	float m_fTimerFade;							// フェードタイマー
 };
 
 namespace house
