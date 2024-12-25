@@ -60,7 +60,7 @@ const D3DXVECTOR3 GAUGE_POS = { 0.8f, 0.93f, 0.0f };	// ゲージの位置
 const D3DXVECTOR2 GAUGE_SIZE = { 0.2f, 0.07f };		// ゲージのサイズ
 const float RADIUS_COLLISION = 200.0f;					// 判定の半径
 
-const float SAB_TIME = 10.0f; // ゲージが減少するまでの時間
+const float SAB_TIME = 1.0f; // ゲージが減少するまでの時間
 
 }
 
@@ -217,8 +217,11 @@ void CPlayer::Update(void)
 	// プレゼントを移動する
 	if (m_pPresent != nullptr)
 	{
-		D3DXVECTOR3 pos = GetPosition() + PRESENT_OFFSET;
-		m_pPresent->SetPosition(pos);
+		MultiplyMtx(false);
+		D3DXMATRIX mtxHead = GetParts(2)->pParts->GetMatrix();
+		m_pPresent->SetMatrixParent(mtxHead);
+		m_pPresent->SetPosition(D3DXVECTOR3(0.0f, 5.0f, 0.0f));
+		m_pPresent->SetScale(0.1f);
 	}
 
 	// 入力処理
@@ -309,6 +312,12 @@ void CPlayer::Forward(void)
 	{// 移動軸操作がしきい値を越えていたら移動
 		fSpeed = SPEED_MOVE;
 
+		if (m_pGauge->GetParam() >= POWER_GAUGE)
+		{
+			fSpeed *= POWER_RATE;
+			MyEffekseer::CreateEffect(CMyEffekseer::TYPE_SPEED, GetPosition());
+		}
+
 		// 移動速度の設定
 		D3DXVECTOR3 move = GetMove();
 
@@ -326,12 +335,6 @@ void CPlayer::Forward(void)
 	}
 	else
 		m_fragMotion.bWalk = false;
-
-	if (m_pGauge->GetParam() >= POWER_GAUGE)
-	{
-		fSpeed *= POWER_RATE;
-		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_SPEED, GetPosition());
-	}
 }
 
 //==========================================
