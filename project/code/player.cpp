@@ -430,7 +430,7 @@ void CPlayer::SwapPresent()
 
 			Sound::Play(CSound::LABEL::LABEL_BGM_FEVER);
 
-			CBlurEvent::Create(1.3f, 0.7f, 10.0f);
+			CBlurEvent::Create(0.7f, 0.7f, 10.0f);
 		}
 	}
 	else
@@ -528,7 +528,7 @@ void CPlayer::Event(EVENT_INFO* pEventInfo)
 
 	if (nMotion == MOTION::MOTION_WALKFOURLEG)
 	{
-		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition());
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_FOOT, GetPosition(),D3DXVECTOR3(0.0f,0.0f,0.0f), D3DXVECTOR3(200.0f, 200.0f, 200.0f));
 		Sound::Play(CSound::LABEL::LABEL_SE_WALK);
 	}
 

@@ -25,11 +25,11 @@
 //***********************************************************
 const char* CMyEffekseer::m_apEfkName[CMyEffekseer::TYPE_MAX] =		// エフェクトのパス
 {
-	"",												// なんもない
-	"data\\EFFEKSEER\\Effect\\right.efkefc",		// 正解
-	"data\\EFFEKSEER\\Effect\\up.efkefc",	// 連続正解
-	"data\\EFFEKSEER\\Effect\\down.efkefc",	// 不正解
-	"data\\EFFEKSEER\\Effect\\foot.efkefc",	// 土煙
+	"",											// なんもない
+	"data\\EFFEKSEER\\Effect\\right.efkefc",	// 正解
+	"data\\EFFEKSEER\\Effect\\up.efkefc",		// 連続正解
+	"data\\EFFEKSEER\\Effect\\down.efkefc",		// 不正解
+	"data\\EFFEKSEER\\Effect\\bearstep.efkefc",	// 土煙
 	"data\\EFFEKSEER\\Effect\\speed.efkefc",	// 二足歩行
 	"data\\EFFEKSEER\\Effect\\present.efkefc",	// 開封
 };
