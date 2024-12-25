@@ -177,7 +177,7 @@ Mesh {
    0.000000;0.000000;0.000000;;
    0.000000;0.000000;0.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\HGS_Final\\project\\data\\TEXTURE\\sakai.png";
+    "data\\TEXTURE\\sakai.png";
    }
   }
   Material {
