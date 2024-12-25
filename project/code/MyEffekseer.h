@@ -32,6 +32,9 @@ public:
 		TYPE_RIGHT,			// 正解
 		TYPE_POWER_UP,		// 連続正解
 		TYPE_POWER_DOWN,	// 不正解
+		TYPE_FOOT,			// 土煙
+		TYPE_SPEED,			// 二足歩行
+		TYPE_PRESENT,		// 開封
 		TYPE_MAX
 	};
 

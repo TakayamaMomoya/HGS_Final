@@ -330,6 +330,7 @@ void CPlayer::Forward(void)
 	if (m_pGauge->GetParam() >= POWER_GAUGE)
 	{
 		fSpeed *= POWER_RATE;
+		MyEffekseer::CreateEffect(CMyEffekseer::TYPE_SPEED, GetPosition());
 	}
 }
 

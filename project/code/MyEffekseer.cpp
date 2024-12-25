@@ -30,6 +30,8 @@ const char* CMyEffekseer::m_apEfkName[CMyEffekseer::TYPE_MAX] =		// エフェクトの
 	"data\\EFFEKSEER\\Effect\\up.efkefc",	// 連続正解
 	"data\\EFFEKSEER\\Effect\\down.efkefc",	// 不正解
 	"data\\EFFEKSEER\\Effect\\foot.efkefc",	// 土煙
+	"data\\EFFEKSEER\\Effect\\speed.efkefc",	// 二足歩行
+	"data\\EFFEKSEER\\Effect\\present.efkefc",	// 開封
 };
 CMyEffekseer *CMyEffekseer::s_pMyEffekseer = nullptr;	// 自身のポインタ
 
