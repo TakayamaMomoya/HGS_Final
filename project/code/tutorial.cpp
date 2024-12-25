@@ -12,6 +12,14 @@
 #include "camera.h"
 #include "cameraState.h"
 
+#include "UI.h"
+#include "texture.h"
+#include "inputkeyboard.h"
+#include "inputjoypad.h"
+#include "inputManager.h"
+#include "sound.h"
+#include "fade.h"
+
 //*****************************************************
 // 定数定義
 //*****************************************************
@@ -28,7 +36,8 @@ CTutorial *CTutorial::s_pTutorial = nullptr;	// 自身のポインタ
 //=====================================================
 // コンストラクタ
 //=====================================================
-CTutorial::CTutorial()
+CTutorial::CTutorial(): 
+m_bFade(false)
 {
 	s_pTutorial = this;
 }
@@ -53,6 +62,12 @@ HRESULT CTutorial::Init(void)
 		return E_FAIL;
 	}
 
+	// チュートリアル画像を表示
+	CUI* ui = CUI::Create();
+	ui->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\tutorial.png"));
+	ui->SetSize(0.5f, 0.5f);
+	ui->SetPosition({ 0.5f, 0.5f, 0.0f });
+
 	// カメラの設定
 	Camera::ChangeState(new CFollowPlayer);
 
@@ -76,7 +91,18 @@ void CTutorial::Uninit(void)
 //=====================================================
 void CTutorial::Update(void)
 {
+	// 入力情報の取得
+	CInputKeyboard* pInputKeyboard = CInputKeyboard::GetInstance();
+	CInputJoypad* pJoypad = CInputJoypad::GetInstance();
 
+	// ボタン入力がない場合関数を抜ける
+	if (!pInputKeyboard->GetTrigger(DIK_SPACE) &&
+		!pInputKeyboard->GetTrigger(DIK_RETURN) &&
+		!pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0))
+	{ return; }
+
+	// フェードを設定
+	CFade::GetInstance()->SetFade(CScene::MODE_GAME);
 }
 
 //=====================================================

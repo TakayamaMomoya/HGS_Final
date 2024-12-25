@@ -32,6 +32,9 @@ public:
 private:
 	// 静的メンバ変数
 	static CTutorial *s_pTutorial;					// 自身のポインタ
+	
+	// メンバ変数
+	bool m_bFade;
 };
 
 #endif

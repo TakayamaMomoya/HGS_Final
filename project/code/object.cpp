@@ -254,6 +254,20 @@ void CObject::DrawAll(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CRenderer::GetInstance()->GetDevice();
 
+	// ブラーの取得
+	CBlur * pBlur = CBlur::GetInstance();
+
+	if (pBlur != nullptr)
+	{
+		pBlur->SaveRenderInfo();	// 描画の情報を保存
+		pBlur->ChangeTarget();	// レンダーターゲットの変更
+
+		// クリアする
+		pDevice->Clear(0, nullptr,
+			(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),
+			COLOR_CLEAR, 1.0f, 0);
+	}
+
 	// カメラの取得
 	CCamera *pCamera = CManager::GetCamera();
 
@@ -269,6 +283,15 @@ void CObject::DrawAll(void)
 	{// エフェクシアの更新
 		CMyEffekseer::GetInstance()->Update();
 		CMyEffekseer::GetInstance()->Draw();
+	}
+
+	if (pBlur != nullptr)
+	{
+		pBlur->OverlapLastTexture();	// 前回のテクスチャを重ねる
+		pBlur->RestoreTarget();			// レンダーターゲットの復元
+		pBlur->DrawBuckBuffer();		// バックバッファへの描画
+		pBlur->SwapBuffer();			// バッファーの入れ替え
+		pBlur->ClearNotBlur();			// ブラーしないレンダラーのクリア
 	}
 
 	// オブジェクトの描画

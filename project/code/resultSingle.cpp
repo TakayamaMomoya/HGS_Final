@@ -127,6 +127,7 @@ HRESULT CResultSingle::Init(void)
 	assert(pSound != nullptr);
 
 	// サウンドの再生
+	pSound->Stop();
 	pSound->Play(CSound::LABEL_BGM_RESULT);
 
 	// 2Dオブジェクトの生成
