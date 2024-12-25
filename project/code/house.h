@@ -43,10 +43,13 @@ public:
 	static void BindPresent(void);				// プレゼントの割り振り
 	static CHouse *Create(void);				// 生成処理
 	static CListManager<CHouse>* GetList(void); // リスト取得
+	static void SetResultLabel(void);			// リザルトのラベル設定
+	static vector<CPresent::E_Label> GetLabelResult(void) { return s_aLabelResult; }
 
 private:
 	// 静的メンバ変数
-	static CListManager<CHouse>* m_pList;		// オブジェクトリスト
+	static CListManager<CHouse>* m_pList;				// オブジェクトリスト
+	static vector<CPresent::E_Label> s_aLabelResult;	// リザルトのラベル
 
 	// メンバ変数
 	CListManager<CHouse>::AIterator m_iterator; // イテレーター
