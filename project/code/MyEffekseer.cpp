@@ -29,7 +29,6 @@ const char* CMyEffekseer::m_apEfkName[CMyEffekseer::TYPE_MAX] =		// エフェクトの
 	"data\\EFFEKSEER\\Effect\\right.efkefc",		// 正解
 	"data\\EFFEKSEER\\Effect\\up.efkefc",	// 連続正解
 	"data\\EFFEKSEER\\Effect\\down.efkefc",	// 不正解
-	"data\\EFFEKSEER\\Effect\\foot.efkefc",	// 土煙
 };
 CMyEffekseer *CMyEffekseer::s_pMyEffekseer = nullptr;	// 自身のポインタ
 
