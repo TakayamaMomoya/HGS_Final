@@ -26,6 +26,7 @@
 
 #include "house.h"
 #include "UI.h"
+#include "texture.h"
 
 //*****************************************************
 // 定数定義
@@ -270,7 +271,8 @@ void CPlayer::Interact()
 			universal::IsInScreen(pos, &posScreen);
 			universal::ConvertScreenRate(posScreen);
 			m_pInteract->SetPosition(posScreen);
-			// TODO : テクスチャ貼る
+			// TODO : テクスチャ変更する
+			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\tutorial_piston.png"));
 		}
 		return;
 	}
