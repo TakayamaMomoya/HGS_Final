@@ -23,6 +23,7 @@
 #include "sound.h"
 #include "MyEffekseer.h"
 #include "gameManager.h"
+#include "navigation.h"
 
 #include "house.h"
 #include "UI.h"
@@ -43,19 +44,21 @@ const float FACT_ROTATION = 0.1f;		// 回転係数
 const float SPEED_MOVE = 20.0f;			// 移動速度
 
 const float INTERACT_LENGTH = 1000.0f; // インタラクト表示が出る範囲
-const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
-const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
+const D3DXVECTOR3 UI_SIZE = { 0.025f, 0.05f, 0.0f }; // インタラクトUIのサイズ
+const D3DXVECTOR3 UI_OFFSET = { 0.0f, 600.0f, 0.0f }; // インタラクトUIのオフセット
 
 const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // プレゼントのオフセット
 
 const int POWERUP_NUM = 5; // 加速に必要な連続正解数
 const float POWER_RATE = 2.0f; // 加速倍率
 
-const float POWER_GAUGE = 5.0f; // 連続正解ゲージの最大値
-const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // １正解で加算されるゲージの量
-const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f }; // ゲージの位置
-const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f }; // ゲージのサイズ
-const float RADIUS_COLLISION = 200.0f;							// 判定の半径
+const float POWER_GAUGE = 5.0f;							// 連続正解ゲージの最大値
+const float POWER_ADD = 1.0f;		// １正解で加算されるゲージの量
+const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f };	// ゲージの位置
+const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f };		// ゲージのサイズ
+const float RADIUS_COLLISION = 200.0f;					// 判定の半径
+
+const float SAB_TIME = 20.0f; // ゲージが減少するまでの時間
 
 }
 
@@ -142,6 +145,9 @@ HRESULT CPlayer::Init(void)
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
 
+	// ナビゲーション生成
+	CNavigation::Create();
+
 	return S_OK;
 }
 
@@ -197,6 +203,11 @@ void CPlayer::Update(void)
 		universal::ConvertScreenRate(posScreen);
 		m_pInteract->SetPosition(posScreen);
 	}
+
+	// ゲージの操作
+	ControlGauge();
+
+	CDebugProc::GetInstance()->Print("\n\n\n\n\n\n\nゲージの数字 : %f\n\n\n\n\n\n", m_pGauge->GetParam());
 
 	// プレゼントを入れ替える処理
 	SwapPresent();
@@ -294,7 +305,7 @@ void CPlayer::Forward(void)
 		fSpeed = SPEED_MOVE;
 	}
 
-	if (m_nAnswerCount >= POWERUP_NUM)
+	if (m_pGauge->GetParam() >= POWER_GAUGE)
 	{
 		fSpeed *= POWER_RATE;
 	}
@@ -393,18 +404,38 @@ void CPlayer::SwapPresent()
 	// 正解のプレゼントだった場合カウンターを加算する
 	if (m_pNearHouse->GetLabelWant() == m_pPresent->GetLabel())
 	{
+		m_fSabTime = 0.0f;
 		++m_nAnswerCount;
 		m_pGauge->AddParam(POWER_ADD);
 	}
 	else
 	{
 		// 間違えていた場合カウンターを初期化
+		m_fSabTime = 0.0f;
 		m_nAnswerCount = 0;
 		m_pGauge->SetParam(0.0f);
 	}
 
 	// 自身の所持しているプレゼントを上書きする
 	m_pPresent = pTemp;
+}
+
+//==========================================
+//  ゲージの操作
+//==========================================
+void CPlayer::ControlGauge()
+{
+	// ゲージが最大の場合関数を抜ける
+	if (m_pGauge->GetParam() >= POWER_GAUGE) { return; }
+
+	// ゲージ減少時間を加算する
+	m_fSabTime += CManager::GetDeltaTime();
+
+	// 一定時間経過していない場合関数を抜ける
+	if (m_fSabTime < SAB_TIME) { return; }
+
+	// ゲージを減らす
+	m_pGauge->AddParam(-0.01f);
 }
 
 //=====================================================

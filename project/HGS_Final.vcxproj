@@ -187,6 +187,7 @@
     <ClCompile Include="code\house.cpp" />
     <ClCompile Include="code\listManager.cpp" />
     <ClCompile Include="code\MyEffekseer.cpp" />
+    <ClCompile Include="code\navigation.cpp" />
     <ClCompile Include="code\object2D.cpp" />
     <ClCompile Include="code\present.cpp" />
     <ClCompile Include="code\resultSingle.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="code\house.h" />
     <ClInclude Include="code\listManager.h" />
     <ClInclude Include="code\MyEffekseer.h" />
+    <ClInclude Include="code\navigation.h" />
     <ClInclude Include="code\object2D.h" />
     <ClInclude Include="code\present.h" />
     <ClInclude Include="code\resultSingle.h" />

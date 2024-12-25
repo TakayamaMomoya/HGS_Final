@@ -14,6 +14,7 @@
 #include "title.h"
 #include "tutorial.h"
 #include "ranking.h"
+#include "result.h"
 #include "manager.h"
 #include "renderer.h"
 #include "camera.h"
@@ -65,7 +66,7 @@ HRESULT CScene::Init(void)
 	{
 		int nIdx = CTexture::GetInstance()->Regist("data\\TEXTURE\\BG\\mountain000.png");
 		pCylinder->SetIdxTexture(nIdx);
-		pCylinder->SetRadius(6000.0f);
+		pCylinder->SetRadius(60000.0f);
 		pCylinder->SetHeight(5000.0f);
 		pCylinder->SetVtx();
 		pCylinder->EnableLighting(false);
@@ -193,6 +194,12 @@ CScene *CScene::Create(MODE mode)
 	case CScene::MODE_GAME:
 
 		pScene = new CGame;
+
+		break;
+
+	case CScene::MODE_RESULT:
+
+		pScene = new CResult;
 
 		break;
 	default:

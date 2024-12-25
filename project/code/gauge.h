@@ -34,7 +34,7 @@ public:
 	void AddParam(float fValue);	// パラメーター加算処理
 
 	// 変数取得・設定関数
-	void SetParam(float fParam) { m_fParam = fParam; }	// パラメーター
+	void SetParam(float fParam) { m_fParam = fParam >= m_fParamMax ? m_fParamMax : fParam; }	// パラメーター
 	float GetParam(void) { return m_fParam; }
 	void SetPosition(D3DXVECTOR3 pos) override;	// 位置
 
