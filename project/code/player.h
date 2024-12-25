@@ -107,7 +107,7 @@ private:
 	void Interact(); // インタラクト表示
 
 	void SwapPresent(); // プレゼントを交換する処理
-	
+
 	void Event(EVENT_INFO* pEventInfo) override;	// モーションイベント
 	void ManageMotion(void);						// モーションの管理
 

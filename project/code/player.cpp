@@ -43,6 +43,8 @@ const float SPEED_MOVE = 5.0f;			// 移動速度
 const float INTERACT_LENGTH = 500.0f; // インタラクト表示が出る範囲
 const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
 const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
+
+const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // プレゼントのオフセット
 }
 
 //*****************************************************
@@ -102,6 +104,9 @@ HRESULT CPlayer::Init(void)
 
 	InitPose(0);
 
+	// プレゼントを生成
+	m_pPresent = CPresent::Create();
+
 	// 入力可能フラグを設定
 	m_bEnableInput = true;
 
@@ -160,6 +165,13 @@ void CPlayer::Update(void)
 
 	// プレゼントを入れ替える処理
 	SwapPresent();
+
+	// プレゼントを移動する
+	if (m_pPresent != nullptr)
+	{
+		D3DXVECTOR3 pos = GetPosition() + PRESENT_OFFSET;
+		m_pPresent->SetPosition(pos);
+	}
 
 	// 入力処理
 	Input();
@@ -276,7 +288,6 @@ void CPlayer::Interact()
 			universal::IsInScreen(pos, &posScreen);
 			universal::ConvertScreenRate(posScreen);
 			m_pInteract->SetPosition(posScreen);
-			// TODO : テクスチャ変更する
 			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\swap.png"));
 		}
 
@@ -300,6 +311,8 @@ void CPlayer::Interact()
 //==========================================
 void CPlayer::SwapPresent()
 {
+	CDebugProc::GetInstance()->Print("所持プレゼント : %d\n", m_pPresent);
+
 	// インタラクト表示が存在していない場合関数を抜ける
 	if (m_pInteract == nullptr) { return; }
 
