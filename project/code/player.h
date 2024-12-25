@@ -115,6 +115,7 @@ private:
 	
 	unsigned int m_nAnswerCount; // 連続正解カウンター
 	CGauge* m_pGauge; // 連続正解ゲージ
+	bool m_bDash;
 	float m_fSabTime; // ゲージが減少するまでの時間
 
 	// 静的メンバ変数
