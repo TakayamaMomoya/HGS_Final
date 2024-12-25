@@ -33,8 +33,16 @@ public:
 
 	// 静的メンバ関数
 	static CHouse *Create(void);	// 生成処理
+	static CListManager<CHouse>* GetList(void); // リスト取得
 
 private:
+
+	// 静的メンバ変数
+	static CListManager<CHouse>* m_pList; // オブジェクトリスト
+
+	// メンバ変数
+	CListManager<CHouse>::AIterator m_iterator; // イテレーター
+
 };
 
 #endif
