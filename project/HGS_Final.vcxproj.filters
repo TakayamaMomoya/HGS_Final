@@ -357,7 +357,7 @@
     <ClCompile Include="code\listManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="result.cpp">
+    <ClCompile Include="code\result.cpp">
       <Filter>ソース ファイル\scene\result</Filter>
     </ClCompile>
   </ItemGroup>
@@ -632,7 +632,7 @@
     <ClInclude Include="code\listManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="result.h">
+    <ClInclude Include="code\result.h">
       <Filter>ソース ファイル\scene\result</Filter>
     </ClInclude>
   </ItemGroup>
