@@ -24,19 +24,19 @@
 //*****************************************************
 namespace
 {
-	const char* TEX_FILE = "data\\TEXTURE\\BG\\map_sea.png";	// テクスチャのファイル
-	const float LENGTH = 300.0f;				// メッシュの一辺の長さ
-	const int MESH_U = 254;						// 横のブロック数
-	const int MESH_V = 254;						// 縦のブロック数
-	const int SPLIT_TEX = 4;					// テクスチャ分割数
-	const float ANGLE_SLIP = 0.7f;				// 坂を滑る角度
+const string TEX_PATH = "data\\TEXTURE\\MATERIAL\\field.jpg";
+const float LENGTH = 300.0f;				// メッシュの一辺の長さ
+const int MESH_U = 254;						// 横のブロック数
+const int MESH_V = 254;						// 縦のブロック数
+const int SPLIT_TEX = 1;					// テクスチャ分割数
+const float ANGLE_SLIP = 0.7f;				// 坂を滑る角度
 
-	// 海流関連
-	const float OCEAN_SPEED = 80.0f;			// 海流の速度
-	const float OCEAN_SPEED_UP = 0.01875f;		// 波の速度増加量（構造変更前0.3fの16分の1）
-	const float OCEAN_SPEED_DOWN = 0.03125f;	// 波の速度減少量（構造変更前0.5fの16分の1）
-	const float OCEAN_SPEED_MAX = 5.0f;			// 波の速度最大値（構造変更前80.0fの16分の1）
-	const float OCEAN_SPEED_MULTIPLY = 5.0f;	// 氷の流れる速度->波の速度にする際の速度倍率
+// 海流関連
+const float OCEAN_SPEED = 80.0f;			// 海流の速度
+const float OCEAN_SPEED_UP = 0.01875f;		// 波の速度増加量（構造変更前0.3fの16分の1）
+const float OCEAN_SPEED_DOWN = 0.03125f;	// 波の速度減少量（構造変更前0.5fの16分の1）
+const float OCEAN_SPEED_MAX = 5.0f;			// 波の速度最大値（構造変更前80.0fの16分の1）
+const float OCEAN_SPEED_MULTIPLY = 5.0f;	// 氷の流れる速度->波の速度にする際の速度倍率
 }
 
 //*****************************************************
@@ -105,12 +105,12 @@ HRESULT CMeshField::Init(void)
 	m_fOceanSpeed = OCEAN_SPEED;
 
 	// 読込処理
-	Load("data\\BYNARY\\field00.bin");
+	//Load("data\\BYNARY\\field00.bin");
 
 	m_nDivTex = SPLIT_TEX;
 
 	// テクスチャの読込
-	m_nIdxTexture = CTexture::GetInstance()->Regist(TEX_FILE);
+	m_nIdxTexture = CTexture::GetInstance()->Regist(&TEX_PATH[0]);
 
 	// 頂点数計算
 	m_MeshField.nNumVtx = (m_nDivNumU + 1) * (m_nDivNumV + 1);

@@ -148,8 +148,6 @@ HRESULT CPlayer::Init(void)
 	// ミニマップの生成
 	CMinimap::Create();
 
-	EnableShadow(true);
-
 	return S_OK;
 }
 
