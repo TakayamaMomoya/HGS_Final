@@ -61,15 +61,37 @@ void CHouse::SetHouseRandom(void)
 {
 	for (int i = 0; i < set::NUM_SET; i++)
 	{
-		CHouse *pHouse;
+		CHouse *pHouse = CHouse::Create();
 
-		// 配置位置の設定
+		if (pHouse == nullptr)
+			assert(false);
+
+		bool bResult = false;
+
 		D3DXVECTOR3 pos = { 0.0f,0.0f,0.0f };
-		pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
-		pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
 
-		CHouse::Create();
+		while (!bResult)
+		{
+			// 配置位置の設定
+			pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
+			pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
+
+			// 配置が被ってるかのチェック
+			bResult = CheckCover(pos);
+		}
+
+		pHouse->SetPosition(pos);
 	}
+}
+
+//=====================================================
+// 被りチェック
+//=====================================================
+bool CHouse::CheckCover(D3DXVECTOR3 pos)
+{
+	
+
+	return false;
 }
 
 //=====================================================
