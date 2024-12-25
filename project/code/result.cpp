@@ -208,19 +208,6 @@ HRESULT CResult::Init(void)
 
 	// リストを取得するよ
 	m_ClearList = CHouse::GetLabelResult();
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-	m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
 
 	// プレゼントを並べる
 	InitCharacter();
@@ -898,7 +885,15 @@ void CResult::Sort(void)
 	if (m_aRankScore.size() <= 1) { return; }
 
 	// ランクインを確認
-	if (m_ClearList.size() >= m_aRankScore[m_aRankScore.size() - 1])
+	bool flag = false;
+	for (int i = 0; i < Result_Rank::NUM; i++)
+	{
+		if (m_ClearList.size() == m_aRankScore[i])
+		{
+			flag = true;
+		}
+	}
+	if (m_ClearList.size() >= m_aRankScore[m_aRankScore.size() - 1] && !flag)
 	{
 		m_aRankScore[m_aRankScore.size() - 1] = m_ClearList.size();
 	}
