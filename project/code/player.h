@@ -126,6 +126,7 @@ private:
 
 	unsigned int m_nAnswerCount; // 連続正解カウンター
 	CGauge* m_pGauge; // 連続正解ゲージ
+	float m_fSabTime; // ゲージが減少するまでの時間
 
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列

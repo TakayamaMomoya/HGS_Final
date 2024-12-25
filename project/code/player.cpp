@@ -40,7 +40,7 @@ const float MODEL_SCALE = 10.0f; // Šg‘å—¦
 const float RATE_DECREASE_MOVE = 0.5f;	// ˆÚ“®Œ¸Š‚ÌŠ„‡
 const float LINE_FACT_ROT = 0.3f;		// Œü‚«‚ð•â³‚·‚é‚Ü‚Å‚Ì“ü—Í‚µ‚«‚¢’l
 const float FACT_ROTATION = 0.1f;		// ‰ñ“]ŒW”
-const float SPEED_MOVE = 5.0f;			// ˆÚ“®‘¬“x
+const float SPEED_MOVE = 20.0f;			// ˆÚ“®‘¬“x
 
 const float INTERACT_LENGTH = 500.0f; // ƒCƒ“ƒ^ƒ‰ƒNƒg•\Ž¦‚ªo‚é”ÍˆÍ
 const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // ƒCƒ“ƒ^ƒ‰ƒNƒgUI‚ÌƒTƒCƒY
@@ -49,7 +49,7 @@ const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // ƒCƒ“ƒ^ƒ‰ƒNƒgUI‚ÌƒIƒtƒZƒ
 const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // ƒvƒŒƒ[ƒ“ƒg‚ÌƒIƒtƒZƒbƒg
 
 const int POWERUP_NUM = 5; // ‰Á‘¬‚É•K—v‚È˜A‘±³‰ð”
-const float POWER_RATE = 3.0f; // ‰Á‘¬”{—¦
+const float POWER_RATE = 2.0f; // ‰Á‘¬”{—¦
 
 const float POWER_GAUGE = 5.0f; // ˜A‘±³‰ðƒQ[ƒW‚ÌÅ‘å’l
 const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // ‚P³‰ð‚Å‰ÁŽZ‚³‚ê‚éƒQ[ƒW‚Ì—Ê
@@ -71,7 +71,8 @@ m_pInteract(nullptr),
 m_pPresent(nullptr),
 m_pNearHouse(nullptr),
 m_nAnswerCount(0),
-m_pGauge(nullptr)
+m_pGauge(nullptr),
+m_fSabTime(0.0f)
 {
 	// ƒfƒtƒHƒ‹ƒg‚Í“ü‚Á‚½‡‚Ì”Ô†
 	m_nID = (int)s_apPlayer.size();
@@ -296,6 +297,9 @@ void CPlayer::Interact()
 	// ƒvƒŒƒCƒ„[ƒŠƒXƒg‚Ì’†g‚ðŠm”F‚·‚é
 	for (CHouse* house : list)
 	{
+		// ƒNƒŠƒAƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚½ê‡ŽŸ‚Éi‚Þ
+		if(house->IsClear()) continue;
+
 		// Œš•¨‚ÌÀ•W‚ðŽæ“¾‚·‚é
 		D3DXVECTOR3 posHouse = house->GetPosition();
 

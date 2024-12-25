@@ -62,7 +62,8 @@ vector<CPresent::E_Label> CHouse::s_aLabelResult;	// リザルトラベルのベクター
 //=====================================================
 // コンストラクタ
 //=====================================================
-CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr)
+CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr),
+m_bClear(false)
 {
 
 }
@@ -256,6 +257,16 @@ void CHouse::Update(void)
 		// テクスチャ設定
 		int nIdxTexture = Texture::GetIdx(&UI::PATH[m_labelWant][0]);
 		m_pUI->SetIdxTexture(nIdxTexture);
+	}
+
+	// クリアフラグの管理
+	if (!m_bClear)
+	{
+		// 所持しているプレゼントとほしいプレゼントが一致したらフラグを立てる
+		if (m_pPresent->GetLabel() == m_labelWant)
+		{
+			m_bClear = true;
+		}
 	}
 }
 
