@@ -32,7 +32,8 @@ public:
 	void Draw(void);
 
 	// 静的メンバ関数
-	static CHouse *Create(void);	// 生成処理
+	static void SetHouseRandom(void);			// ランダムに家を配置する処理
+	static CHouse *Create(void);				// 生成処理
 	static CListManager<CHouse>* GetList(void); // リスト取得
 
 private:

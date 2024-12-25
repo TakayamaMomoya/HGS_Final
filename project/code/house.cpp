@@ -19,11 +19,22 @@
 //-------------------------
 namespace model
 {
-const string PATH_DEFAULT = "data\\MODEL\\block\\Drift_ice.x";	// デフォルトモデルのパス
+const string PATH_DEFAULT = "data\\MODEL\\object\\Snowdome.x";	// デフォルトモデルのパス
+}
+
+//-------------------------
+// 配置の定数
+//-------------------------
+namespace set
+{
+const int NUM_SET = 15;									// 設置数
+const float DIST_HOUSE = 300.0f;						// 家同士の距離
+const float RANGE_SET = 5000.0f;						// 配置範囲
+const int NUM_GRID = (int)RANGE_SET / (int)DIST_HOUSE;	// グリッドの数
 }
 
 //==========================================
-//  静的メンバ変数宣言
+// 静的メンバ変数宣言
 //==========================================
 CListManager<CHouse>* CHouse::m_pList = nullptr; // オブジェクトリスト
 
@@ -41,6 +52,24 @@ CHouse::CHouse(int nPriority) : CObjectX(nPriority)
 CHouse::~CHouse()
 {
 
+}
+
+//=====================================================
+// ランダムに家を配置する処理
+//=====================================================
+void CHouse::SetHouseRandom(void)
+{
+	for (int i = 0; i < set::NUM_SET; i++)
+	{
+		CHouse *pHouse;
+
+		// 配置位置の設定
+		D3DXVECTOR3 pos = { 0.0f,0.0f,0.0f };
+		pos.x = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
+		pos.z = universal::RandRange(set::NUM_GRID, 0) * set::DIST_HOUSE;
+
+		CHouse::Create();
+	}
 }
 
 //=====================================================
