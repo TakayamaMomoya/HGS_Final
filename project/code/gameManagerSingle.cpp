@@ -17,6 +17,7 @@
 #include "camera.h"
 #include "cameraState.h"
 #include "house.h"
+#include "present.h"
 
 //*****************************************************
 // 定数定義
@@ -61,7 +62,9 @@ HRESULT CGameManagerSingle::Init(void)
 
 	// 家の生成
 	CHouse::SetHouseRandom();
-	CObjectX::Create();
+	
+	// プレゼント生成
+	CPresent::Create();
 
 	// 基底クラスの初期化
 	CGameManager::Init();

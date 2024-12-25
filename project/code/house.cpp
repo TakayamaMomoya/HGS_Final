@@ -27,10 +27,10 @@ const string PATH_DEFAULT = "data\\MODEL\\object\\Snowdome.x";	// デフォルトモデ
 //-------------------------
 namespace set
 {
-const int NUM_SET = 15;									// 設置数
-const float DIST_HOUSE = 1000.0f;						// 家同士の距離
-const float RANGE_SET = 5000.0f;						// 配置範囲
-const int NUM_GRID = 20;	// グリッドの数
+const int NUM_SET = 16;				// 設置数
+const float DIST_HOUSE = 1000.0f;	// 家同士の距離
+const float RANGE_SET = 5000.0f;	// 配置範囲
+const int NUM_GRID = 20;			// グリッドの数
 }
 
 //==========================================
