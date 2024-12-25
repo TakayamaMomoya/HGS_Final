@@ -373,6 +373,7 @@ void CResult::MotionSet(void)
 			 (*m_CharacterIt)->pModel = CObjectX::Create();
 			 int nIdxModel = CModel::Load(&pInfo->pathModel[0]);
 			 (*m_CharacterIt)->pModel->BindModel(nIdxModel);
+			 (*m_CharacterIt)->pModel->SetRotation(D3DXVECTOR3(0.0f, D3DX_PI, 0.0f));
 
 			// プレゼント箱からエフェクトを生成
 			MyEffekseer::CreateEffect(CMyEffekseer::TYPE::TYPE_PRESENT, (*m_CharacterIt)->pPresent->GetPosition());
