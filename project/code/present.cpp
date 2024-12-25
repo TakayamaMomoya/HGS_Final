@@ -19,7 +19,7 @@ const string PATH_INFO = "data\\TEXT\\present.txt";	// プレゼント情報のパス
 const string PATH_LABEL[CPresent::E_Label::LABEL_MAX] =	// ラベルのモデルパス
 {
 	"data\\TEXT\\box\\motion_box_b.txt",
-	"data\\TEXT\\box\\motion_box_g.txt",
+	"data\\TEXT\\cylinder\\motion_cylinder_g.txt",
 	"data\\TEXT\\box\\motion_box_p.txt",
 	"data\\TEXT\\box\\motion_box_y.txt",
 };
