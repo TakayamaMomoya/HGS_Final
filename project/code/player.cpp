@@ -148,9 +148,6 @@ HRESULT CPlayer::Init(void)
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
 
-	// ミニマップの生成
-	CMinimap::Create();
-
 	return S_OK;
 }
 
