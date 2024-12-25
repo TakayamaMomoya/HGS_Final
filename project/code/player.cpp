@@ -53,6 +53,7 @@ const float POWER_RATE = 3.0f; // ‰Á‘¬”{—¦
 
 const float POWER_GAUGE = 5.0f; // ˜A‘±³‰ðƒQ[ƒW‚ÌÅ‘å’l
 const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // ‚P³‰ð‚Å‰ÁŽZ‚³‚ê‚éƒQ[ƒW‚Ì—Ê
+const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f }; // ƒQ[ƒW‚ÌˆÊ’u
 const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f }; // ƒQ[ƒW‚ÌƒTƒCƒY
 
 }
@@ -119,6 +120,7 @@ HRESULT CPlayer::Init(void)
 
 	// ƒQ[ƒW‚ð¶¬
 	m_pGauge = CGauge::Create(POWER_GAUGE, GAUGE_SIZE);
+	m_pGauge->SetPosition(GAUGE_POS);
 
 	InitPose(0);
 
