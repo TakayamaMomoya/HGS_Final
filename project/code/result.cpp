@@ -51,6 +51,7 @@ namespace
 	const float ADD_X = 200.0f;
 	const float CHARA_Z = (-100.0f);
 	char* CHARA_PATH = "data\\TEXT\\motion_kidsboy.txt";
+	const std::string FILE_PATH = "data\\FILE\\ranking.bin";
 	const float CNT = 0.3f;
 	const int MAX_WIDTH_NUM = 10;
 	const float ADD_Z = 500.0f;
@@ -104,11 +105,11 @@ namespace
 		const D3DXVECTOR3 DEST_POS = D3DXVECTOR3(0.25f, 0.35f, 0.0f);				// 目標位置
 		const D3DXVECTOR3 INIT_POS = DEST_POS + D3DXVECTOR3(0.0f, 0.2f, 0.0f);	// 初期位置
 		const D3DXVECTOR3 DIFF_POS = DEST_POS - INIT_POS;						// 差分位置
-		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.075f, 0.3f, 0.0f);				// 目標位置
+		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.09f, 0.3f, 0.0f);				// 目標位置
 		const float WIDTH = 0.2f;	// 幅
 		const float HEIGHT = 0.125f;	// 高さ
-		const float SCORE_WIDTH = 0.035f;	// 幅
-		const float SCORE_HEIGHT = 0.075f;	// 高さ
+		const float SCORE_WIDTH = 0.05f;	// 幅
+		const float SCORE_HEIGHT = 0.09f;	// 高さ
 	}
 
 	namespace Rank
@@ -135,14 +136,14 @@ namespace
 		const D3DXVECTOR3 SCORE_POS = D3DXVECTOR3(-0.05f, 0.3f, 0.0f);			// 目標位置
 		const D3DXVECTOR3 RANK_UI_POS = D3DXVECTOR3(-0.12f, 0.15f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_UI_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
-		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.06f, 0.15f, 0.0f);		// 目標位置
+		const D3DXVECTOR3 RANK_SCORE_POS = D3DXVECTOR3(0.0f, 0.15f, 0.0f);		// 目標位置
 		const D3DXVECTOR3 RANK_SCORE_SPACE = D3DXVECTOR3(0.0f, 0.15f, 0.0f);	// 目標位置
 		const float WIDTH = 0.2f;				// 幅
 		const float HEIGHT = 0.125f;			// 高さ
-		const float SCORE_UI_WIDTH = 0.1f;		// 幅
-		const float SCORE_UI_HEIGHT = 0.075f;	// 高さ
-		const float SCORE_WIDTH = 0.025f;		// 幅
-		const float SCORE_HEIGHT = 0.04f;		// 高さ
+		const float SCORE_UI_WIDTH = 0.075f;		// 幅
+		const float SCORE_UI_HEIGHT = 0.05f;	// 高さ
+		const float SCORE_WIDTH = 0.03f;		// 幅
+		const float SCORE_HEIGHT = 0.06f;		// 高さ
 	}
 }
 
@@ -171,6 +172,7 @@ CResult::CResult() : m_fTimer(0.0f), m_pCaption(nullptr)
 	m_ClearList.clear();
 	m_CharacterList.clear();
 	m_CharacterIt = m_CharacterList.end();
+	m_aRankScore.clear();
 	m_fCnt = 0.0f;
 	m_nKeyOld = 0;
 	m_bEnd = false;
@@ -194,9 +196,6 @@ HRESULT CResult::Init(void)
 	CInputManager::Create();
 
 	m_aRankScore.resize(Result_Rank::NUM);
-	m_aRankScore[0] = 0;
-	m_aRankScore[1] = 0;
-	m_aRankScore[2] = 0;
 
 	// 親クラスの初期化
 	CScene::Init();
@@ -204,15 +203,7 @@ HRESULT CResult::Init(void)
 	m_pResult = this;
 
 	// リストを取得するよ
-	//m_ClearList = CHouse::GetLabelResult();
-	{
-		m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-		m_ClearList.push_back(CPresent::E_Label::LABEL_GREEN);
-		m_ClearList.push_back(CPresent::E_Label::LABEL_PUPLE);
-		m_ClearList.push_back(CPresent::E_Label::LABEL_YELLOW);
-		m_ClearList.push_back(CPresent::E_Label::LABEL_BLUE);
-		
-	}
+	m_ClearList = CHouse::GetLabelResult();
 
 	// プレゼントを並べる
 	InitCharacter();
@@ -235,6 +226,15 @@ HRESULT CResult::Init(void)
 
 		pCamera->SetPosR(m_camerastart);
 	}
+
+	// 読み込み
+	Load();
+
+	// ソート
+	Sort();
+
+	// 保存
+	Save();
 
 	// 2Dオブジェクトの生成
 	Create2D();
@@ -275,6 +275,7 @@ void CResult::Uninit(void)
 	}
 
 	m_CharacterList.clear();
+	m_aRankScore.clear();
 
 	// オブジェクト全棄
 	CObject::ReleaseAll();
@@ -711,6 +712,11 @@ void CResult::Input(void)
 	{
 		m_state = E_State::STATE_FADE;
 	}
+	else if (m_state == E_State::STATE_ENDAPPERCAPTION)
+	{
+		m_state = E_State::STATE_END;
+		CFade::GetInstance()->SetFade(CScene::MODE::MODE_TITLE);
+	}
 }
 
 //=====================================================
@@ -780,5 +786,96 @@ void CResult::CreateRank(void)
 		m_apRankScore[i]->SetPosition(Rank::INIT_POS + Rank::RANK_SCORE_POS + Rank::RANK_SCORE_SPACE * i);
 		m_apRankScore[i]->SetAlpha(Rank::INIT_COL.a);
 		m_apRankScore[i]->SetSizeAll(Rank::SCORE_WIDTH, Rank::SCORE_HEIGHT);
+	}
+}
+
+//=====================================================
+// 保存
+//=====================================================
+void CResult::Save(void)
+{
+	// ファイルを開く
+	std::ofstream File(FILE_PATH, std::ios::binary);
+	if (!File.is_open()) {
+		return;
+	}
+
+	int size = m_aRankScore.size();
+
+	// ベクトルのサイズをセーブ
+	File.write(reinterpret_cast<const char*>(&size), sizeof(size));
+
+	// データをバイナリファイルに書き出す
+	File.write(reinterpret_cast<char*>(m_aRankScore.data()), size * sizeof(int));
+
+	// ファイルを閉じる
+	File.close();
+}
+
+//=====================================================
+// 読み込み
+//=====================================================
+void CResult::Load(void)
+{
+	m_aRankScore.clear();
+	m_aRankScore.resize(Result_Rank::NUM);
+
+	// ファイルを開く
+	std::ifstream File(FILE_PATH, std::ios::binary);
+	if (!File.is_open()) {
+		// 例外処理
+
+		for (int i = 0; i < m_aRankScore.size(); i++)
+		{
+			m_aRankScore[i] = i;
+		}
+
+		return;
+	}
+
+	// サイズ読み込み
+	int size = 0;
+	File.read(reinterpret_cast<char*>(&size), sizeof(size));
+	File.read(reinterpret_cast<char*>(m_aRankScore.data()), size * sizeof(int));
+
+	// ファイルを閉じる
+	File.close();
+}
+
+//=====================================================
+// ソート
+//=====================================================
+void CResult::Sort(void)
+{
+	if (m_aRankScore.size() <= 1) { return; }
+
+	// ランクインを確認
+	if (m_ClearList.size() >= m_aRankScore[m_aRankScore.size() - 1])
+	{
+		m_aRankScore[m_aRankScore.size() - 1] = m_ClearList.size();
+	}
+
+	// ソート
+	for (int i = 0; i < Result_Rank::NUM; i++)
+	{
+		int temp = i;
+
+		for (int j = i + 1; j < Result_Rank::NUM; j++)
+		{
+			// 昇順ソート
+			if (m_aRankScore[j] >= m_aRankScore[temp])
+			{
+				// 記憶
+				temp = j;
+			}
+		}
+
+		// 変更された
+		if (i != temp)
+		{
+			int score = m_aRankScore[temp];
+			m_aRankScore[temp] = m_aRankScore[i];
+			m_aRankScore[i] = score;
+		}
 	}
 }
