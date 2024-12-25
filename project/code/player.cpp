@@ -450,6 +450,8 @@ void CPlayer::SwapPresent()
 
 		CSound::GetInstance()->Stop();
 
+		Sound::Play(CSound::LABEL::LABEL_SE_FALSE);
+
 		Sound::Play(CSound::LABEL::LABEL_BGM_GAME01);
 	}
 
@@ -459,7 +461,7 @@ void CPlayer::SwapPresent()
 	if (pSound != nullptr)
 	{
 		// BGM‚ÌÄ¶
-		pSound->Play(pSound->LABEL_SE_PICKUP);
+		//pSound->Play(pSound->LABEL_SE_PICKUP);
 	}
 
 	// Ž©g‚ÌŠŽ‚µ‚Ä‚¢‚éƒvƒŒƒ[ƒ“ƒg‚ðã‘‚«‚·‚é

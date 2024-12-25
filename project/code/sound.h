@@ -47,6 +47,7 @@ public:
 		LABEL_SE_PICKUP,				// プレゼント取得
 		LABEL_SE_WALK,					// 歩く音
 		LABEL_SE_SUCCESS,				// 成功
+		LABEL_SE_FALSE,					// 失敗
 		LABEL_SE_FEVER,					// フィーバー
 
 		LABEL_SE_PAUSE_MENU,			// ポーズ
@@ -140,6 +141,7 @@ private:
 		{ "data/SOUND/SE/SE_Pickup01.wav",0 },			// プレゼント取得
 		{ "data/SOUND/SE/SE_Walking.wav",0 },			// 歩く音
 		{ "data/SOUND/SE/SE_Success00.wav",0 },			// 成功
+		{ "data/SOUND/SE/SE_false.wav",0 },			// 成功
 		{ "data/SOUND/SE/SE_Fiver.wav",0 },				// フィーバー
 
 		{ "data/SOUND/SE/pause.wav",0 },				// ポーズ
