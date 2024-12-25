@@ -276,7 +276,6 @@ void CPlayer::Interact()
 			universal::IsInScreen(pos, &posScreen);
 			universal::ConvertScreenRate(posScreen);
 			m_pInteract->SetPosition(posScreen);
-			// TODO : テクスチャ変更する
 			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\swap.png"));
 		}
 
@@ -300,6 +299,8 @@ void CPlayer::Interact()
 //==========================================
 void CPlayer::SwapPresent()
 {
+	CDebugProc::GetInstance()->Print("所持プレゼント : %d\n", m_pPresent);
+
 	// インタラクト表示が存在していない場合関数を抜ける
 	if (m_pInteract == nullptr) { return; }
 
