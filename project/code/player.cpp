@@ -23,7 +23,7 @@
 #include "sound.h"
 #include "MyEffekseer.h"
 #include "gameManager.h"
-#include "navigation.h"
+#include "minimap.h"
 
 #include "house.h"
 #include "UI.h"
@@ -145,8 +145,8 @@ HRESULT CPlayer::Init(void)
 		m_pCollision->SetRadius(RADIUS_COLLISION);
 	}
 
-	// ナビゲーション生成
-	CNavigation::Create();
+	// ミニマップの生成
+	CMinimap::Create();
 
 	EnableShadow(true);
 
