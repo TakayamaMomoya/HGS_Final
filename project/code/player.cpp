@@ -25,21 +25,38 @@
 #include "gameManager.h"
 
 #include "house.h"
+#include "UI.h"
+#include "present.h"
+#include "gauge.h"
 
 //*****************************************************
 // 定数定義
 //*****************************************************
 namespace
 {
-const std::string PATH_BODY = "data\\MOTION\\motionPenguin.txt";	// ボディのパス
+const std::string PATH_BODY = "data\\MOTION\\motionTonakai.txt";	// ボディのパス
+const float MODEL_SCALE = 10.0f; // 拡大率
 
 const float RATE_DECREASE_MOVE = 0.5f;	// 移動減衰の割合
 const float LINE_FACT_ROT = 0.3f;		// 向きを補正するまでの入力しきい値
 const float FACT_ROTATION = 0.1f;		// 回転係数
 const float SPEED_MOVE = 5.0f;			// 移動速度
 
-const float INTERACT_LENGTH = 100.0f; // インタラクト表示が出る範囲
-} 
+const float INTERACT_LENGTH = 500.0f; // インタラクト表示が出る範囲
+const D3DXVECTOR3 UI_SIZE = { 0.03f, 0.06f, 0.0f }; // インタラクトUIのサイズ
+const D3DXVECTOR3 UI_OFFSET = { 0.0f, 300.0f, 0.0f }; // インタラクトUIのオフセット
+
+const D3DXVECTOR3 PRESENT_OFFSET = { 0.0f, 300.0f, 0.0f }; // プレゼントのオフセット
+
+const int POWERUP_NUM = 5; // 加速に必要な連続正解数
+const float POWER_RATE = 3.0f; // 加速倍率
+
+const float POWER_GAUGE = 5.0f; // 連続正解ゲージの最大値
+const float POWER_ADD = POWER_GAUGE / POWERUP_NUM; // １正解で加算されるゲージの量
+const D3DXVECTOR3 GAUGE_POS = { 0.25f, 0.05f, 0.0f }; // ゲージの位置
+const D3DXVECTOR2 GAUGE_SIZE = { 0.25f, 0.05f }; // ゲージのサイズ
+
+}
 
 //*****************************************************
 // 静的メンバ変数宣言
@@ -49,7 +66,12 @@ vector<CPlayer*> CPlayer::s_apPlayer;	// 格納用の配列
 //=====================================================
 // コンストラクタ
 //=====================================================
-CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0)
+CPlayer::CPlayer(int nPriority) : m_state(STATE_NONE), m_bEnableInput(false), m_fragMotion(), m_nID(0),
+m_pInteract(nullptr),
+m_pPresent(nullptr),
+m_pNearHouse(nullptr),
+m_nAnswerCount(0),
+m_pGauge(nullptr)
 {
 	// デフォルトは入った順の番号
 	m_nID = (int)s_apPlayer.size();
@@ -93,7 +115,17 @@ HRESULT CPlayer::Init(void)
 	// 継承クラスの初期化
 	CCharacter::Init();
 
+	// 大きくする
+	SetScale(MODEL_SCALE);
+
+	// ゲージを生成
+	m_pGauge = CGauge::Create(POWER_GAUGE, GAUGE_SIZE);
+	m_pGauge->SetPosition(GAUGE_POS);
+
 	InitPose(0);
+
+	// プレゼントを生成
+	m_pPresent = CPresent::Create();
 
 	// 入力可能フラグを設定
 	m_bEnableInput = true;
@@ -121,6 +153,14 @@ void CPlayer::Uninit(void)
 		break;
 	}
 
+	// UIを削除する
+	if (m_pInteract != nullptr)
+	{
+		m_pInteract->Uninit();
+		delete m_pInteract;
+		m_pInteract = nullptr;
+	}
+
 	// 継承クラスの終了
 	CCharacter::Uninit();
 }
@@ -130,6 +170,29 @@ void CPlayer::Uninit(void)
 //=====================================================
 void CPlayer::Update(void)
 {
+	// インタラクト表示処理
+	Interact();
+
+	// UIを移動する
+	if (m_pInteract != nullptr)
+	{
+		D3DXVECTOR3 posScreen = { 0.0f, 0.0f, 0.0f };
+		D3DXVECTOR3 pos = GetPosition() + UI_OFFSET;
+		universal::IsInScreen(pos, &posScreen);
+		universal::ConvertScreenRate(posScreen);
+		m_pInteract->SetPosition(posScreen);
+	}
+
+	// プレゼントを入れ替える処理
+	SwapPresent();
+
+	// プレゼントを移動する
+	if (m_pPresent != nullptr)
+	{
+		D3DXVECTOR3 pos = GetPosition() + PRESENT_OFFSET;
+		m_pPresent->SetPosition(pos);
+	}
+
 	// 入力処理
 	Input();
 
@@ -199,6 +262,11 @@ void CPlayer::Forward(void)
 		fSpeed = SPEED_MOVE;
 	}
 
+	if (m_nAnswerCount >= POWERUP_NUM)
+	{
+		fSpeed *= POWER_RATE;
+	}
+
 	// 移動速度の設定
 	D3DXVECTOR3 move = GetMove();
 
@@ -232,12 +300,76 @@ void CPlayer::Interact()
 		D3DXVECTOR3 posHouse = house->GetPosition();
 
 		// 一定距離内に建物が存在しない場合次に進む
-		if (!universal::DistCmp(pos, posHouse, INTERACT_LENGTH, nullptr))continue;
+		if (!universal::DistCmp(pos, posHouse, INTERACT_LENGTH, nullptr)) continue;
 
 		// 一定距離内に建物が存在したらポリゴンを表示する
-		// TODO : ポリゴン出す
+		if (m_pInteract == nullptr)
+		{
+			m_pInteract = CUI::Create();
+			m_pInteract->Init();
+			m_pInteract->SetSize(UI_SIZE.x, UI_SIZE.y);
+			D3DXVECTOR3 posScreen = { 0.0f, 0.0f, 0.0f };
+			D3DXVECTOR3 pos = GetPosition() + UI_OFFSET;
+			universal::IsInScreen(pos, &posScreen);
+			universal::ConvertScreenRate(posScreen);
+			m_pInteract->SetPosition(posScreen);
+			m_pInteract->SetIdxTexture(Texture::GetIdx("data\\TEXTURE\\UI\\swap.png"));
+		}
+
+		// 近かった建物を記録する
+		m_pNearHouse = house;
+
 		return;
 	}
+
+	// 建物を最後までチェックしても存在していない場合ポリゴンを削除する
+	if (m_pInteract != nullptr)
+	{
+		m_pInteract->Uninit();
+		delete m_pInteract;
+		m_pInteract = nullptr;
+	}
+}
+
+//==========================================
+//  プレゼントを交換する処理
+//==========================================
+void CPlayer::SwapPresent()
+{
+	CDebugProc::GetInstance()->Print("所持プレゼント : %d\n", m_pPresent);
+	CDebugProc::GetInstance()->Print("連続正解カウンター : %d\n", m_nAnswerCount);
+
+	// インタラクト表示が存在していない場合関数を抜ける
+	if (m_pInteract == nullptr) { return; }
+
+	// 入力情報の取得
+	CInputKeyboard* pInputKeyboard = CInputKeyboard::GetInstance();
+	CInputJoypad* pJoypad = CInputJoypad::GetInstance();
+
+	// ボタン入力がない場合関数を抜ける
+	if (!pInputKeyboard->GetTrigger(DIK_SPACE) && !pJoypad->GetTrigger(CInputJoypad::PADBUTTONS_A, 0)){ return; }
+
+	// 最も近い建物のプレゼントを受け取る
+	CPresent* pTemp = m_pNearHouse->GetPresent();
+
+	// 最も近い建物にプレゼントを与える
+	m_pNearHouse->SetPresent(m_pPresent);
+
+	// 正解のプレゼントだった場合カウンターを加算する
+	if (m_pNearHouse->GetLabelWant() == m_pPresent->GetLabel())
+	{
+		++m_nAnswerCount;
+		m_pGauge->AddParam(POWER_ADD);
+	}
+	else
+	{
+		// 間違えていた場合カウンターを初期化
+		m_nAnswerCount = 0;
+		m_pGauge->SetParam(0.0f);
+	}
+
+	// 自身の所持しているプレゼントを上書きする
+	m_pPresent = pTemp;
 }
 
 //=====================================================

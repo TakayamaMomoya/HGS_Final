@@ -17,6 +17,10 @@
 //*****************************************************
 class CInputManager;
 class CShadow;
+class CUI;
+class CPresent;
+class CHouse;
+class CGauge;
 
 //*****************************************************
 // クラスの定義
@@ -101,8 +105,10 @@ private:
 	void InputMoveAnalog(void);	// アナログ移動入力
 	void Forward(void);			// 前進処理
 
-	void Interact(); // インタラクト表示-
-	
+	void Interact(); // インタラクト表示
+
+	void SwapPresent(); // プレゼントを交換する処理
+
 	void Event(EVENT_INFO* pEventInfo) override;	// モーションイベント
 	void ManageMotion(void);						// モーションの管理
 
@@ -114,6 +120,12 @@ private:
 	E_State m_state;			// プレイヤー状態
 	S_FragMotion m_fragMotion;	// モーションフラグ
 	CInputManager *m_pInputMgr;	// 入力マネージャー
+	CUI* m_pInteract;			// インタラクトUI
+	CPresent* m_pPresent;		// プレゼントのポインタ
+	CHouse* m_pNearHouse;			// 近い建物のポインタ
+
+	unsigned int m_nAnswerCount; // 連続正解カウンター
+	CGauge* m_pGauge; // 連続正解ゲージ
 
 	// 静的メンバ変数
 	static vector<CPlayer*> s_apPlayer;	// 格納用の配列

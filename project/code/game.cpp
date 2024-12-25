@@ -81,11 +81,11 @@ HRESULT CGame::Init(void)
 	m_state = STATE_NORMAL;
 	m_bStop = false;
 
-	// タイマー生成
-	m_pTimer = CTimer::Create();
-
 	// ゲームマネージャーの生成
 	m_pGameManager = CGameManager::Create(m_GameMode);
+
+	// タイマー生成
+	m_pTimer = CTimer::Create();
 
 	// ゲームBGMの再生
 	Sound::Play(CSound::LABEL_BGM_GAME01);

@@ -43,7 +43,7 @@ CGauge::~CGauge()
 //=====================================================
 // 生成処理
 //=====================================================
-CGauge *CGauge::Create(float fParamMax)
+CGauge *CGauge::Create(float fParamMax, const D3DXVECTOR2& size)
 {
 	CGauge *pGauge = nullptr;
 
@@ -52,6 +52,7 @@ CGauge *CGauge::Create(float fParamMax)
 	if (pGauge != nullptr)
 	{
 		pGauge->m_fParamMax = fParamMax;
+		pGauge->m_sizeGauge = size;
 		pGauge->Init();
 	}
 
@@ -80,9 +81,7 @@ void CGauge::CreatePolygon(void)
 {
 	m_aPolygon.resize(E_Polygon::POLYGON_MAX);
 
-	m_sizeGauge = SIZE_GAUGE_INITIAL;
-
-	D3DXVECTOR2 aSize[E_Polygon::POLYGON_MAX] = { SIZE_FRAME_INITIAL,SIZE_GAUGE_INITIAL };	// ポリゴンのサイズ
+	D3DXVECTOR2 aSize[E_Polygon::POLYGON_MAX] = { m_sizeGauge,m_sizeGauge };	// ポリゴンのサイズ
 	string aPath[E_Polygon::POLYGON_MAX] = 
 	{
 		"data\\TEXTURE\\UI\\frame00.png",

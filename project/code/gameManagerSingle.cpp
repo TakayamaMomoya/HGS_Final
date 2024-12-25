@@ -17,6 +17,7 @@
 #include "camera.h"
 #include "cameraState.h"
 #include "house.h"
+#include "present.h"
 
 //*****************************************************
 // 定数定義
@@ -50,21 +51,20 @@ HRESULT CGameManagerSingle::Init(void)
 		m_pPlayer->BindInputMgr(pInpuMgr);
 	}
 
-	// スコアの生成
-	CGame *pGame = CGame::GetInstance();
-
-	if (pGame != nullptr)
-		pGame->CreateScore();
-
 	// カメラのステイト設定
 	Camera::ChangeState(new CFollowPlayer);
 
 	// 家の生成
 	CHouse::SetHouseRandom();
-	CObjectX::Create();
-
+	
 	// 基底クラスの初期化
 	CGameManager::Init();
+
+	// スコアの生成
+	CGame *pGame = CGame::GetInstance();
+
+	if (pGame != nullptr)
+		pGame->CreateScore();
 
 	return S_OK;
 }
