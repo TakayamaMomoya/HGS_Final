@@ -65,7 +65,7 @@ HRESULT CScene::Init(void)
 	{
 		int nIdx = CTexture::GetInstance()->Regist("data\\TEXTURE\\BG\\mountain000.png");
 		pCylinder->SetIdxTexture(nIdx);
-		pCylinder->SetRadius(60000.0f);
+		pCylinder->SetRadius(30000.0f);
 		pCylinder->SetHeight(5000.0f);
 		pCylinder->SetVtx();
 		pCylinder->EnableLighting(false);
