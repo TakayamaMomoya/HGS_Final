@@ -65,10 +65,12 @@ public:
 	void SetPosVDest(D3DXVECTOR3 posVDest) { m_camera.posVDest = posVDest; }
 	void ChangeState(CCameraState *pBehavior);
 	void SetPosV(void);
+	void SetPosR(D3DXVECTOR3& posR) { m_camera.posR = posR; }
 	void SetPosR(void);
 	float GetRoll(void) { return m_camera.fRoll; }
 	void SetRoll(float fRoll) { m_camera.fRoll = fRoll; }
 	D3DXVECTOR3 GetPosAbove(void) { return m_posAbove; }
+	D3DXVECTOR3 GetPosR() { return m_camera.posR; }
 	void SetPosAbove(D3DXVECTOR3 posAbove) { m_posAbove = posAbove; }
 	void SkipToDest(void);	// 目標位置までカメラの視点注視点を動かす
 	CCameraState *GetState(void) { return m_pState; }	// ステイトの取得

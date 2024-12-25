@@ -14,6 +14,7 @@
 #include "title.h"
 #include "tutorial.h"
 #include "ranking.h"
+#include "result.h"
 #include "manager.h"
 #include "renderer.h"
 #include "camera.h"
@@ -193,6 +194,12 @@ CScene *CScene::Create(MODE mode)
 	case CScene::MODE_GAME:
 
 		pScene = new CGame;
+
+		break;
+
+	case CScene::MODE_RESULT:
+
+		pScene = new CResult;
 
 		break;
 	default:
