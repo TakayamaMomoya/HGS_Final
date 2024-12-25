@@ -10,6 +10,8 @@
 //*****************************************************
 #include "house.h"
 #include "model.h"
+#include "UI.h"
+#include "texture.h"
 
 //*****************************************************
 // 定数定義
@@ -34,6 +36,23 @@ const int NUM_GRID = 20;			// グリッドの数
 const D3DXVECTOR3 OFFSET_PRESENT = { 0.0f,0.0f,-800.0f };	// プレゼントのオフセット
 }
 
+//-------------------------
+// UIの定数
+//-------------------------
+namespace UI
+{
+const float WIDTH = 0.05f;							// 幅
+const float HEIGHT = 0.08f;							// 高さ
+const D3DXVECTOR3 OFFSET = { 0.0f,-0.2f,0.0f };		// オフセット
+const string PATH[CPresent::E_Label::LABEL_MAX] =	// テクスチャパス
+{
+	"data\\TEXTURE\\UI\\1st.png",
+	"data\\TEXTURE\\UI\\2nd.png",
+	"data\\TEXTURE\\UI\\3rd.png",
+	"data\\TEXTURE\\UI\\4th.png",
+};
+}
+
 //==========================================
 // 静的メンバ変数宣言
 //==========================================
@@ -42,7 +61,7 @@ CListManager<CHouse>* CHouse::m_pList = nullptr; // オブジェクトリスト
 //=====================================================
 // コンストラクタ
 //=====================================================
-CHouse::CHouse(int nPriority) : CObjectX(nPriority)
+CHouse::CHouse(int nPriority) : CObjectX(nPriority), m_labelWant(CPresent::E_Label::LABEL_BLUE), m_pPresent(nullptr), m_pUI(nullptr)
 {
 
 }
@@ -116,7 +135,9 @@ void CHouse::BindPresent(void)
 
 		// 割り振る
 		vector[i]->SetPresent(CPresent::Create(labelFirst));
+		vector[i]->SetLabelWant(labelSecond);
 		vector[i + 1]->SetPresent(CPresent::Create(labelSecond));
+		vector[i + 1]->SetLabelWant(labelFirst);
 	}
 }
 
@@ -180,6 +201,14 @@ HRESULT CHouse::Init(void)
 	// リストに自身のオブジェクトを追加・イテレーターを取得
 	m_iterator = m_pList->AddList(this);
 
+	// UIの生成
+	m_pUI = CUI::Create();
+
+	if (m_pUI != nullptr)
+	{
+		m_pUI->SetSize(UI::WIDTH, UI::HEIGHT);
+	}
+
 	return S_OK;
 }
 
@@ -209,6 +238,24 @@ void CHouse::Update(void)
 {
 	// 継承クラスの更新
 	CObjectX::Update();
+
+	// UIの追従
+	if (m_pUI != nullptr)
+	{
+		D3DXVECTOR3 pos = GetPosition();
+
+		D3DXVECTOR3 posScreen;
+		universal::IsInScreen(pos, &posScreen);
+		universal::ConvertScreenRate(posScreen);
+		posScreen += UI::OFFSET;
+
+		m_pUI->SetPosition(posScreen);
+		m_pUI->SetVtx();
+
+		// テクスチャ設定
+		int nIdxTexture = Texture::GetIdx(&UI::PATH[m_labelWant][0]);
+		m_pUI->SetIdxTexture(nIdxTexture);
+	}
 }
 
 //=====================================================
