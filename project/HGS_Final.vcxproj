@@ -184,8 +184,10 @@
     <ClCompile Include="code\fade3D.cpp" />
     <ClCompile Include="code\gameManager.cpp" />
     <ClCompile Include="code\gameManagerSingle.cpp" />
+    <ClCompile Include="code\house.cpp" />
     <ClCompile Include="code\MyEffekseer.cpp" />
     <ClCompile Include="code\object2D.cpp" />
+    <ClCompile Include="code\present.cpp" />
     <ClCompile Include="code\resultSingle.cpp" />
     <ClCompile Include="code\resultSingleLose.cpp" />
     <ClCompile Include="code\resultSingleWin.cpp" />
@@ -274,8 +276,10 @@
     <ClInclude Include="code\fade3D.h" />
     <ClInclude Include="code\gameManager.h" />
     <ClInclude Include="code\gameManagerSingle.h" />
+    <ClInclude Include="code\house.h" />
     <ClInclude Include="code\MyEffekseer.h" />
     <ClInclude Include="code\object2D.h" />
+    <ClInclude Include="code\present.h" />
     <ClInclude Include="code\resultSingle.h" />
     <ClInclude Include="code\resultSingleLose.h" />
     <ClInclude Include="code\resultSingleWin.h" />
