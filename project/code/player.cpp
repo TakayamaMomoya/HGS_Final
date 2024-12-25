@@ -431,7 +431,7 @@ void CPlayer::ControlGauge()
 	if (m_fSabTime < SAB_TIME) { return; }
 
 	// ƒQ[ƒW‚ðŒ¸‚ç‚·
-	//m_pGauge->AddParam(-0.01f);
+	m_pGauge->AddParam(-0.01f);
 }
 
 //=====================================================
